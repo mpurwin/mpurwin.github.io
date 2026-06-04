@@ -42,22 +42,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 }
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
 .hero-content{position:relative;z-index:2}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;
-  color:rgba(255,255,255,0.6);letter-spacing:0.07em;text-transform:uppercase;
-  margin-bottom:28px;opacity:0;animation:up .6s var(--ease) .2s forwards;
-}
-.hero-tag-dot{width:6px;height:6px;background:#4d8bff;border-radius:50%;animation:pulse 2.4s ease infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
-.hero-headline{
-  font-family:var(--display);font-size:clamp(52px,7.5vw,108px);font-weight:700;
-  line-height:.92;letter-spacing:-.03em;color:#fff;margin-bottom:44px;
-  text-transform:uppercase;opacity:0;animation:up .7s var(--ease) .32s forwards;
-}
-.hero-headline span{color:rgba(255,255,255,.35)}
 .hero-bottom{
   display:flex;align-items:flex-end;justify-content:space-between;gap:40px;
-  opacity:0;animation:up .7s var(--ease) .46s forwards;
+  opacity:0;animation:up .7s var(--ease) .78s forwards;
+}
+.hero-headline{
+  font-family:var(--display);font-size:clamp(62px,9vw,128px);font-weight:700;
+  line-height:.92;letter-spacing:-.03em;color:#fff;margin-bottom:44px;cursor:default;
+}
+.hero-headline-inner{display:block;}
+.headline-cycle-wrap{
+  display:block;
+  position:relative;
+  height:1.05em;
+  overflow:hidden;
+}
+.cycle-word{
+  position:absolute;
+  top:0; left:0;
+  opacity:0;
+  transform:translateY(100%);
+  transition:opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  white-space:nowrap;
+  pointer-events:none;
+}
+.cycle-word.enter{
+  opacity:1;
+  transform:translateY(0);
+}
+.cycle-word.exit{
+  opacity:0;
+  transform:translateY(-100%);
+  transition:opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.cycle-word.final{
+  color:#fff;
+}
+.cycle-word.dimmed{
+  color:rgba(255,255,255,0.35);
 }
 .hero-bio{max-width:400px;font-size:15px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.75}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:100px;transition:all .15s;white-space:nowrap;font-family:var(--body)}
@@ -102,15 +124,18 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <div class="hero-tag">
-      <span class="hero-tag-dot"></span>
-      Available for work
-    </div>
-    <h1 class="hero-headline">
-      My<br><span>Resume.</span>
+    <h1 class="hero-headline" id="hero-headline">
+      <span class="hero-headline-inner">
+        <span class="headline-cycle-wrap" id="cycle-wrap">
+          <span class="cycle-word dimmed" id="cw-0">Design.</span>
+          <span class="cycle-word dimmed" id="cw-1">Motion.</span>
+          <span class="cycle-word dimmed" id="cw-2">Social.</span>
+          <span class="cycle-word final"  id="cw-3">My Resume.</span>
+        </span>
+      </span>
     </h1>
     <div class="hero-bottom">
-      <p class="hero-bio">6+ years directing visual identity across motion, video, graphic design, and social content.</p>
+      <p class="hero-bio">8+ years directing visual identity across motion, video, graphic design, brand and social content.</p>
       <a href="pdfs/Maxwell Purwin Resume 2026.pdf" download="Maxwell_Purwin_Resume.pdf" class="btn btn-primary">↓ Download PDF</a>
     </div>
   </div>
@@ -155,13 +180,13 @@ function resize() {
 
 function makeBlob(i) {
   const palette = [
-    [0, 60, 180],
-    [10, 80, 220],
-    [120, 40, 200],
-    [0, 140, 160],
-    [60, 20, 120],
-    [30, 100, 210],
-    [90, 30, 160],
+    [30,  90,  210],
+    [50, 120,  240],
+    [20,  70,  200],
+    [60, 140,  255],
+    [15,  55,  180],
+    [80, 160,  255],
+    [35, 100,  225],
   ];
   const c = palette[i % palette.length];
   return {
@@ -191,7 +216,7 @@ function init() {
 function draw() {
   ctx.clearRect(0, 0, W, H);
 
-  ctx.fillStyle = '#060810';
+  ctx.fillStyle = '#050a18';
   ctx.fillRect(0, 0, W, H);
 
   blobs.forEach(b => {
@@ -273,8 +298,36 @@ init();
 draw();
 window.addEventListener('resize', () => { resize(); });
 
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)});},{threshold:0.06});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target;const siblings=Array.from(el.parentElement.children);const idx=siblings.indexOf(el);setTimeout(()=>el.classList.add('visible'),idx*80);obs.unobserve(el);}});},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── Cycling headline ──
+const cycleWords = ['cw-0','cw-1','cw-2','cw-3'];
+const holdTime   = 650;  // ms each word stays visible
+const gapTime    = 180;  // ms gap between exit and next enter
+let cwIndex = 0;
+
+function showWord(idx) {
+  const el = document.getElementById(cycleWords[idx]);
+  if (!el) return;
+  el.classList.add('enter');
+
+  const isLast = idx === cycleWords.length - 1;
+  if (isLast) return; // last word stays forever
+
+  setTimeout(() => {
+    el.classList.add('exit');
+    el.classList.remove('enter');
+    setTimeout(() => {
+      el.classList.remove('exit');
+      cwIndex++;
+      showWord(cwIndex);
+    }, gapTime + 450);
+  }, holdTime);
+}
+
+// Start after a short pause so the page has settled
+setTimeout(() => showWord(0), 500);
 </script>
 </body>
 </html>
