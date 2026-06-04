@@ -109,9 +109,30 @@ nav {
   z-index: 0;
 }
 
+.hero-gif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 50%,
+    rgba(0,0,0,0.2) 100%
+  );
+  z-index: 2;
+}
+
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-headline {
@@ -370,93 +391,33 @@ nav {
 
 /* Card 1 — Virgin Voyages: deep ocean blues */
 .bg-1 {
-  background-image: url('images/VV Header Website.gif');
-  background-color: #0a1f4e;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-1::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0a1f4e 0%, #0e3a7a 40%, #0a2d6b 70%, #061530 100%);
-  z-index: -1;
+  background: url('images/VV Header Website.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #0a1f4e 0%, #0e3a7a 40%, #0a2d6b 70%, #061530 100%);
 }
 /* Card 2 — University Motors: automotive warm tones */
 .bg-2 {
-  background-image: url('images/University Motors GIF Website 2.gif');
-  background-color: #1a0a00;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-2::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #2a1200 0%, #8b3a00 40%, #5c2800 70%, #1a0a00 100%);
-  z-index: -1;
+  background: url('images/University Motors GIF Website 2.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #2a1200 0%, #8b3a00 40%, #5c2800 70%, #1a0a00 100%);
 }
 /* Card 3 — Body Shop: industrial steel */
 .bg-3 {
-  background-image: url('images/CPBS HEADER_GIF_2.gif');
-  background-color: #111418;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-3::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #111418 0%, #2a3040 40%, #1c2230 70%, #0a0c10 100%);
-  z-index: -1;
+  background: url('images/CPBS HEADER_GIF_2.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #111418 0%, #2a3040 40%, #1c2230 70%, #0a0c10 100%);
 }
 /* Card 4 — DLM: limelight stage green */
 .bg-4 {
-  background-image: url('images/DLM HEADER_1.gif');
-  background-color: #0a1a0a;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-4::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0a1a0a 0%, #1a4a1a 40%, #0f300f 70%, #050f05 100%);
-  z-index: -1;
+  background: url('images/DLM HEADER_1.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #0a1a0a 0%, #1a4a1a 40%, #0f300f 70%, #050f05 100%);
 }
 /* Card 5 — Photography: moody monochrome */
 .bg-5 {
-  background-image: url('images/Photography Header GIF_1_1.gif');
-  background-color: #111111;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-5::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #111111 0%, #333333 40%, #222222 70%, #080808 100%);
-  z-index: -1;
+  background: url('images/Photography Header GIF_1_1.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #111111 0%, #333333 40%, #222222 70%, #080808 100%);
 }
 /* Card 6 — Just For Fun: playful purple */
 .bg-6 {
-  background-image: url('images/mini animation header.gif');
-  background-color: #12051e;
-  background-size: cover;
-  background-position: center;
-  animation: none;
-}
-.bg-6::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #12051e 0%, #3d1166 40%, #250a40 70%, #0a0212 100%);
-  z-index: -1;
+  background: url('images/mini animation header.gif') center center / cover no-repeat,
+              linear-gradient(135deg, #12051e 0%, #3d1166 40%, #250a40 70%, #0a0212 100%);
 }
 
 /* ── About ── */
@@ -621,6 +582,8 @@ footer {
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
+  <img class="hero-gif active" id="hero-gif-active" src="images/Main_Header_GIF.gif" alt="">
+  <div class="hero-scrim"></div>
 
   <div class="hero-content">
     <h1 class="hero-headline" id="hero-headline">
@@ -912,6 +875,10 @@ function draw() {
 init();
 draw();
 window.addEventListener('resize', () => { resize(); });
+
+// ── Hero GIF sequencer ──
+const gifEl = document.getElementById('hero-gif-active');
+gifEl.src = 'images/Main_Header_GIF.gif';
 
 // ── Scroll reveals — staggered per card ──
 const obs = new IntersectionObserver(entries => {
