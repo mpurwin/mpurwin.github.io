@@ -446,22 +446,22 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
     <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);margin-bottom:16px">In-Feed Videos <span style="font-weight:300;color:var(--gray-400)">— Facebook &middot; Instagram &middot; TikTok &middot; Pinterest &middot; LinkedIn</span></p>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:40px">
-      <div class="vv-vid-thumb" data-src="/videos/vv/Housekeeping Mic'd Up_6.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/SRB Narrator Video_7.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Games On Board_6.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Greece Siri Reel_v05.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/In Feed_Part 2_SRB_Three Truths and a Lie_1.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Ahoy Sis Reel_3.mp4"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="-HkjWaT0KR8"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="ATa2ONSJfRo"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="GPjpY4nBYu8"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="mOAqvb7wv4E"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="ZUo4OixYFfw"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="T73tyNAR-cE"><div class="vv-vid-play">▶</div></div>
     </div>
 
     <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);margin-bottom:16px">Dynamic Videos for Stories <span style="font-weight:300;color:var(--gray-400)">— Facebook &middot; Instagram</span></p>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">
-      <div class="vv-vid-thumb" data-src="/videos/vv/BL MIA Countdown_1 Day_Animated_5.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/AUS Countdown_Main _1_4.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Master_Adriatic Gems_IGS_10.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Ariya Announcement IGS_4.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/Portsmouth_IGS Map_2.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/videos/vv/BL Now Live IGS_Studio_1.mp4"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="tCeoW0Jefy4"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="DRX8_byN_1o"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="fIoSPqAuhsc"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="j918lJBhYdM"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="MBsuwwAxZ3s"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="UcYAfaJeuVs"><div class="vv-vid-play">▶</div></div>
     </div>
   </div>
 
@@ -493,8 +493,8 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       <div class="vv-carousel-dots" id="vv-gifs-dots"></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:66%;margin:0 auto">
-      <div class="vv-vid-thumb" data-src="/images/vv gifs/BL LA Stickers_Promo_3.mp4"><div class="vv-vid-play">▶</div></div>
-      <div class="vv-vid-thumb" data-src="/images/vv gifs/Holiday Sticker_Promo_7.mp4"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="P0tQlVD4_q4"><div class="vv-vid-play">▶</div></div>
+      <div class="vv-vid-thumb vv-yt-thumb" data-ytid="inkES5vO4zA"><div class="vv-vid-play">▶</div></div>
     </div>
   </div>
 
@@ -569,67 +569,64 @@ document.querySelectorAll('.stat').forEach(el => statObs.observe(el));
 </script>
 
 <script>
-// Auto-capture thumbnails from videos at specific timestamps
-const vidTimestamps = {
-  "/images/vv gifs/BL LA Stickers_Promo_3.mp4":                     3,
-  "/images/vv gifs/Holiday Sticker_Promo_7.mp4":                    1.6,
-  "/videos/vv/Housekeeping Mic'd Up_6.mp4":                         7,
-  "/videos/vv/SRB Narrator Video_7.mp4":                            2,
-  "/videos/vv/Games On Board_6.mp4":                                2,
-  "/videos/vv/Greece Siri Reel_v05.mp4":                            8,
-  "/videos/vv/In Feed_Part 2_SRB_Three Truths and a Lie_1.mp4":     3,
-  "/videos/vv/Ahoy Sis Reel_3.mp4":                                 3,
-  "/videos/vv/BL MIA Countdown_1 Day_Animated_5.mp4":               6,
-  "/videos/vv/AUS Countdown_Main _1_4.mp4":                         1,
-  "/videos/vv/Master_Adriatic Gems_IGS_10.mp4":                     2,
-  "/videos/vv/Ariya Announcement IGS_4.mp4":                        5,
-  "/videos/vv/Portsmouth_IGS Map_2.mp4":                            5,
-  "/videos/vv/BL Now Live IGS_Studio_1.mp4":                        3,
-};
-
-document.querySelectorAll('.vv-vid-thumb').forEach(thumb => {
-  const src = thumb.dataset.src;
-  const t   = vidTimestamps[src] ?? 0.5;
-
-  const canvas = document.createElement('canvas');
-  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;';
-  thumb.insertBefore(canvas, thumb.firstChild);
-
-  const vid = document.createElement('video');
-  vid.src        = src + '#t=' + t; // hint to browser to start near timestamp
-  vid.muted      = true;
-  vid.playsInline = true;
-  vid.preload    = 'auto';
-  vid.style.display = 'none';
-  document.body.appendChild(vid);
-
-  function drawFrame() {
-    if (vid.videoWidth === 0) return;
-    canvas.width  = vid.videoWidth;
-    canvas.height = vid.videoHeight;
-    canvas.getContext('2d').drawImage(vid, 0, 0, canvas.width, canvas.height);
-    vid.pause();
-    document.body.removeChild(vid);
-  }
-
-  vid.addEventListener('seeked', drawFrame, { once: true });
-  function onTimeUpdate() {
-    if (vid.currentTime >= t) {
-      drawFrame();
-      vid.removeEventListener('timeupdate', onTimeUpdate);
+// ── YouTube Shorts: thumbnail → iframe on click ───────────────────
+(function() {
+  // Inject YouTube thumbnails into each tile
+  document.querySelectorAll('.vv-yt-thumb').forEach(thumb => {
+    const ytid = thumb.dataset.ytid;
+    if (!ytid || ytid.startsWith('PLACEHOLDER')) {
+      const ph = document.createElement('div');
+      ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
+      ph.innerHTML = '<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);text-align:center;padding:0 12px;">Coming Soon</span>';
+      thumb.insertBefore(ph, thumb.firstChild);
+      const play = thumb.querySelector('.vv-vid-play');
+      if (play) play.style.display = 'none';
+      return;
     }
-  }
-  vid.addEventListener('timeupdate', onTimeUpdate);
-  vid.addEventListener('canplay', () => {
-    vid.currentTime = t;
-  }, { once: true });
-
-  vid.load();
-  vid.play().catch(() => {
-    // autoplay blocked — seeked event should still fire
-    vid.currentTime = t;
+    const img = document.createElement('img');
+    img.src = 'https://i.ytimg.com/vi/' + ytid + '/maxresdefault.jpg';
+    img.alt = '';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;display:block;';
+    img.onerror = function() { this.src = 'https://i.ytimg.com/vi/' + ytid + '/hqdefault.jpg'; };
+    thumb.insertBefore(img, thumb.firstChild);
   });
-});
+
+  // Click: swap thumbnail for autoplay iframe
+  let activeThumb = null;
+  document.querySelectorAll('.vv-yt-thumb').forEach(thumb => {
+    const ytid = thumb.dataset.ytid;
+    if (!ytid || ytid.startsWith('PLACEHOLDER')) return;
+    thumb.addEventListener('click', () => {
+      if (thumb.classList.contains('playing')) return;
+      // Collapse previously active tile
+      if (activeThumb && activeThumb !== thumb) {
+        const prevFrame = activeThumb.querySelector('iframe.vv-yt-frame');
+        if (prevFrame) prevFrame.remove();
+        const prevImg = activeThumb.querySelector('img');
+        if (prevImg) prevImg.style.display = 'block';
+        const prevPlay = activeThumb.querySelector('.vv-vid-play');
+        if (prevPlay) prevPlay.style.display = 'flex';
+        activeThumb.classList.remove('playing');
+        activeThumb = null;
+      }
+      // Hide thumbnail + play icon
+      const img = thumb.querySelector('img');
+      if (img) img.style.display = 'none';
+      const play = thumb.querySelector('.vv-vid-play');
+      if (play) play.style.display = 'none';
+      // Inject autoplay iframe
+      const frame = document.createElement('iframe');
+      frame.className = 'vv-yt-frame';
+      frame.src = 'https://www.youtube.com/embed/' + ytid + '?autoplay=1&loop=1&playlist=' + ytid + '&rel=0&playsinline=1';
+      frame.allow = 'autoplay; fullscreen; picture-in-picture';
+      frame.allowFullscreen = true;
+      frame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:10px;z-index:2;background:#000;';
+      thumb.appendChild(frame);
+      thumb.classList.add('playing');
+      activeThumb = thumb;
+    });
+  });
+})();
 </script>
 
 
@@ -665,44 +662,6 @@ document.addEventListener('keydown', e => {
 document.querySelectorAll('.vv-post-item, .vv-story-item').forEach(item => {
   item.addEventListener('click', () => {
     openLightbox('image', item.querySelector('img').src);
-  });
-});
-
-// Video thumbnails — play inline, pause others
-let activeVidThumb = null;
-
-document.querySelectorAll('.vv-vid-thumb').forEach(item => {
-  item.addEventListener('click', () => {
-    // If already playing, do nothing (let native controls handle it)
-    if (item.classList.contains('playing')) return;
-
-    // Pause any other playing tile
-    if (activeVidThumb && activeVidThumb !== item) {
-      const prev = activeVidThumb.querySelector('video.vv-inline-vid');
-      if (prev) { prev.pause(); prev.remove(); }
-      activeVidThumb.classList.remove('playing');
-      activeVidThumb = null;
-    }
-
-    // Swap canvas for a real video element
-    const src = item.dataset.src;
-    const inlineVid = document.createElement('video');
-    inlineVid.src = src;
-    inlineVid.controls = true;
-    inlineVid.playsInline = true;
-    inlineVid.autoplay = true;
-    inlineVid.className = 'vv-inline-vid';
-    inlineVid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:10px;background:#000;z-index:2;';
-    item.appendChild(inlineVid);
-    item.classList.add('playing');
-    activeVidThumb = item;
-
-    // When video ends, revert to thumbnail
-    inlineVid.addEventListener('ended', () => {
-      inlineVid.remove();
-      item.classList.remove('playing');
-      if (activeVidThumb === item) activeVidThumb = null;
-    });
   });
 });
 </script>
