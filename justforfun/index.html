@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virgin Voyages — Maxwell Purwin</title>
+<title>Just For Fun — Maxwell Purwin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* HERO — full viewport, GIF bg */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('images/VV Header Website.gif');background-size:cover;background-position:center}
+.hero-bg{position:absolute;inset:0;background-image:url('images/mini animation header.gif');background-size:cover;background-position:center}
 .hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%)}
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
@@ -55,7 +55,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* FEATURE — big image left, text right */
 .feature{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--gray-200)}
-.feature-media{background:var(--gray-100);min-height:520px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-right:1px solid var(--gray-200);position:relative;overflow:hidden;cursor:pointer;transition:background .2s}
+.feature-media{background:var(--gray-100);min-height:520px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-right:1px solid var(--gray-200);position:relative;overflow:hidden;cursor:pointer;transition:background .2s;border-radius:16px}
 .feature-media:hover{background:var(--gray-50)}
 .feature-media-icon{font-size:28px;opacity:.2}
 .feature-media-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
@@ -133,355 +133,135 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   footer{flex-direction:column;gap:20px;padding:32px 20px}
 }
 .pnav-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.08;transition:opacity .4s}.pnav-item:hover .pnav-bg{opacity:0.18}
-.pnav-bg-jff{background-image:url('images/mini animation header.gif')}
-.pnav-bg-um{background-image:url('images/University Motors GIF Website 2.gif')}
+.pnav-bg-photo{background-image:url('images/Photography Header GIF_1_1.gif')}
+.pnav-bg-vv{background-image:url('images/VV Header Website.gif')}
 
-.vv-page{border-top:1px solid var(--gray-200)}
-.vv-section{}
-@media(max-width:768px){
-  .vv-section{padding:40px 20px !important}
-  .vv-section div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important}
-  .vv-section div[style*="repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr) !important}
-  .vv-section div[style*="repeat(5,1fr)"]{grid-template-columns:repeat(2,1fr) !important}
-  .vv-section div[style*="repeat(3,1fr)"]{grid-template-columns:repeat(2,1fr) !important}
-  .vv-section div[style*="repeat(7,1fr)"]{grid-template-columns:repeat(3,1fr) !important}
-}
-
-
-
-
-.vv-post-item img{width:100%;height:auto;display:block;transition:transform .5s var(--ease)}
-
-
-
-
-
-
-@media(max-width:768px){}
-/* focus carousel */
-.vv-carousel{
-  position:relative;
-  margin-bottom:40px;
-  user-select:none;
-}
-.vv-carousel-track{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:540px;
-  position:relative;
-  cursor:grab;
-}
-.vv-carousel-item{
-  position:absolute;
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-  background:var(--gray-100);
-  will-change:transform,opacity,width,height;
-  transform-origin: center bottom;
-}
-.vv-carousel-item img{
-  width:100%;height:100%;object-fit:contain;display:block;
-  pointer-events:none;
-}
-
-/* arrows */
-.vv-carousel-btn{
-  position:absolute;
-  top:50%; transform:translateY(-50%);
-  z-index:10;
-  background:var(--white);
-  border:1px solid var(--gray-200);
-  border-radius:50%;
-  width:44px; height:44px;
-  font-size:18px;
-  cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:background .15s, box-shadow .15s;
-  box-shadow:0 2px 8px rgba(0,0,0,0.08);
-  color:var(--black);
-}
-.vv-carousel-btn:hover{ background:var(--gray-50); box-shadow:0 4px 16px rgba(0,0,0,0.12); }
-.vv-carousel-prev{ left:0; }
-.vv-carousel-next{ right:0; }
-
-/* dots */
-.vv-carousel-dots{
-  display:flex; justify-content:center; align-items:center;
-  gap:6px; margin-top:24px;
-}
-.vv-carousel-dot{
-  width:6px; height:6px; border-radius:50%;
-  background:var(--gray-200);
-  border:none; padding:0; cursor:pointer;
-  transition:background .2s, transform .2s;
-}
-.vv-carousel-dot.active{
-  background:var(--black);
-  transform:scale(1.4);
-}
-
-@media(max-width:768px){
-  .vv-carousel-track{ height:360px; }
-  .vv-carousel-prev{ left:-8px; }
-  .vv-carousel-next{ right:-8px; }
-}
-.vv-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
-.vv-lightbox.active{display:flex}
-.vv-lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
-.vv-lightbox-close{position:absolute;top:24px;right:32px;font-size:32px;color:#fff;cursor:pointer;opacity:0.6;line-height:1}
-.vv-lightbox-close:hover{opacity:1}
-@media(max-width:768px){.vv-posts-wrap{grid-template-columns:repeat(2,1fr)}.vv-stories-wrap{grid-template-columns:repeat(2,1fr)}}
-
-/* stories carousel — taller 9:16 slots */
-.vv-stories-track{ height:600px; }
-.vv-story-item{
-  position:absolute;
-  border-radius:12px;
-  overflow:hidden;
-  cursor:pointer;
-  background:var(--gray-100);
-  will-change:transform,opacity,width,height;
-}
-.vv-story-item img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  pointer-events:none;
-}
-@media(max-width:768px){ .vv-stories-track{ height:360px; } }
-
-/* gif sticker carousel — square, wide, transparent bg */
-.vv-gifs-track{ height:220px; }
-.vv-gif-item{
-  position:absolute;
-  cursor:pointer;
-  background:transparent;
-  will-change:transform,opacity,width,height;
-}
-.vv-gif-item img{
-  width:100%;height:100%;object-fit:contain;display:block;
-  pointer-events:none;
-}
-@media(max-width:768px){ .vv-gifs-track{ height:160px; } }
+.mini-img-wrap{cursor:zoom-in;overflow:hidden}
+.mini-img-wrap img{transition:transform .4s var(--ease)}
+.mini-img-wrap:hover img{transform:scale(1.05)}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;}
+.lightbox.active{display:flex}
+.lightbox img{max-width:82vw;max-height:88vh;object-fit:contain;user-select:none;}
+.lightbox-close{position:absolute;top:24px;right:32px;font-size:32px;color:#fff;cursor:pointer;font-family:var(--body);line-height:1;opacity:0.6;z-index:2;}
+.lightbox-close:hover{opacity:1}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:24px;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:2;backdrop-filter:blur(4px);}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.25);}
+.lightbox-prev{left:24px;}
+.lightbox-next{right:24px;}
+.lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:.1em;font-family:var(--body);}
+.ep-item{position:absolute;inset:0;cursor:pointer;}
+.ep-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(0.25,0.46,0.45,0.94);}
+.ep-item:hover img{transform:scale(1.04);}
+.ep-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.ep-play-btn{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+.ep-item:hover .ep-play-btn{transform:scale(1.1);background:#fff;}
+.ep-play-btn svg{width:20px;height:20px;margin-left:3px;}
+.ep-item iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block;}
+@media(max-width:768px){ .mini-grid{ grid-template-columns:1fr !important; } }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="portfolio.html" class="nav-logo">Maxwell Purwin</a>
+  <a href="/" class="nav-logo">Maxwell Purwin</a>
   <ul class="nav-links">
-    <li><a href="portfolio.html#work">Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="resume.html">Resume</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/resume/">Resume</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Social Media &amp; Content Strategy</p>
-    <h1 class="hero-title">Virgin<br>Voyages</h1>
+    <p class="hero-eyebrow">Personal Projects</p>
+    <h1 class="hero-title">Just For Fun</h1>
     <div class="hero-foot">
-      <p class="hero-desc">Directing visual identity and creative production across all social platforms for one of the most distinctive brands in modern travel.</p>
+      <p class="hero-desc">Sometimes it's fun to make things just because — personal projects, student films, and creative work from my time at the University of Michigan.</p>
       <div class="hero-tags">
-        <span class="hero-tag">2021 &ndash; Present</span>
-        <span class="hero-tag">Creative Manager</span>
+        
+        <span class="hero-tag">Illustrator &middot; Premiere Pro &middot; After Effects</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat reveal">
-    <div class="stat-n" data-count="40" data-suffix="%">0%</div>
-    <div class="stat-l">YoY increase in interactions &amp; views</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-n" data-count="2" data-suffix="M+">0M+</div>
-    <div class="stat-l">Total audience reached</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-n" data-count="4" data-suffix="">0</div>
-    <div class="stat-l">Ship launches covered</div>
-  </div>
-</div>
 
-<!-- FEATURE BLOCK -->
-<div class="vv-page">
 
-  <!-- OVERVIEW -->
-  <div class="vv-section" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:56px;border-bottom:1px solid var(--gray-200)">
+<div class="feature reveal" style="flex-direction:column;display:flex">
+
+  <!-- Overview -->
+  <div class="feature-text" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:56px;border-bottom:1px solid var(--gray-200)">
     <div>
       <p class="feature-label">The Work</p>
-      <h2 class="feature-heading">Social content<br>at scale.</h2>
+      <h2 class="feature-heading">Making things<br>for fun.</h2>
     </div>
+    <p class="feature-body">A small collection of personal projects and work from my time at the University of Michigan. Outside of design, I love aviation, cars, nature, and traveling — so I try to incorporate elements of those interests into my work as often as I can.</p>
+  </div>
+
+  <!-- Mini Animation — Vimeo -->
+  <div style="padding:56px;border-bottom:1px solid var(--gray-200)">
+    <p class="feature-label" style="margin-bottom:12px;">Franken-Mini</p>
+    <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;max-width:720px;margin-bottom:32px;">A short animated story I wrote, illustrated, and voiced over for my dad's "Franken-Mini" project — a custom Mini Cooper built from multiple different models. Created in After Effects and Illustrator.</p>
+    <div style="width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative">
+      <div class="ep-item" data-vimeo="431215746">
+        <img src="https://vumbnail.com/431215746.jpg" alt="Franken-Mini Animation">
+        <div class="ep-play"><div class="ep-play-btn"><svg viewBox="0 0 24 24" fill="var(--black)"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+
+    <!-- Mini Illustrations -->
+    <div class="mini-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
+      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
+        <img src="images/MiniPrint-01.png" alt="Mini Illustration 1" style="width:100%;max-width:320px;display:block;">
+      </div>
+      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
+        <img src="images/MiniPrint-02.png" alt="Mini Illustration 2" style="width:100%;max-width:320px;display:block;">
+      </div>
+      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
+        <img src="images/MiniPrint-03.png" alt="Mini Illustration 3" style="width:100%;max-width:320px;display:block;">
+      </div>
+    </div>
+  </div>
+
+  <!-- University of Michigan Films -->
+  <div style="padding:56px;border-bottom:1px solid var(--gray-200)">
+    <p class="feature-label" style="margin-bottom:12px;">University of Michigan Films</p>
+    <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;max-width:720px;margin-bottom:48px;">During my time at the University of Michigan, I collaborated on a range of short films — taking on roles across producing, directing, and cinematography. Highlights include <em>The Hunt</em>, a narrative drama that earned Runner Up — Best Drama at the Lightworks Film Festival, and <em>Turbo Slut</em>, a low-light thriller shot on limited equipment.</p>
+
+    <!-- Washington DC -->
     <div>
-      <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;">As Social Creative Manager, I lead a team producing high-impact social content — from videos and graphics to bold, platform-native campaigns that bring Virgin Voyages' ships and itineraries to life across every major social channel.</p>
-
-    </div>
-  </div>
-
-  <!-- GRAPHIC DESIGN -->
-  <div class="vv-section" style="padding:56px;border-bottom:1px solid var(--gray-200)">
-    <p class="feature-label" style="margin-bottom:12px;">Graphic Design</p>
-    <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);margin-bottom:16px">In-Feed Posts <span style="font-weight:300;color:var(--gray-400)">— Facebook &middot; Instagram &middot; Pinterest &middot; Threads &middot; LinkedIn</span></p>
-    <div class="vv-carousel" id="vv-carousel">
-      <button class="vv-carousel-btn vv-carousel-prev" id="vv-prev" aria-label="Previous">&#8592;</button>
-      <button class="vv-carousel-btn vv-carousel-next" id="vv-next" aria-label="Next">&#8594;</button>
-
-      <div class="vv-carousel-track" id="vv-carousel-track">
-        <div class="vv-carousel-item" data-index="0"><img src="images/vv infeed/01_sea ibiza.png" alt="Sea Ibiza"></div>
-        <div class="vv-carousel-item" data-index="1"><img src="images/vv infeed/02_bar tab.png" alt="Bar Tab"></div>
-        <div class="vv-carousel-item" data-index="2"><img src="images/vv infeed/03_wlf oceans.png" alt="With Love for Our Oceans"></div>
-        <div class="vv-carousel-item" data-index="3"><img src="images/vv infeed/04_aruba.png" alt="Aruba"></div>
-        <div class="vv-carousel-item" data-index="4"><img src="images/vv infeed/05_santorini.png" alt="Santorini"></div>
-        <div class="vv-carousel-item" data-index="5"><img src="images/vv infeed/06_solo cruise.png" alt="Solo Cruise"></div>
-        <div class="vv-carousel-item" data-index="6"><img src="images/vv infeed/07_set it to silent.png" alt="Set It to Silent"></div>
-        <div class="vv-carousel-item" data-index="7"><img src="images/vv infeed/08_bl tour.png" alt="BL Tour"></div>
-        <div class="vv-carousel-item" data-index="8"><img src="images/vv infeed/09_boy george.png" alt="Boy George"></div>
-        <div class="vv-carousel-item" data-index="9"><img src="images/vv infeed/10_laptop monday.png" alt="Laptop Monday"></div>
-        <div class="vv-carousel-item" data-index="10"><img src="images/vv infeed/11_vacation.png" alt="Vacation"></div>
-        <div class="vv-carousel-item" data-index="11"><img src="images/vv infeed/12_mermaids intro.gif" alt="Mermaids Intro"></div>
-        <div class="vv-carousel-item" data-index="12"><img src="images/vv infeed/13_mermaids sl.gif" alt="Mermaids"></div>
-        <div class="vv-carousel-item" data-index="13"><img src="images/vv infeed/14_sea days intro.png" alt="Sea Days Intro"></div>
-        <div class="vv-carousel-item" data-index="14"><img src="images/vv infeed/15_sea days 1.gif" alt="Sea Days 1"></div>
-        <div class="vv-carousel-item" data-index="15"><img src="images/vv infeed/16_sea days 2.gif" alt="Sea Days 2"></div>
-        <div class="vv-carousel-item" data-index="16"><img src="images/vv infeed/17_sea days 3.gif" alt="Sea Days 3"></div>
+      <p style="font-family:var(--display);font-size:clamp(18px,2vw,24px);font-weight:700;letter-spacing:-.02em;text-transform:uppercase;color:var(--black);margin-bottom:8px">Washington D.C.</p>
+      <p style="font-size:13px;color:var(--gray-400);margin-bottom:16px">Personal Trip Recap</p>
+      <div style="width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:12px">
+        <video width="100%" height="100%" style="display:block;width:100%;height:100%;object-fit:cover" controls playsinline preload="metadata">
+          <source src="videos/Washington DC.mp4" type="video/mp4">
+        </video>
       </div>
-
-      <!-- dot indicators -->
-      <div class="vv-carousel-dots" id="vv-dots"></div>
-    </div>
-    
-    
-  </div>
-
-
-  <!-- STORIES -->
-  <div class="vv-section" style="padding:56px;border-bottom:1px solid var(--gray-200)">
-    <p class="feature-label" style="margin-bottom:12px;">Stories</p>
-    <p style="font-size:13px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px">Facebook &middot; Instagram &middot; TikTok</p>
-
-    <div class="vv-carousel" id="vv-stories-carousel">
-      <button class="vv-carousel-btn vv-carousel-prev" id="vv-stories-prev" aria-label="Previous">&#8592;</button>
-      <button class="vv-carousel-btn vv-carousel-next" id="vv-stories-next" aria-label="Next">&#8594;</button>
-      <div class="vv-carousel-track vv-stories-track" id="vv-stories-track">
-        <div class="vv-story-item"><img src="images/vv stories/01_Miami 305.png" alt="Miami 305"></div>
-        <div class="vv-story-item"><img src="images/vv stories/02_Miami 305 Outro.png" alt="Miami 305 Outro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/03_WLF intro.png" alt="WLF Intro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/04_WLF outro.png" alt="WLF Outro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/05_seven seas intro.png" alt="Seven Seas Intro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/06_seven seas drink 1.png" alt="Seven Seas Drink 1"></div>
-        <div class="vv-story-item"><img src="images/vv stories/07_seven seas drink 2.png" alt="Seven Seas Drink 2"></div>
-        <div class="vv-story-item"><img src="images/vv stories/08_seven seas outro.png" alt="Seven Seas Outro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/09_athens to portsmouth.png" alt="Athens to Portsmouth"></div>
-        <div class="vv-story-item"><img src="images/vv stories/10_AUS animation.gif" alt="AUS Animation"></div>
-        <div class="vv-story-item"><img src="images/vv stories/11_word on the sea.png" alt="Word on the Sea"></div>
-        <div class="vv-story-item"><img src="images/vv stories/12_BL countdown.png" alt="BL Countdown"></div>
-        <div class="vv-story-item"><img src="images/vv stories/13_eat and drink.png" alt="Eat and Drink"></div>
-        <div class="vv-story-item"><img src="images/vv stories/14_Sailor Reviews_COVER_3.gif" alt="Sailor Reviews Cover"></div>
-        <div class="vv-story-item"><img src="images/vv stories/15_Sailor Reviews_4.gif" alt="Sailor Reviews 4"></div>
-        <div class="vv-story-item"><img src="images/vv stories/16_Sailor Reviews_2.gif" alt="Sailor Reviews 2"></div>
-        <div class="vv-story-item"><img src="images/vv stories/17_Pi or Lie Intro.png" alt="Pi or Lie Intro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/18_Pi or Lie Question.png" alt="Pi or Lie Question"></div>
-        <div class="vv-story-item"><img src="images/vv stories/19_Pi or Lie Answer.png" alt="Pi or Lie Answer"></div>
-        <div class="vv-story-item"><img src="images/vv stories/20_BL LA Playlist.png" alt="BL LA Playlist"></div>
-        <div class="vv-story-item"><img src="images/vv stories/21_Marv Voayges Intro.png" alt="Marv Voyages Intro"></div>
-        <div class="vv-story-item"><img src="images/vv stories/22_Marv Voyages 1.png" alt="Marv Voyages 1"></div>
-        <div class="vv-story-item"><img src="images/vv stories/23_Marv Voyages 2.png" alt="Marv Voyages 2"></div>
-        <div class="vv-story-item"><img src="images/vv stories/24_Marv Voyages 3.png" alt="Marv Voyages 3"></div>
-        <div class="vv-story-item"><img src="images/vv stories/25_Marv Voyages Outro.png" alt="Marv Voyages Outro"></div>
-      </div>
-      <div class="vv-carousel-dots" id="vv-stories-dots"></div>
-    </div>
-  </div>
-
-  <!-- VIDEO & MOTION -->
-  <div class="vv-section" style="padding:56px;border-bottom:1px solid var(--gray-200)">
-    <p class="feature-label" style="margin-bottom:12px;">Video Editing &amp; Motion</p>
-
-
-    <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);margin-bottom:16px">In-Feed Videos <span style="font-weight:300;color:var(--gray-400)">— Facebook &middot; Instagram &middot; TikTok &middot; Pinterest &middot; LinkedIn</span></p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px">
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Housekeeping Mic'd Up_6.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/SRB Narrator Video_7.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Games On Board_6.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Greece Siri Reel_v05.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/In Feed_Part 2_SRB_Three Truths and a Lie_1.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Ahoy Sis Reel_3.mp4" type="video/mp4"></video></div>
     </div>
 
-    <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);margin-bottom:16px">Dynamic Videos for Stories <span style="font-weight:300;color:var(--gray-400)">— Facebook &middot; Instagram</span></p>
-    
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/BL MIA Countdown_1 Day_Animated_5.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/AUS Countdown_Main _1_4.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Master_Adriatic Gems_IGS_10.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Ariya Announcement IGS_4.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/Portsmouth_IGS Map_2.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="videos/vv/BL Now Live IGS_Studio_1.mp4" type="video/mp4"></video></div>
-    </div>
-  </div>
-
-  <!-- ANIMATED GIF STICKERS -->
-  <div class="vv-section" style="padding:56px">
-    <p class="feature-label" style="margin-bottom:12px;">Animated GIF Stickers</p>
-    <p style="font-size:13px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Stories</p>
-    <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;max-width:760px;margin-bottom:8px;">For major launches, events, and holidays, I design playful, on-brand sticker sets featured in stories and shared on GIPHY for our audience to use across social.</p>
-    <a href="https://giphy.com/virginvoyages" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;margin-bottom:32px">See them all on GIPHY ↗</a>
-    <div class="vv-carousel" id="vv-gifs-carousel">
-      <button class="vv-carousel-btn vv-carousel-prev" id="vv-gifs-prev" aria-label="Previous">&#8592;</button>
-      <button class="vv-carousel-btn vv-carousel-next" id="vv-gifs-next" aria-label="Next">&#8594;</button>
-      <div class="vv-carousel-track vv-gifs-track" id="vv-gifs-track">
-        <div class="vv-gif-item"><img src="images/vv gifs/01_BL NYC_NYC LOCK UP_Sticker_1.gif" alt="BL NYC Lock Up"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/02_BL NYC_BRILLIANT_Sticker_1.gif" alt="Brilliant"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/03_BL MIA Flamingo_Sticker_1.gif" alt="BL MIA Flamingo"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/04_BL MIA No Kids_Sticker_1.gif" alt="No Kids"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/05_AUS_GDay_Sticker_1.gif" alt="G'Day"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/06_AUS_Kangaroo Sign_Sticker_1.gif" alt="Kangaroo Sign"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/07_AUS_NWV_Stamp_Sticker_1.gif" alt="NWV Stamp"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/08_Opa Ahoy Sticker_2.gif" alt="Opa Ahoy"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/09_RL_Mermaid_1.gif" alt="Mermaid"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/10_Sea You In Greece Sticker_2_White.gif" alt="Sea You In Greece"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/11_Scarlet Fright Night_Sticker_2.gif" alt="Scarlet Fright Night"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/12_Witch Hat_Sticker_1.gif" alt="Witch Hat"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/13_Holidays_Ornament_Sticker_1.gif" alt="Holidays Ornament"></div>
-        <div class="vv-gif-item"><img src="images/vv gifs/14_Holidays_Stamp_Sticker_1.gif" alt="Holidays Stamp"></div>
-      </div>
-      <div class="vv-carousel-dots" id="vv-gifs-dots"></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="images/vv gifs/BL LA Stickers_Promo_3.mp4" type="video/mp4"></video></div>
-      <div style="aspect-ratio:9/16;background:var(--gray-900);border-radius:12px;overflow:hidden"><video width="100%" height="100%" controls playsinline style="display:block;object-fit:cover"><source src="images/vv gifs/Holiday Sticker_Promo_7.mp4" type="video/mp4"></video></div>
-    </div>
   </div>
 
 </div>
 
-<!-- ROLE ROW -->
 
 
-<!-- HIGHLIGHTS -->
 
 
-<!-- MEDIA GRID -->
 
 </div>
 
-<!-- PROJECT NAV -->
 <div class="project-nav">
-  <a href="justforfun.html" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-jff"></div>
+  <a href="/photography/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-photo"></div>
     <span class="pnav-dir">&#8592; Previous</span>
-    <span class="pnav-title">Just For Fun</span>
-    <span class="pnav-type">Personal Projects</span>
+    <span class="pnav-title">Photography</span>
+    <span class="pnav-type">Stills & Compositions</span>
   </a>
-  <a href="universitymotors.html" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-um"></div>
+  <a href="/virginvoyages/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-vv"></div>
     <span class="pnav-dir">Next &#8594;</span>
-    <span class="pnav-title">University Motors</span>
-    <span class="pnav-type">YouTube Content Creation</span>
+    <span class="pnav-title">Virgin Voyages</span>
+    <span class="pnav-type">Social Media & Content Strategy</span>
   </a>
 </div>
 
@@ -490,362 +270,74 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <ul class="footer-links">
     <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
     <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="resume.html">Resume</a></li>
+    <li><a href="/resume/">Resume</a></li>
   </ul>
 </footer>
 
 <script>
-// Scroll reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)});},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// Count-up animation for stats
-function animateCount(el) {
-  const target = parseInt(el.dataset.count, 10);
-  const suffix = el.dataset.suffix || '';
-  const duration = 1400;
-  const startTime = performance.now();
-  function ease(t) { return 1 - Math.pow(1 - t, 3); }
-  function tick(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const current = Math.round(ease(progress) * target);
-    el.textContent = current + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-const statObs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const countEl = entry.target.querySelector('[data-count]');
-      if (countEl) animateCount(countEl);
-      statObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.stat').forEach(el => statObs.observe(el));
 </script>
 
-
-
-
-<div class="vv-lightbox" id="vv-lightbox" onclick="this.classList.remove('active')">
-  <span class="vv-lightbox-close">&times;</span>
-  <img id="vv-lightbox-img" src="" alt="">
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightbox-close">&times;</span>
+  <button class="lightbox-prev" id="lightbox-prev">&#8592;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" id="lightbox-next">&#8594;</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
 </div>
+
 <script>
-document.querySelectorAll('.vv-post-item, .vv-story-item').forEach(item => {
+// Lightbox with prev/next
+(function(){
+  const items  = Array.from(document.querySelectorAll('.jff-lightbox-item'));
+  const lb     = document.getElementById('lightbox');
+  const lbImg  = document.getElementById('lightbox-img');
+  const lbCtr  = document.getElementById('lightbox-counter');
+  let current  = 0;
+
+  function open(idx) {
+    current = ((idx % items.length) + items.length) % items.length;
+    lbImg.src = items[current].querySelector('img').src;
+    lbCtr.textContent = (current + 1) + ' / ' + items.length;
+    lb.classList.add('active');
+  }
+  function close() { lb.classList.remove('active'); }
+  function prev()  { open(current - 1); }
+  function next()  { open(current + 1); }
+
+  items.forEach((item, i) => item.addEventListener('click', () => open(i)));
+  document.getElementById('lightbox-close').addEventListener('click', close);
+  document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); prev(); });
+  document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); next(); });
+  lb.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
+  });
+  let touchX = 0;
+  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
+  }, {passive:true});
+})();
+
+// Vimeo click-to-play
+document.querySelectorAll('.ep-item[data-vimeo]').forEach(item => {
   item.addEventListener('click', () => {
-    document.getElementById('vv-lightbox-img').src = item.querySelector('img').src;
-    document.getElementById('vv-lightbox').classList.add('active');
+    const vid = item.dataset.vimeo;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://player.vimeo.com/video/${vid}?autoplay=1`;
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:block;';
+    item.innerHTML = '';
+    item.appendChild(iframe);
+    item.style.cursor = 'default';
   });
-});
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') document.getElementById('vv-lightbox').classList.remove('active');
-});
-</script>
-<script>
-// ── Reusable focus carousel factory ───────────────────────────────
-function makeCarousel(opts) {
-  const { itemSelector, trackId, prevId, nextId, dotsId, slots, speed, shadow=true, adaptiveHeight=false } = opts;
-
-  const items  = Array.from(document.querySelectorAll(itemSelector));
-  const dotsEl = document.getElementById(dotsId);
-  const track  = document.getElementById(trackId);
-  const total  = items.length;
-
-  // pos is always 0..total (normalized). delta is the signed lerp target.
-  let pos    = 0;   // normalized 0..total
-  let delta  = 0;   // how far we still need to move (signed, in slot units)
-  let moving = false;
-  let lastT  = null;
-  const EASE = 0.10;
-  const DRAG_SCALE = 1 / 260;
-  let dragging=false, dragStartX=0, dragStartPos=0, dragVel=0, lastDragX=0, didDrag=false;
-
-  function mod(n, m) { return ((n % m) + m) % m; }
-
-  // dots
-  items.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'vv-carousel-dot';
-    d.setAttribute('aria-label','Go to slide '+(i+1));
-    d.addEventListener('click', () => { stopAutoplay(); moveTo(i); });
-    dotsEl.appendChild(d);
-  });
-
-  function updateDots() {
-    const idx = Math.round(mod(pos, total)) % total;
-    dotsEl.querySelectorAll('.vv-carousel-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
-  }
-
-  function lerp(a,b,t){ return a+(b-a)*t; }
-
-  function slotFor(offset) {
-    const OFFSCREEN = 5.0;
-    if (Math.abs(offset) > OFFSCREEN) return null;
-    const si = Math.max(0, Math.min(slots.length-1, offset + 2));
-    const lo = Math.floor(si), hi = Math.ceil(si);
-    const A = slots[Math.max(0, Math.min(slots.length-1, lo))];
-    const B = slots[Math.max(0, Math.min(slots.length-1, hi))];
-    const t = (lo === hi) ? 0 : si - lo;
-    const xPerSlot = (slots[slots.length-1].x - slots[0].x) / (slots.length - 1);
-    let x = lerp(A.x, B.x, t);
-    const halfLen = (slots.length - 1) / 2;
-    if (offset < -halfLen) x = slots[0].x + (offset + halfLen) * xPerSlot;
-    if (offset >  halfLen) x = slots[slots.length-1].x + (offset - halfLen) * xPerSlot;
-    return {
-      x,
-      w:   lerp(A.w,   B.w,   t),
-      h:   lerp(A.h,   B.h,   t),
-      op:  lerp(A.op,  B.op,  t),
-      // z purely from offset — never interpolated so there's no mid-transition jump
-      // Left side (negative offset): higher z so they layer over the right
-      // Right side (positive offset): lower z so they slide under
-      z:   offset <= 0 ? Math.round(4 + offset) : Math.round(4 - offset - 1),
-      rot: lerp(A.rot||0, B.rot||0, t),
-      y:   lerp(A.y||0,   B.y||0,   t),
-    };
-  }
-
-  function render() {
-    items.forEach((item, i) => {
-      // Compute shortest-path offset from normalized pos
-      let offset = mod(i - pos, total);
-      if (offset > total / 2) offset -= total;
-
-      const slot = slotFor(offset);
-      if (!slot) {
-        item.style.opacity='0'; item.style.pointerEvents='none'; item.style.zIndex='0'; return;
-      }
-
-      let w = slot.w, h = slot.h;
-      if (adaptiveHeight) {
-        const img = item.querySelector('img');
-        if (img && img.naturalWidth && img.naturalHeight) {
-          h = Math.round(w * img.naturalHeight / img.naturalWidth);
-        }
-      }
-
-      item.style.opacity       = slot.op;
-      item.style.zIndex        = slot.z;
-      item.style.width         = w+'px';
-      item.style.height        = h+'px';
-      item.style.top           = '50%';
-      item.style.left          = '50%';
-      item.style.marginLeft    = (-w/2)+'px';
-      item.style.transform     = `translateX(${slot.x}px) translateY(calc(-50% + ${slot.y||0}px)) rotate(${slot.rot||0}deg)`;
-      item.style.pointerEvents = Math.abs(offset) < 2.4 ? 'auto' : 'none';
-      item.style.cursor        = Math.abs(offset) < 0.4 ? 'zoom-in' : 'pointer';
-
-      if (shadow) {
-        const s = Math.max(0, 1 - Math.abs(offset));
-        item.style.boxShadow = `0 ${lerp(0,32,s).toFixed(1)}px ${lerp(0,80,s).toFixed(1)}px rgba(0,0,0,${lerp(0,0.22,s).toFixed(3)})`;
-      } else {
-        item.style.boxShadow = 'none';
-      }
-    });
-    updateDots();
-  }
-
-  // Autoplay: continuous drift
-  let autoplay = null;
-  function startAutoplay() {
-    if (autoplay) return;
-    let lastAT = null;
-    function ap(ts) {
-      if (!autoplay) return;
-      if (lastAT !== null) {
-        pos = mod(pos + speed * Math.min((ts - lastAT) / 1000, 0.05), total);
-        render();
-      }
-      lastAT = ts;
-      autoplay = requestAnimationFrame(ap);
-    }
-    autoplay = requestAnimationFrame(ap);
-  }
-  function stopAutoplay() {
-    if (autoplay) { cancelAnimationFrame(autoplay); autoplay = null; }
-  }
-
-  // Snap animation: lerp pos toward a target over multiple frames
-  let snapRAF = null;
-  function moveTo(idx) {
-    stopAutoplay();
-    if (snapRAF) { cancelAnimationFrame(snapRAF); snapRAF = null; }
-
-    // Find shortest-path direction to idx from current pos
-    const cur = mod(pos, total);
-    let diff = mod(idx - cur, total);
-    if (diff > total / 2) diff -= total; // negative = go backwards
-
-    const targetPos = cur + diff;
-    let p = pos; // use a local to avoid touching pos until we're sure
-
-    function snap() {
-      const remaining = targetPos - mod(p - (p - cur), total) - cur;
-      // lerp the remaining distance
-      p = mod(p + (targetPos - p) * EASE, total);
-      // Also keep a running normalized pos
-      pos = mod(pos + (targetPos - pos) * EASE, total);
-      render();
-      if (Math.abs(targetPos - pos) > 0.001 && Math.abs(mod(targetPos,total) - mod(pos,total)) > 0.001) {
-        snapRAF = requestAnimationFrame(snap);
-      } else {
-        pos = mod(targetPos, total);
-        render();
-        snapRAF = null;
-      }
-    }
-    snapRAF = requestAnimationFrame(snap);
-  }
-
-  // Simpler moveTo that just lerps pos in normalized space
-  function moveBy(dir) {
-    stopAutoplay();
-    if (snapRAF) { cancelAnimationFrame(snapRAF); snapRAF = null; }
-
-    const start = pos;
-    const end   = mod(pos + dir, total);
-    // Use shortest path
-    let d = mod(end - start, total);
-    if (d > total / 2) d -= total;
-    const target = start + d;
-
-    function snap() {
-      pos = mod(pos + (target - mod(pos, total) + start - start) * EASE, total);
-      // simpler: just lerp in unbounded space then renormalize
-      render();
-    }
-
-    // Actually the cleanest: lerp an unbounded float, render uses mod
-    let p = 0; // progress 0..1
-    function go(ts) {
-      if (lastT === null) lastT = ts;
-      const dt = Math.min((ts - lastT) / 1000, 0.05);
-      lastT = ts;
-      pos = mod(pos + d * EASE, total);
-      d *= (1 - EASE);
-      render();
-      if (Math.abs(d) > 0.0005) {
-        snapRAF = requestAnimationFrame(go);
-      } else {
-        pos = mod(target, total);
-        render();
-        snapRAF = null;
-        lastT = null;
-      }
-    }
-    lastT = null;
-    snapRAF = requestAnimationFrame(go);
-  }
-
-  document.getElementById(prevId).addEventListener('click', ()=>moveBy(-1));
-  document.getElementById(nextId).addEventListener('click', ()=>moveBy(+1));
-
-  items.forEach((item,i) => {
-    item.addEventListener('click', () => {
-      if (didDrag) return;
-      const centerIdx = Math.round(mod(pos, total)) % total;
-      if (i === centerIdx) {
-        document.getElementById('vv-lightbox-img').src = item.querySelector('img').src;
-        document.getElementById('vv-lightbox').classList.add('active');
-      } else {
-        // Find shortest direction
-        let diff = mod(i - mod(pos, total), total);
-        if (diff > total / 2) diff -= total;
-        moveBy(diff);
-      }
-    });
-  });
-
-  // Drag
-  function onDragStart(x) {
-    stopAutoplay();
-    if (snapRAF) { cancelAnimationFrame(snapRAF); snapRAF = null; }
-    dragging=true; didDrag=false; dragStartX=x; lastDragX=x;
-    dragStartPos=pos; dragVel=0;
-    track.style.cursor='grabbing';
-    lastT = null;
-  }
-  function onDragMove(x) {
-    if (!dragging) return;
-    dragVel   = -(x - lastDragX) * DRAG_SCALE;
-    lastDragX = x;
-    if (Math.abs(x - dragStartX) > 4) didDrag = true;
-    pos = mod(dragStartPos - (x - dragStartX) * DRAG_SCALE, total);
-    render();
-  }
-  function onDragEnd() {
-    if (!dragging) return;
-    dragging = false; track.style.cursor = '';
-    // Fling then snap to nearest integer
-    const flung = mod(pos + dragVel * 5, total);
-    let diff = mod(flung - pos, total);
-    if (diff > total / 2) diff -= total;
-    moveBy(diff + Math.round(mod(pos + diff, total)) - mod(pos + diff, total));
-  }
-
-  track.addEventListener('mousedown',  e=>{e.preventDefault(); onDragStart(e.clientX);});
-  window.addEventListener('mousemove', e=>{if(dragging) onDragMove(e.clientX);});
-  window.addEventListener('mouseup',   ()=>onDragEnd());
-  track.addEventListener('touchstart', e=>{onDragStart(e.touches[0].clientX);},{passive:true});
-  track.addEventListener('touchmove',  e=>{if(dragging) onDragMove(e.touches[0].clientX);},{passive:true});
-  track.addEventListener('touchend',   ()=>onDragEnd());
-
-  startAutoplay();
-  render();
-  return { moveBy, moveTo, stopAutoplay };
-}
-// ── In-feed posts carousel ────────────────────────────────────────
-const postCarousel = makeCarousel({
-  itemSelector: '.vv-carousel-item',
-  trackId: 'vv-carousel-track', prevId: 'vv-prev', nextId: 'vv-next', dotsId: 'vv-dots',
-  speed: 0.4, shadow: true, adaptiveHeight: true,
-  slots: [
-    { x:-310, w:180, h:180, op:1.0, z:2, rot:-6,  y: 30 },
-    { x:-190, w:240, h:240, op:1.0, z:3, rot:-3,  y: 14 },
-    { x:   0, w:360, h:360, op:1.0, z:4, rot: 0,  y:  0 },
-    { x: 190, w:240, h:240, op:1.0, z:3, rot: 3,  y: 14 },
-    { x: 310, w:180, h:180, op:1.0, z:2, rot: 6,  y: 30 },
-  ],
-});
-
-// ── Stories carousel ──────────────────────────────────────────────
-const storiesCarousel = makeCarousel({
-  itemSelector: '.vv-story-item',
-  trackId: 'vv-stories-track', prevId: 'vv-stories-prev', nextId: 'vv-stories-next', dotsId: 'vv-stories-dots',
-  speed: 0.35, shadow: true,
-  slots: [
-    { x:-220, w:120, h:214, op:1.0, z:2, rot:-6,  y: 30 },
-    { x:-130, w:165, h:293, op:1.0, z:3, rot:-3,  y: 14 },
-    { x:   0, w:240, h:426, op:1.0, z:4, rot: 0,  y:  0 },
-    { x: 130, w:165, h:293, op:1.0, z:3, rot: 3,  y: 14 },
-    { x: 220, w:120, h:214, op:1.0, z:2, rot: 6,  y: 30 },
-  ],
-});
-
-// ── GIF sticker carousel ──────────────────────────────────────────
-const gifCarousel = makeCarousel({
-  itemSelector: '.vv-gif-item',
-  trackId: 'vv-gifs-track', prevId: 'vv-gifs-prev', nextId: 'vv-gifs-next', dotsId: 'vv-gifs-dots',
-  speed: 0.3, shadow: false,
-  slots: [
-    { x:-440, w:120, h:120, op:1.0, z:2, rot:0, y:0 },
-    { x:-250, w:155, h:155, op:1.0, z:3, rot:0, y:0 },
-    { x:   0, w:200, h:200, op:1.0, z:4, rot:0, y:0 },
-    { x: 250, w:155, h:155, op:1.0, z:3, rot:0, y:0 },
-    { x: 440, w:120, h:120, op:1.0, z:2, rot:0, y:0 },
-  ],
-});
-
-document.addEventListener('keydown', e => {
-  if (document.getElementById('vv-lightbox').classList.contains('active')) return;
-  if (e.key==='ArrowLeft')  { postCarousel.moveBy(-1); storiesCarousel.moveBy(-1); gifCarousel.moveBy(-1); }
-  if (e.key==='ArrowRight') { postCarousel.moveBy(+1); storiesCarousel.moveBy(+1); gifCarousel.moveBy(+1); }
 });
 </script>
 </body>

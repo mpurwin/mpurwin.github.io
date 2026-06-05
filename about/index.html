@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Just For Fun — Maxwell Purwin</title>
+<title>About — Maxwell Purwin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Rye&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Simpel';
@@ -17,328 +17,475 @@
 </style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --white:#ffffff;--black:#0a0a0a;--gray-50:#f9f9f9;--gray-100:#f0f0f0;
-  --gray-200:#e2e2e2;--gray-400:#a0a0a0;--gray-600:#606060;--gray-800:#222222;
-  --accent:#0057ff;--display:'Simpel','Syne',sans-serif;--body:'Inter',sans-serif;
-  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+
+:root {
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --gray-50: #f9f9f9;
+  --gray-100: #f0f0f0;
+  --gray-200: #e2e2e2;
+  --gray-400: #a0a0a0;
+  --gray-600: #606060;
+  --gray-800: #222222;
+  --accent: #0057ff;
+  --display: 'Simpel', 'Syne', sans-serif;
+  --body: 'Inter', sans-serif;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-html{scroll-behavior:smooth}
-body{background:var(--white);color:var(--black);font-family:var(--body);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:64px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06)}
-.nav-logo{font-family:var(--display);font-size:15px;font-weight:600;color:var(--black);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
-.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+html { scroll-behavior: smooth; }
 
-/* HERO — full viewport, GIF bg */
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('images/mini animation header.gif');background-size:cover;background-position:center}
-.hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%)}
-.hero-content{position:relative;z-index:2}
-.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
-.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);display:block}
-.hero-title{font-family:var(--display);font-size:clamp(56px,8vw,120px);font-weight:700;line-height:.9;letter-spacing:-.03em;color:#fff;text-transform:uppercase;margin-bottom:40px;opacity:0;animation:up .7s var(--ease) .2s forwards}
-.hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;opacity:0;animation:up .7s var(--ease) .32s forwards}
-.hero-desc{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:480px;line-height:1.7}
-.hero-tags{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.hero-tag{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase}
-
-/* STATS — full-bleed 3 columns */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--gray-200)}
-.stat{padding:56px 48px;border-right:1px solid var(--gray-200)}
-.stat:last-child{border-right:none}
-.stat-n{font-family:var(--display);font-size:clamp(48px,5vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--black);margin-bottom:10px}
-.stat-l{font-size:12px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-weight:400}
-
-/* FEATURE — big image left, text right */
-.feature{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--gray-200)}
-.feature-media{background:var(--gray-100);min-height:520px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-right:1px solid var(--gray-200);position:relative;overflow:hidden;cursor:pointer;transition:background .2s;border-radius:16px}
-.feature-media:hover{background:var(--gray-50)}
-.feature-media-icon{font-size:28px;opacity:.2}
-.feature-media-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
-.feature-text{padding:64px 56px;display:flex;flex-direction:column;justify-content:center}
-.feature-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.feature-label::before{content:'';width:20px;height:1px;background:var(--accent);display:block}
-.feature-heading{font-family:var(--display);font-size:clamp(28px,3vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-transform:uppercase;color:var(--black);margin-bottom:24px}
-.feature-body{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8}
-
-/* ROLE ROW */
-.role-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--gray-200)}
-.role-cell{padding:48px;border-right:1px solid var(--gray-200)}
-.role-cell:last-child{border-right:none}
-.role-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px}
-.role-value{font-family:var(--display);font-size:clamp(18px,2vw,26px);font-weight:700;letter-spacing:-.02em;text-transform:uppercase;color:var(--black)}
-
-/* HIGHLIGHTS — alternating rows */
-.highlights{border-bottom:1px solid var(--gray-200)}
-.highlight-header{padding:40px 48px 0;display:flex;align-items:center;gap:12px}
-.highlight-header-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-400);display:flex;align-items:center;gap:10px}
-.highlight-header-label::before{content:'';width:20px;height:1px;background:var(--gray-400);display:block}
-.highlight-item{display:grid;grid-template-columns:56px 1fr;gap:0;border-top:1px solid var(--gray-200);margin-top:0}
-.highlight-num{padding:32px 0 32px 48px;font-family:var(--display);font-size:13px;font-weight:700;color:var(--gray-200);letter-spacing:.04em}
-.highlight-text{padding:32px 48px 32px 0;font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.75;border-left:1px solid var(--gray-200)}
-
-/* MEDIA GRID */
-.media-row{display:grid;grid-template-columns:2fr 1fr;gap:2px;background:var(--gray-200);border-bottom:1px solid var(--gray-200)}
-.media-cell{background:var(--gray-50);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;cursor:pointer;transition:background .2s;min-height:300px}
-.media-cell:hover{background:var(--gray-100)}
-.media-cell.tall{min-height:500px}
-.media-cell-icon{font-size:20px;opacity:.25}
-.media-cell-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
-
-/* PROJECT NAV */
-.project-nav{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray-200)}
-.pnav-item{background:var(--white);padding:48px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:background .2s;position:relative;overflow:hidden}
-.pnav-item::before{content:'';position:absolute;inset:0;background:var(--gray-50);transform:translateX(-101%);transition:transform .4s var(--ease)}
-.pnav-item:hover::before{transform:translateX(0)}
-.pnav-item>*{position:relative;z-index:1}
-.pnav-item.next{align-items:flex-end;text-align:right}
-.pnav-item.next::before{transform:translateX(101%)}
-.pnav-item.next:hover::before{transform:translateX(0)}
-.pnav-dir{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
-.pnav-title{font-family:var(--display);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;color:var(--black);text-transform:uppercase}
-.pnav-type{font-size:12px;color:var(--gray-400)}
-
-footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}
-.footer-name{font-family:var(--display);font-size:14px;font-weight:600;color:var(--black);letter-spacing:.04em;text-transform:uppercase}
-.footer-links{display:flex;list-style:none}
-.footer-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
-.footer-links a:hover{background:var(--gray-100);color:var(--black)}
-
-@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.reveal.visible{opacity:1;transform:none}
-
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .hero{padding:0 20px 52px}
-  .hero-foot{flex-direction:column;align-items:flex-start}
-  .hero-tags{align-items:flex-start}
-  .stats{grid-template-columns:1fr}
-  .stat{border-right:none;border-bottom:1px solid var(--gray-200);padding:36px 20px}
-  .feature{grid-template-columns:1fr}
-  .feature-media{min-height:280px;border-right:none;border-bottom:1px solid var(--gray-200)}
-  .feature-text{padding:40px 20px}
-  .role-row{grid-template-columns:1fr}
-  .role-cell{border-right:none;padding:32px 20px}
-  .highlight-header{padding:32px 20px 0}
-  .highlight-num{padding:24px 0 24px 20px}
-  .highlight-text{padding:24px 20px 24px 0}
-  .media-row{grid-template-columns:1fr}
-  .project-nav{grid-template-columns:1fr}
-  .pnav-item.next{align-items:flex-start;text-align:left}
-  footer{flex-direction:column;gap:20px;padding:32px 20px}
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
-.pnav-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.08;transition:opacity .4s}.pnav-item:hover .pnav-bg{opacity:0.18}
-.pnav-bg-photo{background-image:url('images/Photography Header GIF_1_1.gif')}
-.pnav-bg-vv{background-image:url('images/VV Header Website.gif')}
 
-.mini-img-wrap{cursor:zoom-in;overflow:hidden}
-.mini-img-wrap img{transition:transform .4s var(--ease)}
-.mini-img-wrap:hover img{transform:scale(1.05)}
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;}
-.lightbox.active{display:flex}
-.lightbox img{max-width:82vw;max-height:88vh;object-fit:contain;user-select:none;}
-.lightbox-close{position:absolute;top:24px;right:32px;font-size:32px;color:#fff;cursor:pointer;font-family:var(--body);line-height:1;opacity:0.6;z-index:2;}
-.lightbox-close:hover{opacity:1}
-.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:24px;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:2;backdrop-filter:blur(4px);}
-.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.25);}
-.lightbox-prev{left:24px;}
-.lightbox-next{right:24px;}
-.lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:.1em;font-family:var(--body);}
-.ep-item{position:absolute;inset:0;cursor:pointer;}
-.ep-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(0.25,0.46,0.45,0.94);}
-.ep-item:hover img{transform:scale(1.04);}
-.ep-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.ep-play-btn{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
-.ep-item:hover .ep-play-btn{transform:scale(1.1);background:#fff;}
-.ep-play-btn svg{width:20px;height:20px;margin-left:3px;}
-.ep-item iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block;}
-@media(max-width:768px){ .mini-grid{ grid-template-columns:1fr !important; } }
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-600);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-links a:hover { background: var(--gray-100); color: var(--black); }
+.nav-links a.active { background: var(--gray-100); color: var(--black); font-weight: 500; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 48px 80px;
+  border-bottom: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+  background: #050a18 url('images/about header.gif') center center / cover no-repeat;
+}
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.45;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+.hero-headline {
+  font-family: var(--display);
+  font-size: clamp(62px, 9vw, 128px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 44px;
+  max-width: 900px;
+  cursor: default;
+}
+.hero-headline-inner { display: block; }
+.hero-headline .line-1,
+.hero-headline .line-2 { display: block; }
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+}
+.hero-word.visible { opacity: 1; transform: translateY(0); }
+.hero-headline span { color: rgba(255,255,255,0.35); }
+.hero-headline em {
+  color: #fff;
+  display: inline-block;
+  font-style: normal;
+  transform: skewX(0deg);
+}
+.hero-headline em.italicize {
+  transform: skewX(-10deg);
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  opacity: 0;
+  animation: up 0.7s var(--ease) 0.78s forwards;
+}
+.hero-bio {
+  max-width: 400px;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+}
+.hero-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 100px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  font-family: var(--body);
+}
+.btn-primary { background: #fff; color: var(--black); }
+.btn-primary:hover { background: #e8e8e8; transform: translateY(-1px); }
+.btn-ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+.btn-ghost:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark:hover { background: var(--gray-800); transform: translateY(-1px); }
+.btn-light { background: var(--gray-100); color: var(--black); }
+.btn-light:hover { background: var(--gray-200); transform: translateY(-1px); }
+
+/* ── About blurb ── */
+.about {
+  padding: 100px 48px 0;
+  border-top: 1px solid var(--gray-200);
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding-bottom: 100px;
+}
+.about-label {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+.about-headline {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
+}
+.about-headline em { font-style: normal; color: var(--gray-400); }
+.about-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--gray-600);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-actions { display: flex; gap: 12px; margin-top: 40px; }
+.about-right {
+  overflow: hidden;
+}
+.about-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  max-height: 560px;
+}
+
+/* ── Embed Section ── */
+.embed-section {
+  border-top: 1px solid var(--gray-200);
+}
+.embed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 48px 48px 40px;
+}
+.embed-label {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+.embed-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--gray-100);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+.embed-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--gray-200);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.footer-name {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+.footer-links { display: flex; list-style: none; }
+.footer-links a {
+  font-size: 13px;
+  color: var(--gray-600);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  transition: background 0.15s, color 0.15s;
+}
+.footer-links a:hover { background: var(--gray-100); color: var(--black); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 0 20px 60px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .about { padding: 60px 20px 0; }
+  .about-top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 60px; }
+  .embed-header { padding: 32px 20px; }
+  .embed-container {
+    aspect-ratio: unset;
+    height: 90vh;
+  }
+  footer { flex-direction: column; gap: 20px; padding: 32px 20px; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="portfolio.html" class="nav-logo">Maxwell Purwin</a>
+  <a href="/" class="nav-logo">Maxwell Purwin</a>
   <ul class="nav-links">
-    <li><a href="portfolio.html#work">Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="resume.html">Resume</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/about/" class="active">About</a></li>
+    <li><a href="/resume/">Resume</a></li>
   </ul>
 </nav>
 
+<!-- ── Hero ── -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-scrim"></div>
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <p class="hero-eyebrow">Personal Projects</p>
-    <h1 class="hero-title">Just For Fun</h1>
-    <div class="hero-foot">
-      <p class="hero-desc">Sometimes it's fun to make things just because — personal projects, student films, and creative work from my time at the University of Michigan.</p>
-      <div class="hero-tags">
-        
-        <span class="hero-tag">Illustrator &middot; Premiere Pro &middot; After Effects</span>
+    <h1 class="hero-headline" id="hero-headline">
+      <span class="hero-headline-inner" id="headline-inner">
+        <span class="line-1">
+          <span class="hero-word" id="hw-creative">Creative</span>
+        </span>
+        <span class="line-2">
+          <span class="hero-word" id="hw-bycraft"><em id="hw-em">by craft.</em></span>
+        </span>
+      </span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-bio">Learn more about me below.</p>
+      <div class="hero-actions">
+        <a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank" class="btn btn-primary">LinkedIn ↗</a>
+        <a href="#experience" class="btn btn-ghost" style="background: linear-gradient(135deg, #d4b06a, #a07c3a); border-color: transparent; color: #fff;">Visit <span style="font-family:'Rye',serif;">PURWIN RANCH</span></a>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<div class="feature reveal" style="flex-direction:column;display:flex">
-
-  <!-- Overview -->
-  <div class="feature-text" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:56px;border-bottom:1px solid var(--gray-200)">
-    <div>
-      <p class="feature-label">The Work</p>
-      <h2 class="feature-heading">Making things<br>for fun.</h2>
-    </div>
-    <p class="feature-body">A small collection of personal projects and work from my time at the University of Michigan. Outside of design, I love aviation, cars, nature, and traveling — so I try to incorporate elements of those interests into my work as often as I can.</p>
-  </div>
-
-  <!-- Mini Animation — Vimeo -->
-  <div style="padding:56px;border-bottom:1px solid var(--gray-200)">
-    <p class="feature-label" style="margin-bottom:12px;">Franken-Mini</p>
-    <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;max-width:720px;margin-bottom:32px;">A short animated story I wrote, illustrated, and voiced over for my dad's "Franken-Mini" project — a custom Mini Cooper built from multiple different models. Created in After Effects and Illustrator.</p>
-    <div style="width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative">
-      <div class="ep-item" data-vimeo="431215746">
-        <img src="https://vumbnail.com/431215746.jpg" alt="Franken-Mini Animation">
-        <div class="ep-play"><div class="ep-play-btn"><svg viewBox="0 0 24 24" fill="var(--black)"><path d="M8 5v14l11-7z"/></svg></div></div>
+<!-- ── About blurb ── -->
+<section class="about">
+  <div class="about-top">
+    <div class="reveal">
+      <p class="about-label">About</p>
+      <h2 class="about-headline">Hi, I'm Max!</h2>
+      <p class="about-text">
+        Creative Manager at Virgin Voyages, directing an internal team and overseeing
+        visual identity across paid and organic social. My work bridges graphic design,
+        motion, and creative strategy to deliver elevated content that drives real
+        brand engagement.
+      </p>
+      <p class="about-text">
+        University of Michigan Film, Television &amp; Media grad. Outside of work I love finding new perspectives through my Fujifilm X100V or from the cockpit of a Cessna 172. Go Blue!
+      </p>
+      <div class="about-actions">
+        <a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank" class="btn btn-dark">LinkedIn ↗</a>
+        <a href="mailto:mpurwin@umich.edu" class="btn btn-light">Email me</a>
       </div>
     </div>
-
-    <!-- Mini Illustrations -->
-    <div class="mini-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
-      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
-        <img src="images/MiniPrint-01.png" alt="Mini Illustration 1" style="width:100%;max-width:320px;display:block;">
-      </div>
-      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
-        <img src="images/MiniPrint-02.png" alt="Mini Illustration 2" style="width:100%;max-width:320px;display:block;">
-      </div>
-      <div class="mini-img-wrap jff-lightbox-item" style="background:var(--white);padding:32px;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;cursor:zoom-in">
-        <img src="images/MiniPrint-03.png" alt="Mini Illustration 3" style="width:100%;max-width:320px;display:block;">
-      </div>
+    <div class="about-right reveal">
+      <img src="images/IMG_9585.JPG" alt="Maxwell Purwin" />
     </div>
   </div>
+</section>
 
-  <!-- University of Michigan Films -->
-  <div style="padding:56px;border-bottom:1px solid var(--gray-200)">
-    <p class="feature-label" style="margin-bottom:12px;">University of Michigan Films</p>
-    <p style="font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;max-width:720px;margin-bottom:48px;">During my time at the University of Michigan, I collaborated on a range of short films — taking on roles across producing, directing, and cinematography. Highlights include <em>The Hunt</em>, a narrative drama that earned Runner Up — Best Drama at the Lightworks Film Festival, and <em>Turbo Slut</em>, a low-light thriller shot on limited equipment.</p>
-
-    <!-- Washington DC -->
-    <div>
-      <p style="font-family:var(--display);font-size:clamp(18px,2vw,24px);font-weight:700;letter-spacing:-.02em;text-transform:uppercase;color:var(--black);margin-bottom:8px">Washington D.C.</p>
-      <p style="font-size:13px;color:var(--gray-400);margin-bottom:16px">Personal Trip Recap</p>
-      <div style="width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:12px">
-        <video width="100%" height="100%" style="display:block;width:100%;height:100%;object-fit:cover" controls playsinline preload="metadata">
-          <source src="videos/Washington DC.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
+<!-- ── Embed Section ── -->
+<section class="embed-section" id="experience">
+  <div class="embed-header reveal">
+    <span class="embed-label">Experience Purwin Ranch</span>
   </div>
+  <div class="embed-container reveal">
+    <iframe src="purwin-ranch-3d.html" allowfullscreen></iframe>
+  </div>
+</section>
 
-</div>
-
-
-
-
-
-
-</div>
-
-<div class="project-nav">
-  <a href="photography.html" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-photo"></div>
-    <span class="pnav-dir">&#8592; Previous</span>
-    <span class="pnav-title">Photography</span>
-    <span class="pnav-type">Stills & Compositions</span>
-  </a>
-  <a href="virginvoyages.html" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-vv"></div>
-    <span class="pnav-dir">Next &#8594;</span>
-    <span class="pnav-title">Virgin Voyages</span>
-    <span class="pnav-type">Social Media & Content Strategy</span>
-  </a>
-</div>
-
+<!-- ── Footer ── -->
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
   <ul class="footer-links">
     <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
     <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="resume.html">Resume</a></li>
+    <li><a href="/resume/">Resume</a></li>
   </ul>
 </footer>
 
 <script>
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)});},{threshold:0.06});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, blobs, time = 0;
+let mouse = { x: -9999, y: -9999, active: false };
 
-<div class="lightbox" id="lightbox">
-  <span class="lightbox-close" id="lightbox-close">&times;</span>
-  <button class="lightbox-prev" id="lightbox-prev">&#8592;</button>
-  <img id="lightbox-img" src="" alt="">
-  <button class="lightbox-next" id="lightbox-next">&#8594;</button>
-  <div class="lightbox-counter" id="lightbox-counter"></div>
-</div>
-
-<script>
-// Lightbox with prev/next
-(function(){
-  const items  = Array.from(document.querySelectorAll('.jff-lightbox-item'));
-  const lb     = document.getElementById('lightbox');
-  const lbImg  = document.getElementById('lightbox-img');
-  const lbCtr  = document.getElementById('lightbox-counter');
-  let current  = 0;
-
-  function open(idx) {
-    current = ((idx % items.length) + items.length) % items.length;
-    lbImg.src = items[current].querySelector('img').src;
-    lbCtr.textContent = (current + 1) + ' / ' + items.length;
-    lb.classList.add('active');
-  }
-  function close() { lb.classList.remove('active'); }
-  function prev()  { open(current - 1); }
-  function next()  { open(current + 1); }
-
-  items.forEach((item, i) => item.addEventListener('click', () => open(i)));
-  document.getElementById('lightbox-close').addEventListener('click', close);
-  document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); prev(); });
-  document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); next(); });
-  lb.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) close(); });
-  document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('active')) return;
-    if (e.key === 'Escape')     close();
-    if (e.key === 'ArrowLeft')  prev();
-    if (e.key === 'ArrowRight') next();
-  });
-  let touchX = 0;
-  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
-  lb.addEventListener('touchend',   e => {
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
-  }, {passive:true});
-})();
-
-// Vimeo click-to-play
-document.querySelectorAll('.ep-item[data-vimeo]').forEach(item => {
-  item.addEventListener('click', () => {
-    const vid = item.dataset.vimeo;
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://player.vimeo.com/video/${vid}?autoplay=1`;
-    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-    iframe.allowFullscreen = true;
-    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:block;';
-    item.innerHTML = '';
-    item.appendChild(iframe);
-    item.style.cursor = 'default';
-  });
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+  mouse.active = true;
 });
+canvas.addEventListener('mouseleave', () => { mouse.active = false; });
+
+function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+
+function makeBlob(i) {
+  const palette = [[30,90,210],[50,120,240],[20,70,200],[60,140,255],[15,55,180],[80,160,255],[35,100,225]];
+  const c = palette[i % palette.length];
+  return { x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.2, rx:0, ry:0, r:180+Math.random()*220, r0:180+Math.random()*220, phase:Math.random()*Math.PI*2, speed:0.003+Math.random()*0.004, color:c, opacity:0.18+Math.random()*0.14, pull:0.012+Math.random()*0.018 };
+}
+
+function init() {
+  resize();
+  blobs = Array.from({length:7}, (_,i) => makeBlob(i));
+  blobs.forEach(b => { b.rx = b.x; b.ry = b.y; });
+}
+
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#050a18'; ctx.fillRect(0,0,W,H);
+  blobs.forEach(b => {
+    b.x+=b.vx; b.y+=b.vy;
+    if(b.x<-b.r) b.x=W+b.r; if(b.x>W+b.r) b.x=-b.r;
+    if(b.y<-b.r) b.y=H+b.r; if(b.y>H+b.r) b.y=-b.r;
+    if(mouse.active){const dx=mouse.x-b.x,dy=mouse.y-b.y,dist=Math.sqrt(dx*dx+dy*dy)||1,falloff=Math.max(0,1-dist/700);b.vx+=dx/dist*b.pull*falloff;b.vy+=dy/dist*b.pull*falloff;}
+    const spd=Math.sqrt(b.vx*b.vx+b.vy*b.vy),maxSpd=mouse.active?2.2:0.5;
+    if(spd>maxSpd){b.vx=b.vx/spd*maxSpd;b.vy=b.vy/spd*maxSpd;}
+    b.vx*=mouse.active?0.97:0.985; b.vy*=mouse.active?0.97:0.985;
+    b.rx+=(b.x-b.rx)*0.12; b.ry+=(b.y-b.ry)*0.12;
+    let nearBoost=0;
+    if(mouse.active){const dx=mouse.x-b.rx,dy=mouse.y-b.ry;nearBoost=Math.max(0,1-Math.sqrt(dx*dx+dy*dy)/500)*60;}
+    b.r=b.r0+Math.sin(time*b.speed*60+b.phase)*40+nearBoost;
+    const[r,g,bl]=b.color,grad=ctx.createRadialGradient(b.rx,b.ry,0,b.rx,b.ry,b.r);
+    grad.addColorStop(0,`rgba(${r},${g},${bl},${b.opacity})`);
+    grad.addColorStop(0.5,`rgba(${r},${g},${bl},${b.opacity*0.4})`);
+    grad.addColorStop(1,`rgba(${r},${g},${bl},0)`);
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(b.rx,b.ry,b.r,0,Math.PI*2); ctx.fill();
+  });
+  ctx.fillStyle='rgba(255,255,255,0.012)';
+  for(let i=0;i<800;i++) ctx.fillRect(Math.random()*W,Math.random()*H,1,1);
+  const vign=ctx.createRadialGradient(W/2,H/2,H*0.2,W/2,H/2,H*0.9);
+  vign.addColorStop(0,'rgba(0,0,0,0)'); vign.addColorStop(1,'rgba(0,0,0,0.65)');
+  ctx.fillStyle=vign; ctx.fillRect(0,0,W,H);
+  time++; requestAnimationFrame(draw);
+}
+
+// Prevent page scroll when mouse is over the experience iframe
+const embedEl = document.querySelector('.embed-container');
+embedEl.addEventListener('wheel', (e) => {
+  e.stopPropagation();
+}, { passive: false });
+
+init(); draw();
+window.addEventListener('resize', () => { resize(); });
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const siblings = Array.from(el.parentElement.children);
+      const idx = siblings.indexOf(el);
+      setTimeout(() => el.classList.add('visible'), idx * 100);
+      obs.unobserve(el);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── Headline word-by-word fade + skew ──
+const aWords = [
+  { id: 'hw-creative', delay: 400  },
+  { id: 'hw-bycraft',  delay: 900  },
+];
+aWords.forEach(({ id, delay }) => {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('visible');
+  }, delay);
+});
+setTimeout(() => {
+  const em = document.getElementById('hw-em');
+  if (em) em.classList.add('italicize');
+}, 2800);
 </script>
 </body>
 </html>
