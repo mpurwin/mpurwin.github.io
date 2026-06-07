@@ -109,7 +109,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   .resume-section{padding:48px 20px 80px}
   footer{flex-direction:column;gap:20px;padding:32px 20px}
 }
+
+/* ── Safari-only fixes ── */
+.is-safari .hero-headline { letter-spacing: -0.07em; font-weight: 900; }
+.is-safari .cycle-word { font-synthesis: none; }
 </style>
+<script>if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent))document.documentElement.classList.add('is-safari');</script>
 </head>
 <body>
 
