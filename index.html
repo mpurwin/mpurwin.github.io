@@ -585,7 +585,14 @@ footer {
   .about { grid-template-columns: 1fr; padding: 60px 20px; }
   footer { flex-direction: column; gap: 20px; padding: 32px 20px; }
 }
+
+/* ── Safari-only fixes ── */
+.is-safari .hero-headline span { color: rgba(255,255,255,0.92); }
+.is-safari .hero-headline em { color: #fff; }
+.is-safari .hero-headline { letter-spacing: -0.07em; font-weight: 900; max-width: 1100px; }
+.is-safari .hero-word { font-synthesis: none; }
 </style>
+<script>if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent))document.documentElement.classList.add('is-safari');</script>
 </head>
 <body>
 
