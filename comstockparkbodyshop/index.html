@@ -145,26 +145,32 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 
 /* Logo shown on a wide soft stage */
-.logo-stage{background:var(--gray-50);border-radius:16px;aspect-ratio:21/9;display:flex;align-items:center;justify-content:center;padding:clamp(32px,5vw,72px)}
-.logo-stage img{height:100%;width:auto;max-width:100%;object-fit:contain;display:block}
-@media(max-width:768px){.logo-stage{aspect-ratio:4/3}}
+.spread{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:96px;align-items:center}
+.spread .metric{display:block;margin:0}
+.spread .metric-body{margin-top:36px;max-width:500px}
+.logo-card{width:420px;aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(15,23,60,.45),0 0 0 1px rgba(0,0,0,.04)}
+.logo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.spread .photo-row{grid-column:1/-1;margin-top:clamp(80px,8vw,128px)}
+@media(max-width:900px){
+  .spread{grid-template-columns:1fr;row-gap:48px}
+  .logo-card{width:min(420px,100%);justify-self:center}
+  .spread .photo-row{margin-top:24px}
+}
 
 /* Bridge sits between the two videos */
 .bridge{margin:128px 0 64px}
 @media(max-width:768px){.bridge{margin:80px 0 32px}}
 
-/* Logo in real life — two photos under the logo */
+/* Logo in real life — two photos under the spread */
 .photo-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
 .photo{position:relative;margin:0;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--gray-100)}
 .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .photo:hover img{transform:scale(1.03)}
-.photo figcaption{position:absolute;left:16px;bottom:16px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.6);backdrop-filter:blur(8px);padding:6px 12px;border-radius:100px}
 /* until the photo exists, show a labelled slot instead of a broken image */
 .photo.is-missing img{display:none}
 .photo.is-missing{display:flex;align-items:center;justify-content:center}
 .photo.is-missing::before{content:attr(data-label);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
-.photo.is-missing figcaption{display:none}
-@media(max-width:768px){.photo-row{grid-template-columns:1fr;gap:10px;margin-top:10px}}
+@media(max-width:768px){.photo-row{gap:10px}.photo{border-radius:12px}}
 
 /* LOCAL VIDEO */
 .vid-frame{width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden}
@@ -203,7 +209,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 <main>
 
   <!-- 01 BRAND -->
-  <section class="um-section" id="logo">
+  <section class="um-section spread" id="logo">
     <div class="metric">
       <div>
         <p class="metric-index">Brand</p>
@@ -212,17 +218,15 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       </div>
       <p class="metric-body">Sixty years under one family is worth celebrating loudly. I designed the anniversary logo, and the shop wore it with pride: on a banner across the front of the building and on shirts for every employee.</p>
     </div>
-    <div class="logo-stage reveal">
+    <div class="logo-card reveal">
       <img src="/images/CPBS 60th Logo_V02-01.png" alt="Comstock Park Body Shop 60th anniversary logo" loading="lazy" decoding="async">
     </div>
     <div class="photo-row">
       <figure class="photo reveal" data-label="Banner on the building">
         <img src="/images/CPBS 60th banner.png" alt="The 60th anniversary banner on the front of the shop" loading="lazy" decoding="async">
-        <figcaption>On the building</figcaption>
       </figure>
       <figure class="photo reveal" data-label="Team shirt">
         <img src="/images/CPBS Shirts.jpg" alt="The 60th anniversary team shirt" loading="lazy" decoding="async">
-        <figcaption>The team shirt</figcaption>
       </figure>
     </div>
   </section>
