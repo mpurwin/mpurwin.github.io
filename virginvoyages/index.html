@@ -36,7 +36,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* HERO — full viewport, GIF bg */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('/images/VV Header Website.gif');background-size:cover;background-position:center}
+.hero-bg{position:absolute;inset:0;background:#0b1530 center/cover no-repeat}
+.hero-bg.use-gif{background-image:url('/images/VV Header Website.gif')}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%)}
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
@@ -569,6 +571,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   #guidelines .guide{justify-content:center}
   #guidelines .sds{--w:min(360px,100%)}
 }
+
+.tick{font-variant-numeric:tabular-nums}
+
+.tick-wrap{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.tick-wrap.is-in{opacity:1;transform:none}
+.tick-wrap:not(.is-in){transition:none}
 </style>
 </head>
 <body>
@@ -584,7 +592,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="vv-hero-bg"><video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791931307/VV_Header_Website_kiizb4.jpg"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791931307/VV_Header_Website_kiizb4.mp4" type="video/mp4"></video></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Social Media &amp; Content Strategy</p>
@@ -599,7 +607,8 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   </div>
 </section>
 
-<div class="vv-page vv-intro">
+<!-- Hidden for now: remove the word "hidden" below to bring the intro back -->
+<div class="vv-page vv-intro" hidden>
   <!-- OVERVIEW -->
   <div class="vv-section" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:56px;border-bottom:1px solid var(--gray-200)">
     <div>
@@ -639,7 +648,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="metric">
       <div>
         <p class="metric-index">Audience</p>
-        <p class="metric-n">350K <svg class="metric-arrow" viewBox="0 0 64 24" aria-hidden="true"><path d="M2 12h58M50 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"> to </span> 2M+</p>
+        <p class="metric-n">350K <svg class="metric-arrow" viewBox="0 0 64 24" aria-hidden="true"><path d="M2 12h58M50 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"> to </span> <span class="tick" data-from="350000" data-to="2000000" data-fmt="aud">2M+</span></p>
         <p class="metric-l">Audience growth</p>
       </div>
       <p class="metric-body">Four ship launches: three as a designer, one as Creative Manager. By Brilliant Lady we&rsquo;d stopped telling people about a launch and started bringing them along for it, from the first countdown to maiden-voyage moments in New York City. Between launches, the posts below kept that growth going: I jumped on trends, tested new formats and styles, and pushed to lead the cruise industry on social, not follow it.</p>
@@ -649,24 +658,22 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       <button class="vv-carousel-btn vv-carousel-next" id="vv-next" aria-label="Next">&#8594;</button>
 
       <div class="vv-carousel-track" id="vv-carousel-track">
-        <div class="vv-carousel-item" data-index="0"><img src="/images/vv infeed/01_sea ibiza.png" alt="Sea Ibiza"></div>
-        <div class="vv-carousel-item" data-index="1"><img src="/images/vv infeed/02_bar tab.png" alt="Bar Tab"></div>
-        <div class="vv-carousel-item" data-index="2"><img src="/images/vv infeed/03_wlf oceans.png" alt="With Love for Our Oceans"></div>
-        <div class="vv-carousel-item" data-index="3"><img src="/images/vv infeed/04_aruba.png" alt="Aruba"></div>
-        <div class="vv-carousel-item" data-index="4"><img src="/images/vv infeed/Vision Board_01_Cover.png" alt="Vision Board Cover"></div>
-        <div class="vv-carousel-item" data-index="5"><img src="/images/vv infeed/Vision Board_03_Med.png" alt="Vision Board Med"></div>
-        <div class="vv-carousel-item" data-index="6"><img src="/images/vv infeed/06_solo cruise.png" alt="Solo Cruise"></div>
-        <div class="vv-carousel-item" data-index="7"><img src="/images/vv infeed/07_set it to silent.png" alt="Set It to Silent"></div>
-        <div class="vv-carousel-item" data-index="8"><img src="/images/vv infeed/08_bl tour.png" alt="BL Tour"></div>
-        <div class="vv-carousel-item" data-index="9"><img src="/images/vv infeed/09_boy george.png" alt="Boy George"></div>
-        <div class="vv-carousel-item" data-index="10"><img src="/images/vv infeed/10_laptop monday.png" alt="Laptop Monday"></div>
-        <div class="vv-carousel-item" data-index="11"><img src="/images/vv infeed/11_vacation.png" alt="Vacation"></div>
-        <div class="vv-carousel-item" data-index="12"><img src="/images/vv infeed/12_mermaids intro.gif" alt="Mermaids Intro"></div>
-        <div class="vv-carousel-item" data-index="13"><img src="/images/vv infeed/13_mermaids sl.gif" alt="Mermaids"></div>
-        <div class="vv-carousel-item" data-index="14"><img src="/images/vv infeed/14_sea days intro.png" alt="Sea Days Intro"></div>
-        <div class="vv-carousel-item" data-index="15"><img src="/images/vv infeed/15_sea days 1.gif" alt="Sea Days 1"></div>
-        <div class="vv-carousel-item" data-index="16"><img src="/images/vv infeed/16_sea days 2.gif" alt="Sea Days 2"></div>
-        <div class="vv-carousel-item" data-index="17"><img src="/images/vv infeed/17_sea days 3.gif" alt="Sea Days 3"></div>
+        <div class="vv-carousel-item" data-index="0"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/01_sea_ibiza" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/01_sea_ibiza" data-local="/images/vv infeed/01_sea ibiza.png" alt="Sea Ibiza"></div>
+        <div class="vv-carousel-item" data-index="1"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/02_bar_tab" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/02_bar_tab" data-local="/images/vv infeed/02_bar tab.png" alt="Bar Tab"></div>
+        <div class="vv-carousel-item" data-index="2"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/03_wlf_oceans" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/03_wlf_oceans" data-local="/images/vv infeed/03_wlf oceans.png" alt="With Love for Our Oceans"></div>
+        <div class="vv-carousel-item" data-index="3"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/04_aruba" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/04_aruba" data-local="/images/vv infeed/04_aruba.png" alt="Aruba"></div>
+        <div class="vv-carousel-item" data-index="4"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/Vision_Board_01_Cover" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/Vision_Board_01_Cover" data-local="/images/vv infeed/Vision Board_01_Cover.png" alt="Vision Board Cover"></div>
+        <div class="vv-carousel-item" data-index="5"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/Vision_Board_03_Med" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/Vision_Board_03_Med" data-local="/images/vv infeed/Vision Board_03_Med.png" alt="Vision Board Med"></div>
+        <div class="vv-carousel-item" data-index="6"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/06_solo_cruise" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/06_solo_cruise" data-local="/images/vv infeed/06_solo cruise.png" alt="Solo Cruise"></div>
+        <div class="vv-carousel-item" data-index="7"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/07_set_it_to_silent" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/07_set_it_to_silent" data-local="/images/vv infeed/07_set it to silent.png" alt="Set It to Silent"></div>
+        <div class="vv-carousel-item" data-index="8"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/08_bl_tour" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/08_bl_tour" data-local="/images/vv infeed/08_bl tour.png" alt="BL Tour"></div>
+        <div class="vv-carousel-item" data-index="9"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/10_laptop_monday" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/10_laptop_monday" data-local="/images/vv infeed/10_laptop monday.png" alt="Laptop Monday"></div>
+        <div class="vv-carousel-item" data-index="10"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/11_vacation" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/11_vacation" data-local="/images/vv infeed/11_vacation.png" alt="Vacation"></div>
+        <div class="vv-carousel-item" data-index="11"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/12_mermaids_intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/12_mermaids_intro" data-local="/images/vv infeed/12_mermaids intro.gif" alt="Mermaids Intro"></div>
+        <div class="vv-carousel-item" data-index="12"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/13_mermaids_sl" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/13_mermaids_sl" data-local="/images/vv infeed/13_mermaids sl.gif" alt="Mermaids"></div>
+        <div class="vv-carousel-item" data-index="13"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/14_sea_days_intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/14_sea_days_intro" data-local="/images/vv infeed/14_sea days intro.png" alt="Sea Days Intro"></div>
+        <div class="vv-carousel-item" data-index="14"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/15_sea_days_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/15_sea_days_1" data-local="/images/vv infeed/15_sea days 1.gif" alt="Sea Days 1"></div>
+        <div class="vv-carousel-item" data-index="15"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_800,c_limit/16_sea_days_2" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/16_sea_days_2" data-local="/images/vv infeed/16_sea days 2.gif" alt="Sea Days 2"></div>
       </div>
 
       <div class="vv-carousel-dots" id="vv-dots"></div>
@@ -678,7 +685,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="metric">
       <div>
         <p class="metric-index">Engagement</p>
-        <p class="metric-n">+40%</p>
+        <p class="metric-n"><span class="tick" data-to="40" data-pre="+" data-suf="%">+40%</span></p>
         <p class="metric-l">Year-over-year engagement growth</p>
       </div>
       <p class="metric-body">Reach only matters if people respond. So I designed every story below to be interacted with: quizzes, launch countdowns, Sailor Reviews and creative series using all the new features.</p>
@@ -687,30 +694,30 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       <button class="vv-carousel-btn vv-carousel-prev" id="vv-stories-prev" aria-label="Previous">&#8592;</button>
       <button class="vv-carousel-btn vv-carousel-next" id="vv-stories-next" aria-label="Next">&#8594;</button>
       <div class="vv-carousel-track vv-stories-track" id="vv-stories-track">
-        <div class="vv-story-item"><img src="/images/vv stories/01_Miami 305.png" alt="Miami 305"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/02_Miami 305 Outro.png" alt="Miami 305 Outro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/03_WLF intro.png" alt="WLF Intro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/04_WLF outro.png" alt="WLF Outro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/Sailing Club Extension_Animated_4.gif" alt="Sailing Club Extension"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/05_seven seas intro.png" alt="Seven Seas Intro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/08_seven seas outro.png" alt="Seven Seas Outro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/09_athens to portsmouth.png" alt="Athens to Portsmouth"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/10_AUS animation.gif" alt="AUS Animation"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/11_word on the sea.png" alt="Word on the Sea"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/12_BL countdown.png" alt="BL Countdown"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/13_eat and drink.png" alt="Eat and Drink"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/14_Sailor Reviews_COVER_3.gif" alt="Sailor Reviews Cover"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/15_Sailor Reviews_4.gif" alt="Sailor Reviews 4"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/16_Sailor Reviews_2.gif" alt="Sailor Reviews 2"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/17_Pi or Lie Intro.png" alt="Pi or Lie Intro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/18_Pi or Lie Question.png" alt="Pi or Lie Question"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/19_Pi or Lie Answer.png" alt="Pi or Lie Answer"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/20_BL LA Playlist.png" alt="BL LA Playlist"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/21_Marv Voayges Intro.png" alt="Marv Voyages Intro"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/22_Marv Voyages 1.png" alt="Marv Voyages 1"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/23_Marv Voyages 2.png" alt="Marv Voyages 2"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/24_Marv Voyages 3.png" alt="Marv Voyages 3"></div>
-        <div class="vv-story-item"><img src="/images/vv stories/25_Marv Voyages Outro.png" alt="Marv Voyages Outro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/01_Miami_305" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/01_Miami_305" data-local="/images/vv stories/01_Miami 305.png" alt="Miami 305"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/02_Miami_305_Outro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/02_Miami_305_Outro" data-local="/images/vv stories/02_Miami 305 Outro.png" alt="Miami 305 Outro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/03_WLF_intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/03_WLF_intro" data-local="/images/vv stories/03_WLF intro.png" alt="WLF Intro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/04_WLF_outro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/04_WLF_outro" data-local="/images/vv stories/04_WLF outro.png" alt="WLF Outro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/Sailing_Club_Extension_Animated_4" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/Sailing_Club_Extension_Animated_4" data-local="/images/vv stories/Sailing Club Extension_Animated_4.gif" alt="Sailing Club Extension"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/05_seven_seas_intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/05_seven_seas_intro" data-local="/images/vv stories/05_seven seas intro.png" alt="Seven Seas Intro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/08_seven_seas_outro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/08_seven_seas_outro" data-local="/images/vv stories/08_seven seas outro.png" alt="Seven Seas Outro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/09_athens_to_portsmouth" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/09_athens_to_portsmouth" data-local="/images/vv stories/09_athens to portsmouth.png" alt="Athens to Portsmouth"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/10_AUS_animation" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/10_AUS_animation" data-local="/images/vv stories/10_AUS animation.gif" alt="AUS Animation"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/11_word_on_the_sea" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/11_word_on_the_sea" data-local="/images/vv stories/11_word on the sea.png" alt="Word on the Sea"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/12_BL_countdown" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/12_BL_countdown" data-local="/images/vv stories/12_BL countdown.png" alt="BL Countdown"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/13_eat_and_drink" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/13_eat_and_drink" data-local="/images/vv stories/13_eat and drink.png" alt="Eat and Drink"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/14_Sailor_Reviews_COVER_3" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/14_Sailor_Reviews_COVER_3" data-local="/images/vv stories/14_Sailor Reviews_COVER_3.gif" alt="Sailor Reviews Cover"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/15_Sailor_Reviews_4" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/15_Sailor_Reviews_4" data-local="/images/vv stories/15_Sailor Reviews_4.gif" alt="Sailor Reviews 4"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/16_Sailor_Reviews_2" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/16_Sailor_Reviews_2" data-local="/images/vv stories/16_Sailor Reviews_2.gif" alt="Sailor Reviews 2"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/17_Pi_or_Lie_Intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/17_Pi_or_Lie_Intro" data-local="/images/vv stories/17_Pi or Lie Intro.png" alt="Pi or Lie Intro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/18_Pi_or_Lie_Question" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/18_Pi_or_Lie_Question" data-local="/images/vv stories/18_Pi or Lie Question.png" alt="Pi or Lie Question"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/19_Pi_or_Lie_Answer" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/19_Pi_or_Lie_Answer" data-local="/images/vv stories/19_Pi or Lie Answer.png" alt="Pi or Lie Answer"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/20_BL_LA_Playlist" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/20_BL_LA_Playlist" data-local="/images/vv stories/20_BL LA Playlist.png" alt="BL LA Playlist"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/21_Marv_Voayges_Intro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/21_Marv_Voayges_Intro" data-local="/images/vv stories/21_Marv Voayges Intro.png" alt="Marv Voyages Intro"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/22_Marv_Voyages_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/22_Marv_Voyages_1" data-local="/images/vv stories/22_Marv Voyages 1.png" alt="Marv Voyages 1"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/23_Marv_Voyages_2" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/23_Marv_Voyages_2" data-local="/images/vv stories/23_Marv Voyages 2.png" alt="Marv Voyages 2"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/24_Marv_Voyages_3" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/24_Marv_Voyages_3" data-local="/images/vv stories/24_Marv Voyages 3.png" alt="Marv Voyages 3"></div>
+        <div class="vv-story-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_600,c_limit/25_Marv_Voyages_Outro" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/25_Marv_Voyages_Outro" data-local="/images/vv stories/25_Marv Voyages Outro.png" alt="Marv Voyages Outro"></div>
       </div>
 
       <div class="vv-carousel-dots" id="vv-stories-dots"></div>
@@ -718,7 +725,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="bridge">
       <div>
         <h3 class="bridge-t">Stickers people actually use</h3>
-        <p class="bridge-stat">94.6M+</p>
+        <p class="bridge-stat"><span class="tick" data-to="94.6" data-dec="1" data-suf="M+">94.6M+</span></p>
         <p class="bridge-stat-l">Views on GIPHY</p>
       </div>
       <div><p class="bridge-p">I&rsquo;ve designed and animated more than 150 GIF stickers for launches, events and holidays. They run in our own stories and live on GIPHY, where anyone can add Virgin Voyages to their posts.</p></div>
@@ -727,20 +734,20 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       <button class="vv-carousel-btn vv-carousel-prev" id="vv-gifs-prev" aria-label="Previous">&#8592;</button>
       <button class="vv-carousel-btn vv-carousel-next" id="vv-gifs-next" aria-label="Next">&#8594;</button>
       <div class="vv-carousel-track vv-gifs-track" id="vv-gifs-track">
-        <div class="vv-gif-item"><img src="/images/vv gifs/01_BL NYC_NYC LOCK UP_Sticker_1.gif" alt="BL NYC Lock Up"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/02_BL NYC_BRILLIANT_Sticker_1.gif" alt="Brilliant"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/03_BL MIA Flamingo_Sticker_1.gif" alt="BL MIA Flamingo"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/04_BL MIA No Kids_Sticker_1.gif" alt="No Kids"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/05_AUS_GDay_Sticker_1.gif" alt="G'Day"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/06_AUS_Kangaroo Sign_Sticker_1.gif" alt="Kangaroo Sign"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/07_AUS_NWV_Stamp_Sticker_1.gif" alt="NWV Stamp"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/08_Opa Ahoy Sticker_2.gif" alt="Opa Ahoy"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/09_RL_Mermaid_1.gif" alt="Mermaid"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/10_Sea You In Greece Sticker_2_White.gif" alt="Sea You In Greece"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/11_Scarlet Fright Night_Sticker_2.gif" alt="Scarlet Fright Night"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/12_Witch Hat_Sticker_1.gif" alt="Witch Hat"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/13_Holidays_Ornament_Sticker_1.gif" alt="Holidays Ornament"></div>
-        <div class="vv-gif-item"><img src="/images/vv gifs/14_Holidays_Stamp_Sticker_1.gif" alt="Holidays Stamp"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/01_BL_NYC_NYC_LOCK_UP_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/01_BL_NYC_NYC_LOCK_UP_Sticker_1" data-local="/images/vv gifs/01_BL NYC_NYC LOCK UP_Sticker_1.gif" alt="BL NYC Lock Up"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/02_BL_NYC_BRILLIANT_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/02_BL_NYC_BRILLIANT_Sticker_1" data-local="/images/vv gifs/02_BL NYC_BRILLIANT_Sticker_1.gif" alt="Brilliant"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/03_BL_MIA_Flamingo_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/03_BL_MIA_Flamingo_Sticker_1" data-local="/images/vv gifs/03_BL MIA Flamingo_Sticker_1.gif" alt="BL MIA Flamingo"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/04_BL_MIA_No_Kids_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/04_BL_MIA_No_Kids_Sticker_1" data-local="/images/vv gifs/04_BL MIA No Kids_Sticker_1.gif" alt="No Kids"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/05_AUS_GDay_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/05_AUS_GDay_Sticker_1" data-local="/images/vv gifs/05_AUS_GDay_Sticker_1.gif" alt="G'Day"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/06_AUS_Kangaroo_Sign_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/06_AUS_Kangaroo_Sign_Sticker_1" data-local="/images/vv gifs/06_AUS_Kangaroo Sign_Sticker_1.gif" alt="Kangaroo Sign"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/07_AUS_NWV_Stamp_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/07_AUS_NWV_Stamp_Sticker_1" data-local="/images/vv gifs/07_AUS_NWV_Stamp_Sticker_1.gif" alt="NWV Stamp"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/08_Opa_Ahoy_Sticker_2" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/08_Opa_Ahoy_Sticker_2" data-local="/images/vv gifs/08_Opa Ahoy Sticker_2.gif" alt="Opa Ahoy"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/09_RL_Mermaid_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/09_RL_Mermaid_1" data-local="/images/vv gifs/09_RL_Mermaid_1.gif" alt="Mermaid"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/10_Sea_You_In_Greece_Sticker_2_White" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/10_Sea_You_In_Greece_Sticker_2_White" data-local="/images/vv gifs/10_Sea You In Greece Sticker_2_White.gif" alt="Sea You In Greece"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/11_Scarlet_Fright_Night_Sticker_2" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/11_Scarlet_Fright_Night_Sticker_2" data-local="/images/vv gifs/11_Scarlet Fright Night_Sticker_2.gif" alt="Scarlet Fright Night"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/12_Witch_Hat_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/12_Witch_Hat_Sticker_1" data-local="/images/vv gifs/12_Witch Hat_Sticker_1.gif" alt="Witch Hat"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/13_Holidays_Ornament_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/13_Holidays_Ornament_Sticker_1" data-local="/images/vv gifs/13_Holidays_Ornament_Sticker_1.gif" alt="Holidays Ornament"></div>
+        <div class="vv-gif-item"><img loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_400,c_limit/14_Holidays_Stamp_Sticker_1" data-full="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/14_Holidays_Stamp_Sticker_1" data-local="/images/vv gifs/14_Holidays_Stamp_Sticker_1.gif" alt="Holidays Stamp"></div>
       </div>
 
       <div class="vv-carousel-dots" id="vv-gifs-dots"></div>
@@ -752,7 +759,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="metric">
       <div>
         <p class="metric-index">Production</p>
-        <p class="metric-n">+132%</p>
+        <p class="metric-n"><span class="tick" data-to="132" data-pre="+" data-suf="%">+132%</span></p>
         <p class="metric-l">Creative output growth</p>
       </div>
       <p class="metric-body">Demand for creative more than doubled, and we met it with the same team. No new hires, just sharper creative direction and project management to get organic and paid social delivered. I started as the only designer on a five-person team, shooting, editing and animating almost everything. Today I lead our video editor and still stay hands-on: every video below is my own edit or animation, made in Premiere and After Effects.</p>
@@ -784,7 +791,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="metric">
       <div>
         <p class="metric-index">Workflow</p>
-        <p class="metric-n">20% faster</p>
+        <p class="metric-n"><span class="tick" data-to="20" data-suf="%">20%</span> faster</p>
         <p class="metric-l">Production turnaround</p>
       </div>
       <p class="metric-body">Three tools, two rounds of copying by hand, and every idea re-typed before anyone could make it. I replaced all of it with one Airtable base, built from the team&rsquo;s pain points. Now brainstorms become briefs automatically, approval takes one click, and the whole social team runs on it.</p>
@@ -839,16 +846,16 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="guide">
       <div class="sds" id="sds" role="img" aria-label="Cover of the Virgin Voyages Social Design System: Social Design System, Version 1.0, September 2026, with a fan of toolkit colours, an Instagram story, a Pinterest pin and a YouTube thumbnail">
         <div class="sds-glow" aria-hidden="true"></div>
-        <img class="sds-logo" src="/images/vv-sds/logo-white.webp" alt="" aria-hidden="true">
+        <img loading="lazy" decoding="async" class="sds-logo" src="/images/vv-sds/logo-white.webp" alt="" aria-hidden="true">
         <div class="sds-cv" aria-hidden="true">
-          <img class="sds-title" src="/images/vv-sds/sds-title.png" alt="">
-          <img class="sds-meta" src="/images/vv-sds/sds-meta.png" alt="">
+          <img loading="lazy" decoding="async" class="sds-title" src="/images/vv-sds/sds-title.png" alt="">
+          <img loading="lazy" decoding="async" class="sds-meta" src="/images/vv-sds/sds-meta.png" alt="">
         </div>
         <div class="sds-stack" id="sdsStack" aria-hidden="true">
           <figure class="cs cs0"><div class="chips"><span class="chip k0"><i style="background:#71D6E0"></i><b>Tropical Blue</b><em>#71D6E0</em></span><span class="chip k1"><i style="background:#FCD450"></i><b>Sunshine</b><em>#FCD450</em></span><span class="chip k2"><i style="background:#3C1053"></i><b>Squid Ink</b><em>#3C1053</em></span><span class="chip k3"><i style="background:#CC0000"></i><b>Virgin Red</b><em>#CC0000</em></span></div><figcaption>Toolkit</figcaption></figure>
-          <figure class="cs cs1"><img src="/images/vv-sds/instagram-story.webp" alt=""><figcaption>Instagram</figcaption></figure>
-          <figure class="cs cs3"><img src="/images/vv-sds/youtube-thumb.webp" alt=""><figcaption>YouTube</figcaption></figure>
-          <figure class="cs cs2"><img src="/images/vv-sds/pinterest-pin.webp" alt=""><figcaption>Pinterest</figcaption></figure>
+          <figure class="cs cs1"><img loading="lazy" decoding="async" src="/images/vv-sds/instagram-story.webp" alt=""><figcaption>Instagram</figcaption></figure>
+          <figure class="cs cs3"><img loading="lazy" decoding="async" src="/images/vv-sds/youtube-thumb.webp" alt=""><figcaption>YouTube</figcaption></figure>
+          <figure class="cs cs2"><img loading="lazy" decoding="async" src="/images/vv-sds/pinterest-pin.webp" alt=""><figcaption>Pinterest</figcaption></figure>
         </div>
       </div>
     </div>
@@ -889,6 +896,24 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   </ul>
 </footer>
 
+<script>
+// ── Load each carousel's images only when it is about to scroll into view ──
+(() => {
+  const load = c => c.querySelectorAll('img[data-src]').forEach(img => {
+    img.addEventListener('load', () => window.dispatchEvent(new Event('resize')), { once: true });
+    if (img.dataset.local) img.addEventListener('error', () => {
+      if (img.dataset.local && !img.src.endsWith(img.dataset.local)) { img.src = img.dataset.local; img.dataset.full = img.dataset.local; }
+    });
+    img.src = img.dataset.src; img.removeAttribute('data-src');
+  });
+  const carousels = document.querySelectorAll('.vv-carousel');
+  if (!('IntersectionObserver' in window)) { carousels.forEach(load); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+  }), { rootMargin: '400px 0px' });
+  carousels.forEach(c => io.observe(c));
+})();
+</script>
 <script>
 // Scroll reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)});},{threshold:0.06});
@@ -942,6 +967,8 @@ document.querySelectorAll('.stat').forEach(el => statObs.observe(el));
     const img = document.createElement('img');
     img.src = 'https://i.ytimg.com/vi/' + ytid + '/maxresdefault.jpg';
     img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
     img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;display:block;';
     img.onerror = function() { this.src = 'https://i.ytimg.com/vi/' + ytid + '/hqdefault.jpg'; };
     thumb.insertBefore(img, thumb.firstChild);
@@ -993,9 +1020,10 @@ document.querySelectorAll('.stat').forEach(el => statObs.observe(el));
   <img id="vv-lightbox-img" src="" alt="">
 </div>
 <script>
-function openLightbox(type, src) {
+function openLightbox(type, src, local) {
   const lb  = document.getElementById('vv-lightbox');
   const img = document.getElementById('vv-lightbox-img');
+  img.onerror = local ? () => { img.onerror = null; img.src = local; } : null;
   img.src = src;
   lb.classList.add('active');
 }
@@ -1017,7 +1045,7 @@ document.addEventListener('keydown', e => {
 // Image carousel items
 document.querySelectorAll('.vv-post-item, .vv-story-item').forEach(item => {
   item.addEventListener('click', () => {
-    openLightbox('image', item.querySelector('img').src);
+    const im = item.querySelector('img'); openLightbox('image', im.dataset.full || im.dataset.src || im.currentSrc || im.src, im.dataset.local);
   });
 });
 </script>
@@ -1435,6 +1463,55 @@ document.querySelectorAll('.hub-send').forEach(btn => btn.addEventListener('clic
   const st = btn.closest('tr').querySelector('[data-status]');
   if (st) { st.textContent = 'In production'; st.className = 'hub-status hub-s-inreview'; }
 }));
+</script>
+<script>
+// ── Header: Cloudinary video, local GIF only if the video can't play ──
+(() => {
+  const bg = document.getElementById('vv-hero-bg');
+  const v = bg && bg.querySelector('video');
+  if (!v) return;
+  let done = false;
+  const fallback = () => { if (done) return; done = true; v.remove(); bg.classList.add('use-gif'); };
+  v.querySelector('source').addEventListener('error', fallback);
+  v.addEventListener('error', fallback);
+  const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name !== 'AbortError') fallback(); });
+})();
+</script>
+<script>
+// ── Section numbers: float up and count, starting from zero before they're seen ──
+(() => {
+  const ticks = [...document.querySelectorAll('.tick')];
+  if (!ticks.length || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const ease = t => 0.6 * (1 - (1 - t) * (1 - t)) + 0.4 * t;   // eases off but keeps moving to the end: no crawl on the last digits
+  const fmt = (el, v) => {
+    const d = el.dataset;
+    if (d.fmt === 'aud') return v < 1e6 ? Math.round(v / 1000) + 'K' : (v / 1e6).toFixed(1) + 'M';
+    return (d.pre || '') + v.toFixed(+(d.dec || 0)) + (d.suf || '');
+  };
+  // set every number to its starting value immediately, and hide its line until it floats in
+  ticks.forEach(el => {
+    el.dataset.final = el.textContent;
+    el.textContent = fmt(el, +(el.dataset.from || 0));
+    el.closest('.metric-n, .bridge-stat').classList.add('tick-wrap');
+  });
+  const run = el => {
+    const from = +(el.dataset.from || 0), to = +el.dataset.to, dur = 900, start = performance.now();
+    const step = now => {
+      const t = Math.max(0, Math.min((now - start) / dur, 1));
+      el.textContent = t < 1 ? fmt(el, from + (to - from) * ease(t)) : el.dataset.final;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const wrap = e.target;
+    wrap.classList.add('is-in');
+    wrap.querySelectorAll('.tick').forEach(run);
+    io.unobserve(wrap);
+  }), { rootMargin: '0px 0px -4% 0px' });
+  new Set(ticks.map(el => el.closest('.tick-wrap'))).forEach(w => io.observe(w));
+})();
 </script>
 </body>
 </html>
