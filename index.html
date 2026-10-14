@@ -167,7 +167,7 @@ nav.is-visible {
   font-family: var(--display);
   font-weight: 500;
   font-synthesis: none;
-  font-size: clamp(62px, 9vw, 128px);
+  font-size: clamp(46px, 6.6vw, 96px);
   line-height: 0.92;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -401,7 +401,7 @@ nav.is-visible {
 .bg-1 {
   background: linear-gradient(135deg, #0a1f4e 0%, #0e3a7a 40%, #0a2d6b 70%, #061530 100%);
 }
-.bg-1.gif-fallback {
+.bg-1.has-gif {
   background: url('/images/VV Header Website.gif') center center / cover no-repeat,
               linear-gradient(135deg, #0a1f4e 0%, #0e3a7a 40%, #0a2d6b 70%, #061530 100%);
 }
@@ -409,7 +409,7 @@ nav.is-visible {
 .bg-2 {
   background: linear-gradient(135deg, #2a1200 0%, #8b3a00 40%, #5c2800 70%, #1a0a00 100%);
 }
-.bg-2.gif-fallback {
+.bg-2.has-gif {
   background: url('/images/University Motors GIF Website 2.gif') center center / cover no-repeat,
               linear-gradient(135deg, #2a1200 0%, #8b3a00 40%, #5c2800 70%, #1a0a00 100%);
 }
@@ -417,7 +417,7 @@ nav.is-visible {
 .bg-3 {
   background: linear-gradient(135deg, #111418 0%, #2a3040 40%, #1c2230 70%, #0a0c10 100%);
 }
-.bg-3.gif-fallback {
+.bg-3.has-gif {
   background: url('/images/CPBS HEADER_GIF_2.gif') center center / cover no-repeat,
               linear-gradient(135deg, #111418 0%, #2a3040 40%, #1c2230 70%, #0a0c10 100%);
 }
@@ -425,7 +425,7 @@ nav.is-visible {
 .bg-4 {
   background: linear-gradient(135deg, #0a1a0a 0%, #1a4a1a 40%, #0f300f 70%, #050f05 100%);
 }
-.bg-4.gif-fallback {
+.bg-4.has-gif {
   background: url('/images/DLM HEADER_1.gif') center center / cover no-repeat,
               linear-gradient(135deg, #0a1a0a 0%, #1a4a1a 40%, #0f300f 70%, #050f05 100%);
 }
@@ -433,7 +433,7 @@ nav.is-visible {
 .bg-5 {
   background: linear-gradient(135deg, #111111 0%, #333333 40%, #222222 70%, #080808 100%);
 }
-.bg-5.gif-fallback {
+.bg-5.has-gif {
   background: url('/images/Photography Header GIF_1_1.gif') center center / cover no-repeat,
               linear-gradient(135deg, #111111 0%, #333333 40%, #222222 70%, #080808 100%);
 }
@@ -441,10 +441,43 @@ nav.is-visible {
 .bg-6 {
   background: linear-gradient(135deg, #12051e 0%, #3d1166 40%, #250a40 70%, #0a0212 100%);
 }
-.bg-6.gif-fallback {
+.bg-6.has-gif {
   background: url('/images/mini animation header.gif') center center / cover no-repeat,
               linear-gradient(135deg, #12051e 0%, #3d1166 40%, #250a40 70%, #0a0212 100%);
 }
+
+/* Hidden until the Amíra landing page is ready: remove "is-hidden" from the card to show it */
+.project-card.is-hidden { display: none !important; }
+
+/* Card 7 — Amíra: Deep Forest into Lake at Dusk, with a Golden Hour glow */
+.bg-7 {
+  background: radial-gradient(ellipse at 70% 30%, rgba(200,169,110,0.22) 0%, rgba(200,169,110,0) 55%),
+              linear-gradient(135deg, #1C2B1E 0%, #1A2535 60%, #0d1218 100%);
+}
+.project-card.is-wide { grid-column: 1 / -1; min-height: 240px; }
+
+/* ── Concept notice (shown before leaving for Amíra) ── */
+.notice {
+  border: none; padding: 0; margin: auto; max-width: min(460px, calc(100vw - 32px));
+  background: #0b111c; color: #fff; border-radius: 18px;
+  box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.08);
+  opacity: 0; transform: translateY(14px) scale(0.98);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.notice[open].is-in { opacity: 1; transform: none; }
+.notice::backdrop { background: rgba(5,10,24,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.notice-body { padding: 36px 36px 30px; }
+.notice-title {
+  font-family: var(--display); font-weight: 500; font-synthesis: none; font-size: 22px;
+  line-height: 1.15; letter-spacing: 0.04em; text-transform: uppercase;
+  -webkit-text-stroke: 0.03em currentColor; margin-bottom: 14px;
+}
+.notice-text { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.7); }
+.notice-actions { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+.notice-actions .btn-primary { background: #fff; color: var(--black); }
+.notice-actions .btn-primary:hover { background: #e8e8e8; }
+.notice-actions .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+.notice-actions .btn-ghost:hover { background: rgba(255,255,255,0.14); }
 
 /* ── About ── */
 .about {
@@ -616,8 +649,7 @@ footer {
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
-  <video class="hero-gif" id="hero-video" autoplay muted loop playsinline poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.mp4" type="video/mp4"></video>
-  <img class="hero-gif" id="hero-gif-fallback" data-src="/images/Main_Header_GIF.gif" alt="" hidden>
+  <img class="hero-gif" id="hero-gif" src="/images/Main_Header_GIF.gif" alt="" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.jpg">
   <div class="hero-scrim"></div>
 
   <div class="hero-content">
@@ -646,9 +678,7 @@ footer {
   <div class="project-grid">
 
     <a href="/virginvoyages/" class="project-card reveal">
-      <div class="card-bg bg-1">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-1" data-gif="/images/VV Header Website.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -660,9 +690,7 @@ footer {
     </a>
 
     <a href="/universitymotors/" class="project-card reveal">
-      <div class="card-bg bg-2">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-2" data-gif="/images/University Motors GIF Website 2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -674,9 +702,7 @@ footer {
     </a>
 
     <a href="/comstockparkbodyshop/" class="project-card reveal">
-      <div class="card-bg bg-3">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-3" data-gif="/images/CPBS HEADER_GIF_2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -688,9 +714,7 @@ footer {
     </a>
 
     <a href="/dlm/" class="project-card reveal">
-      <div class="card-bg bg-4">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-4" data-gif="/images/DLM HEADER_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -702,9 +726,7 @@ footer {
     </a>
 
     <a href="/photography/" class="project-card reveal">
-      <div class="card-bg bg-5">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-5" data-gif="/images/Photography Header GIF_1_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -716,9 +738,7 @@ footer {
     </a>
 
     <a href="/justforfun/" class="project-card reveal">
-      <div class="card-bg bg-6">
-        <video class="card-video" muted loop playsinline preload="metadata" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.jpg" aria-hidden="true"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.mp4" type="video/mp4"></video>
-      </div>
+      <div class="card-bg bg-6" data-gif="/images/mini animation header.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -729,8 +749,36 @@ footer {
       </div>
     </a>
 
+    <a href="/amira/" class="project-card is-wide is-hidden reveal" id="amira-card">
+      <div class="card-bg bg-7" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.jpg"></div>
+      <div class="card-scrim"></div>
+      <div class="project-card-top">
+        <span class="project-arrow">→</span>
+      </div>
+      <div class="card-content">
+        <p class="project-type">Hospitality Brand Concept</p>
+        <h2 class="project-title" style="text-transform:uppercase;letter-spacing:0.02em">Amíra</h2>
+      </div>
+    </a>
+
   </div>
 </section>
+
+<dialog class="notice" id="amira-notice" aria-labelledby="amira-notice-title">
+  <div class="notice-body">
+    <h2 class="notice-title" id="amira-notice-title">A quick note</h2>
+    <p class="notice-text">
+      Amíra is a concept brand I created as an experiment: building a luxury hospitality brand
+      from nothing and bringing it to life, from naming and visual identity to the guest
+      experience and website. It draws on eight years creating for travel brands.
+      It isn&rsquo;t a real resort, and nothing on the site can be booked.
+    </p>
+    <div class="notice-actions">
+      <a class="btn btn-primary" href="/amira/">Continue to Amíra →</a>
+      <button class="btn btn-ghost" type="button" data-close>Stay here</button>
+    </div>
+  </div>
+</dialog>
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
@@ -879,11 +927,11 @@ function draw() {
   if (canvasRunning) rafId = requestAnimationFrame(draw);
 }
 
-// Only animate the canvas when it's actually visible: the hero video covers it,
-// so it runs only as a fallback, and never while the hero is scrolled away.
-let canvasRunning = false, rafId = null, heroVideoPlaying = false, heroInView = true;
+// Only animate the canvas when it's actually visible: the hero GIF (or its video
+// backup) covers it, so it runs only as a last fallback, and never while scrolled away.
+let canvasRunning = false, rafId = null, heroCovered = false, heroInView = true;
 function syncCanvas() {
-  const should = heroInView && !heroVideoPlaying;
+  const should = heroInView && !heroCovered;
   if (should && !canvasRunning) { canvasRunning = true; rafId = requestAnimationFrame(draw); }
   if (!should && canvasRunning) { canvasRunning = false; cancelAnimationFrame(rafId); }
 }
@@ -895,63 +943,69 @@ draw(); // paint one frame so there's never a blank hero
 syncCanvas();
 window.addEventListener('resize', () => { resize(); });
 
-// ── Media fallbacks: Cloudinary MP4 → local GIF → CSS gradient ──
-// GIFs only download if the video fails, so normal visits stay light.
-function onVideoFail(video, fallback) {
-  let done = false;
-  const fail = () => {
-    if (done) return;
-    done = true;
-    video.remove();
-    fallback();
+// ── Media: local GIF first → Cloudinary MP4 backup → CSS gradient ──
+function makeVideo(src, poster, className) {
+  const v = document.createElement('video');
+  v.className = className;
+  v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+  if (poster) v.poster = poster;
+  const s = document.createElement('source');
+  s.src = src; s.type = 'video/mp4';
+  v.appendChild(s);
+  const fail = () => v.isConnected && v.remove(); // gradient / canvas behind takes over
+  s.addEventListener('error', fail);
+  v.addEventListener('error', fail);
+  return v;
+}
+
+// Hero
+(() => {
+  const gif = document.getElementById('hero-gif');
+  if (!gif) return;
+  const covered = () => { heroCovered = true; syncCanvas(); };
+  const fallBack = () => {
+    const v = makeVideo(gif.dataset.video, gif.dataset.poster, 'hero-gif');
+    gif.replaceWith(v);
+    v.addEventListener('playing', covered);
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
   };
-  const source = video.querySelector('source');
-  if (source) source.addEventListener('error', fail);
-  video.addEventListener('error', fail);
-  // Autoplay blocked (e.g. some low-power modes) → fall back too
-  const p = video.play();
-  if (p && p.catch) p.catch(err => { if (err.name !== 'AbortError') fail(); });
-}
+  if (gif.complete) { gif.naturalWidth ? covered() : fallBack(); }
+  else {
+    gif.addEventListener('load', covered, { once: true });
+    gif.addEventListener('error', fallBack, { once: true });
+  }
+})();
 
-const heroVideo = document.getElementById('hero-video');
-const heroGif = document.getElementById('hero-gif-fallback');
-if (heroVideo) onVideoFail(heroVideo, () => {
-  heroGif.src = heroGif.dataset.src;
-  heroGif.hidden = false;
-  // If the GIF also fails, the animated canvas underneath stays visible
-  heroGif.onerror = () => heroGif.remove();
-});
-
-if (heroVideo) {
-  heroVideo.addEventListener('playing', () => { heroVideoPlaying = true; syncCanvas(); });
-  heroVideo.addEventListener('pause',   () => { heroVideoPlaying = false; syncCanvas(); });
-}
-
-// Cards: play only while on screen so the browser isn't decoding six videos at once
-const cardObserver = new IntersectionObserver(entries => {
+// Cards: load each GIF as it nears the screen; if it fails, swap in the video
+const cardVideoObserver = new IntersectionObserver(entries => {
   entries.forEach(({ target: v, isIntersecting }) => {
     if (!v.isConnected) return;
-    if (isIntersecting) {
-      const p = v.play();
-      if (p && p.catch) p.catch(() => {});
-    } else {
-      v.pause();
-    }
+    if (isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+    else v.pause();
   });
 }, { rootMargin: '200px 0px' });
 
-document.querySelectorAll('.card-video').forEach(v => {
-  const bg = v.parentElement; // grab it before the video is removed
-  const source = v.querySelector('source');
-  const fail = () => {
-    if (!v.isConnected) return;
-    cardObserver.unobserve(v);
-    v.remove();
-    if (bg) bg.classList.add('gif-fallback');
-  };
-  if (source) source.addEventListener('error', fail);
-  v.addEventListener('error', fail);
-  cardObserver.observe(v);
+const cardLoader = new IntersectionObserver(entries => {
+  entries.forEach(({ target: bg, isIntersecting }) => {
+    if (!isIntersecting) return;
+    cardLoader.unobserve(bg);
+    const useVideo = () => {
+      if (!bg.dataset.video) return;
+      const v = makeVideo(bg.dataset.video, bg.dataset.poster, 'card-video');
+      bg.appendChild(v);
+      cardVideoObserver.observe(v);
+    };
+    if (!bg.dataset.gif) return useVideo();
+    const img = new Image();
+    img.onload = () => bg.classList.add('has-gif');
+    img.onerror = useVideo;
+    img.src = bg.dataset.gif;
+  });
+}, { rootMargin: '600px 0px' });
+document.querySelectorAll('.card-bg[data-video]').forEach(bg => {
+  if (bg.closest('.is-hidden')) return; // hidden cards load nothing
+  cardLoader.observe(bg);
 });
 
 // ── Scroll reveals — staggered per card ──
@@ -968,6 +1022,26 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.06 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── Amíra concept notice ──
+(() => {
+  const card = document.getElementById('amira-card');
+  const dlg = document.getElementById('amira-notice');
+  if (!card || !dlg || typeof dlg.showModal !== 'function') return; // no dialog support → link just works
+  const close = () => {
+    dlg.classList.remove('is-in');
+    setTimeout(() => dlg.close(), 250);
+  };
+  card.addEventListener('click', e => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // new-tab clicks go straight through
+    e.preventDefault();
+    dlg.showModal();
+    requestAnimationFrame(() => dlg.classList.add('is-in'));
+  });
+  dlg.querySelector('[data-close]').addEventListener('click', close);
+  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });  // click outside
+  dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });   // Esc key
+})();
 
 // ── Name reveal: each line rises out of its mask (kerning stays intact) ──
 (() => {
