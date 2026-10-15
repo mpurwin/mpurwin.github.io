@@ -163,8 +163,10 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 /* Franken-Mini prints */
 .prints{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
-.print{background:var(--gray-50);border-radius:12px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;padding:clamp(20px,3vw,40px);cursor:zoom-in;overflow:hidden}
-.print img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s var(--ease)}
+/* white, square cards that match the print files; a soft shadow lifts them off the white page */
+.print{background:#fff;border-radius:12px;aspect-ratio:1;padding:0;cursor:zoom-in;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05),0 18px 40px -16px rgba(0,0,0,.22);transition:box-shadow .9s var(--ease)}
+.print:hover{box-shadow:0 2px 4px rgba(0,0,0,.06),0 28px 56px -18px rgba(0,0,0,.3)}
+.print img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .9s var(--ease)}
 .print:hover img{transform:scale(1.04)}
 /* Sub-piece label inside a section */
 .sub{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:128px 0 24px}
@@ -177,7 +179,6 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 .ep-item[data-vimeo] img{object-fit:cover}
 @media(max-width:768px){
   .prints{grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
-  .print{padding:10px}
   .sub{margin:80px 0 16px}
 }
 </style>
