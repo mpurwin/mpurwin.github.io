@@ -111,10 +111,13 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 
 /* HERO HEADLINE — "Creative" in white at 35%, "by craft." in white, rising in, then a slight italic */
-.hero-title{opacity:1;animation:none}
-.hl-mask{display:block;overflow:hidden;padding-bottom:.06em}
+/* Matches the name on the home page: Simpel Medium thickened with a stroke (no faked bold), same size and spacing */
+.hero-title{opacity:1;animation:none;font-size:clamp(min(46px,9vw),6.6vw,96px);line-height:.92;font-weight:500;font-synthesis:none;-webkit-text-stroke:.035em currentColor;letter-spacing:.01em}
+.hero-title .punct{-webkit-text-stroke:.035em currentColor}
+.hl-mask{display:block;overflow:hidden;padding-bottom:.06em;padding-right:.2em}
 .hl-word{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
-.hl-1{opacity:.42}
+.hl-1{opacity:.42}   /* looser than the display default so the letters breathe */
+.kern-w{margin-right:.05em}   /* Simpel's W runs into the H */
 .hl-1 .hl-word{animation-delay:.15s}
 .hl-2 .hl-word{animation-delay:.32s}
 .hl-2{cursor:default}
@@ -122,7 +125,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 .punct{font-synthesis:none;-webkit-text-stroke:.022em currentColor;paint-order:stroke fill}
 /* rotating answer: every word sits in the same grid cell so the line sizes to the longest one */
 .hl-cycle{display:inline-grid;vertical-align:top}
-.hl-cycle em{grid-area:1/1;font-style:normal;display:inline-block;transform:translateY(105%) skewX(-10deg);opacity:0;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s ease;white-space:nowrap}
+.hl-cycle em{grid-area:1/1;font-style:normal;display:inline-block;transform-origin:left bottom;transform:translateY(105%) skewX(-10deg);opacity:0;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s ease;white-space:nowrap}
 .hl-cycle em.is-on{transform:translateY(0) skewX(-10deg);opacity:1}
 .hl-cycle em.is-out{transform:translateY(-105%) skewX(-10deg);opacity:0}
 @keyframes rise{to{transform:none}}
@@ -162,7 +165,6 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 @media (prefers-reduced-motion: reduce){.hl-word{animation:none;transform:none}.hl-cycle em{transition:none}}
 
 /* Safari-only fixes (carried over) */
-.is-safari .hero-title{letter-spacing:-0.07em;font-weight:900}
 .is-safari .hl-word{font-synthesis:none}
 </style>
 <script>if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent))document.documentElement.classList.add('is-safari');</script>
@@ -184,7 +186,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <div class="hero-scrim"></div>
   <div class="hero-content">
     <h1 class="hero-title">
-      <span class="hl-mask hl-1"><span class="hl-word">Wait, who is Max<span class="punct">?</span></span></span>
+      <span class="hl-mask hl-1"><span class="hl-word"><span class="kern-w">W</span>ho<span class="punct">&rsquo;</span>s Max<span class="punct">?</span></span></span>
       <span class="hl-mask hl-2"><span class="hl-word"><span class="hl-cycle" id="hl-cycle" aria-live="off">
         <em class="is-on">Creative.</em>
         <em>Designer.</em>

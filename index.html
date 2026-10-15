@@ -446,7 +446,7 @@ nav.is-visible {
               linear-gradient(135deg, #12051e 0%, #3d1166 40%, #250a40 70%, #0a0212 100%);
 }
 
-/* Hidden until the Amíra landing page is ready: remove "is-hidden" from the card to show it */
+/* Amíra card links to /amiraconcept/. Hidden until ready: remove "is-hidden" from the card to show it */
 .project-card.is-hidden { display: none !important; }
 
 /* Card 7 — Amíra: Deep Forest into Lake at Dusk, with a Golden Hour glow */
@@ -749,14 +749,14 @@ footer {
       </div>
     </a>
 
-    <a href="/amira/" class="project-card is-wide is-hidden reveal" id="amira-card">
+    <a href="/amiraconcept/" class="project-card is-wide is-hidden reveal" id="amira-card">
       <div class="card-bg bg-7" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
       </div>
       <div class="card-content">
-        <p class="project-type">Hospitality Brand Concept</p>
+        <p class="project-type">Personal Brand Concept</p>
         <h2 class="project-title" style="text-transform:uppercase;letter-spacing:0.02em">Amíra</h2>
       </div>
     </a>
@@ -764,21 +764,6 @@ footer {
   </div>
 </section>
 
-<dialog class="notice" id="amira-notice" aria-labelledby="amira-notice-title">
-  <div class="notice-body">
-    <h2 class="notice-title" id="amira-notice-title">A quick note</h2>
-    <p class="notice-text">
-      Amíra is a concept brand I created as an experiment: building a luxury hospitality brand
-      from nothing and bringing it to life, from naming and visual identity to the guest
-      experience and website. It draws on eight years creating for travel brands.
-      It isn&rsquo;t a real resort, and nothing on the site can be booked.
-    </p>
-    <div class="notice-actions">
-      <a class="btn btn-primary" href="/amira/">Continue to Amíra →</a>
-      <button class="btn btn-ghost" type="button" data-close>Stay here</button>
-    </div>
-  </div>
-</dialog>
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
@@ -1023,25 +1008,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.06 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ── Amíra concept notice ──
-(() => {
-  const card = document.getElementById('amira-card');
-  const dlg = document.getElementById('amira-notice');
-  if (!card || !dlg || typeof dlg.showModal !== 'function') return; // no dialog support → link just works
-  const close = () => {
-    dlg.classList.remove('is-in');
-    setTimeout(() => dlg.close(), 250);
-  };
-  card.addEventListener('click', e => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // new-tab clicks go straight through
-    e.preventDefault();
-    dlg.showModal();
-    requestAnimationFrame(() => dlg.classList.add('is-in'));
-  });
-  dlg.querySelector('[data-close]').addEventListener('click', close);
-  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });  // click outside
-  dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });   // Esc key
-})();
 
 // ── Name reveal: each line rises out of its mask (kerning stays intact) ──
 (() => {
