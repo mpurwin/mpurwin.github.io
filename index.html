@@ -7,8 +7,8 @@
 <link rel="icon" type="image/png" href="images/Maxwell Purwin webclip.png">
 <link rel="apple-touch-icon" href="/images/Maxwell Purwin webclip.png">
 <meta name="theme-color" content="#050a18">
-<link rel="preload" as="image" href="/images/Main_Header_GIF.gif" fetchpriority="high">
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preload" as="image" href="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792505716/Main_Header_GIF_v9d8qe.jpg">
 <script>
   // JS is on: allow the intro. Seen it already this visit: skip it.
   document.documentElement.classList.add('js');
@@ -649,9 +649,48 @@ html.js.intro-skip .intro{display:none}
 .iw{display:inline-block;overflow:hidden;padding:.12em .06em .12em 0;vertical-align:bottom;transform-origin:0 0;-webkit-text-stroke:.035em currentColor}
 .iw span{display:inline-block;transform:translateY(115%) rotate(8deg);transition:transform 1s cubic-bezier(.34,1.45,.64,1),color .8s ease;transition-delay:calc(var(--d) * 55ms)}
 .intro.is-in .iw span{transform:none}
-/* while things load, a blue glint sweeps across the name, letter by letter (not tied to progress) */
-.intro.is-wave .iw span{animation:glint 2.6s ease-in-out infinite;animation-delay:calc(var(--d) * 90ms)}
-@keyframes glint{0%,40%,100%{color:#fff;text-shadow:none;transform:none}16%{color:#5b95ff;text-shadow:0 0 20px rgba(0,87,255,.55);transform:translateY(-.08em)}}
+/* While things load, a soft band of blue light glides across the name, and each letter lifts and settles as the
+   light passes over it, so the motion rolls through the whole name as one wave.
+   - The blue is one continuous gradient (a blue copy of the name revealed through a moving soft mask), so letters
+     never switch colour one by one.
+   - The lift is timed to the band: each letter peaks exactly as the light reaches it, and neighbours overlap.
+   - Letters are moved as ready-drawn layers (will-change), so they glide instead of re-drawing and shimmering. */
+.intro-name{position:relative}
+.intro-glint{position:absolute;inset:0;pointer-events:none;color:#5b95ff;-webkit-text-stroke:.035em #5b95ff;text-shadow:0 0 18px rgba(0,87,255,.5);
+  -webkit-mask-image:linear-gradient(90deg,transparent 41%,#000 48%,#000 52%,transparent 59%);mask-image:linear-gradient(90deg,transparent 41%,#000 48%,#000 52%,transparent 59%);
+  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:92.5% 0;mask-position:92.5% 0;opacity:0}
+.intro-glint .gw{display:inline-block;overflow:hidden;padding:.12em .06em .12em 0;vertical-align:bottom}
+.intro-glint .gw span{display:inline-block}
+.intro.is-wave .intro-glint{opacity:1;animation:sweep 3.4s linear infinite}
+@keyframes sweep{
+  0%{-webkit-mask-position:92.5% 0;mask-position:92.5% 0}
+  77%,100%{-webkit-mask-position:7.5% 0;mask-position:7.5% 0}
+}
+.intro.is-wave .iw span,.intro.is-wave .gw span{will-change:transform;animation:lift 3.4s infinite;animation-delay:calc(144ms + var(--d) * 110ms)}
+@keyframes lift{
+  0%{transform:translate3d(0,0,0);animation-timing-function:cubic-bezier(.37,0,.63,1)}
+  13.2%{transform:translate3d(0,-.1em,0);animation-timing-function:cubic-bezier(.37,0,.63,1)}
+  26.5%,100%{transform:translate3d(0,0,0)}
+}
+.intro.is-morph .intro-glint{opacity:0;animation:none;transition:opacity .2s ease}
+/* the light spills into the room, quietly: a faint blue bloom behind the name that travels with the light band,
+   fading in as the band reaches the first letter and out as it leaves the last. It never crosses the empty screen. */
+.intro-spill{position:absolute;left:50%;top:50%;width:min(40vw,520px);height:min(26vh,240px);margin:calc(min(26vh,240px) / -2) 0 0 calc(min(40vw,520px) / -2);
+  background:radial-gradient(closest-side,rgba(50,120,255,.13),rgba(20,80,255,.05) 55%,rgba(0,60,255,0));pointer-events:none;opacity:0;will-change:transform,opacity;
+  transform:translate3d(calc(var(--nw,200px) * -.85),0,0)}
+.intro.is-wave .intro-spill{animation:spill 3.4s linear infinite}
+/* the band's centre crosses the name from 15.9% to 61.1% of each pass, and its soft trailing edge clears the last
+   letter at ~73%, so the bloom holds until the light has fully left; it moves with the band the whole time */
+@keyframes spill{
+  0%{opacity:0;transform:translate3d(calc(var(--nw,200px) * -.85),0,0)}
+  15.9%{opacity:0;animation-timing-function:cubic-bezier(.37,0,.63,1)}
+  30%{opacity:1}
+  58%{opacity:1;animation-timing-function:cubic-bezier(.37,0,.63,1)}
+  73%{opacity:0}
+  77%{transform:translate3d(calc(var(--nw,200px) * .85),0,0)}
+  100%{opacity:0;transform:translate3d(calc(var(--nw,200px) * .85),0,0)}
+}
+.intro.is-morph .intro-spill{animation:none;opacity:0;transition:opacity .4s ease}
 /* hand-off: the curtain fades while each word travels to its place in the hero */
 /* travel + veil timing */
 .intro-veil{position:absolute;inset:0;background:radial-gradient(60% 45% at 50% 55%,rgba(0,87,255,.18) 0%,rgba(11,59,184,.08) 45%,rgba(5,10,24,0) 75%),#050a18;z-index:-1;transition:opacity 1.4s cubic-bezier(.45,0,.2,1)}
@@ -669,8 +708,13 @@ body.intro-lock{overflow:hidden}
 .hero-bottom{animation-play-state:paused}
 .hero.is-loaded .hero-bottom{animation-play-state:running}
 /* header GIF fades in rather than popping over the canvas */
+/* the header's first frame (small JPG) shows right away, so the top is never empty while the GIF downloads */
+.hero-poster{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease;pointer-events:none}
+.hero-poster.is-on{opacity:1}
 .hero-gif{opacity:0;transition:opacity 1.2s ease}
 .hero-gif.is-ready{opacity:1}
+/* when the first frame is already showing, the video takes over with a straight cut on that same frame: no crossfade, no ghosting */
+.hero-gif.is-cut{transition:none}
 /* cards: a still frame shows first, then crossfades away once the GIF is playing */
 .card-poster{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
 .card-poster.is-on{opacity:1}
@@ -679,7 +723,9 @@ body.intro-lock{overflow:hidden}
   html.js .intro{transition:opacity .5s ease}
   .intro.is-fade{opacity:0}
   .iw span{transform:none;transition:none}
-  .intro.is-wave .iw span{animation:none}
+  .intro.is-wave .intro-glint{animation:none;opacity:0}
+  .intro.is-wave .intro-spill{animation:none;opacity:0}
+  .intro.is-wave .iw span,.intro.is-wave .gw span{animation:none}
 }
 
 /* ── Safari-only fixes ── */
@@ -690,6 +736,7 @@ body.intro-lock{overflow:hidden}
 
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-veil"></div>
+  <div class="intro-spill"></div>
   <p class="intro-name"><span class="iw iw1"><span style="--d:0">M</span><span style="--d:1">a</span><span style="--d:2">x</span><span style="--d:3">w</span><span style="--d:4">e</span><span style="--d:5">l</span><span style="--d:6">l</span></span> <span class="iw iw2"><span style="--d:8">P</span><span style="--d:9">u</span><span style="--d:10">r</span><span style="--d:11">w</span><span style="--d:12">i</span><span style="--d:13">n</span></span></p>
 </div>
 
@@ -705,7 +752,8 @@ body.intro-lock{overflow:hidden}
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
-  <img class="hero-gif" id="hero-gif" src="/images/Main_Header_GIF.gif" alt="" fetchpriority="high" decoding="async" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.jpg">
+  <div class="hero-poster" id="hero-poster" style="background-image:url('https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792505716/Main_Header_GIF_v9d8qe.jpg')"></div>
+  <video class="hero-gif" id="hero-gif" src="https://res.cloudinary.com/dfscbinjh/video/upload/v1792505716/Main_Header_GIF_v9d8qe.mp4" data-gif="/images/Main_Header_GIF.gif" muted autoplay loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero-scrim"></div>
 
   <div class="hero-content">
@@ -1003,25 +1051,41 @@ function makeVideo(src, poster, className) {
 // ── Loading choreography: header first, then cards in order; the intro covers the wait ──
 const settle = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
 
-// Header: GIF (top priority) → Cloudinary video → animated canvas behind
+// Header: Cloudinary video (top priority) → the old GIF if the video can't play → animated canvas behind
 const heroReady = new Promise(done => {
-  const gif = document.getElementById('hero-gif');
-  if (!gif) return done();
-  const covered = el => { el.classList.add('is-ready'); heroCovered = true; syncCanvas(); done(); };
-  const fallBack = () => {
-    const v = makeVideo(gif.dataset.video, gif.dataset.poster, 'hero-gif');
-    gif.replaceWith(v);
-    v.addEventListener('playing', () => covered(v), { once: true });
-    v.addEventListener('error', done, { once: true });
-    v.querySelector('source').addEventListener('error', done, { once: true });
-    const p = v.play(); if (p && p.catch) p.catch(() => {});
-  };
-  if (gif.complete && gif.naturalWidth) covered(gif);
-  else if (gif.complete) fallBack();
-  else {
-    gif.addEventListener('load', () => covered(gif), { once: true });
-    gif.addEventListener('error', fallBack, { once: true });
+  const vid = document.getElementById('hero-gif');
+  if (!vid) return done();
+  // first frame in place as soon as it arrives (it was preloaded in the head)
+  const poster = document.getElementById('hero-poster');
+  if (poster) {
+    const still = new Image();
+    still.onload = () => { if (!heroCovered) { poster.classList.add('is-on'); heroCovered = true; syncCanvas(); } };
+    still.src = poster.style.backgroundImage.slice(5, -2);
   }
+  let settled = false;
+  const covered = el => {
+    if (settled) return; settled = true;
+    const show = () => {
+      if (poster && poster.classList.contains('is-on')) el.classList.add('is-cut');   // still frame up: cut, don't fade
+      el.classList.add('is-ready'); heroCovered = true; syncCanvas(); done();
+    };
+    // swap on the first frame the video has actually painted, so the cut lands on the matching image
+    if (el.requestVideoFrameCallback) el.requestVideoFrameCallback(() => show()); else requestAnimationFrame(show);
+  };
+  const fallBack = () => {                       // e.g. video blocked by low-power mode, or it failed to load
+    if (settled || !vid.isConnected) return;
+    const img = new Image();
+    img.className = 'hero-gif'; img.id = 'hero-gif'; img.alt = ''; img.decoding = 'async';
+    img.addEventListener('load', () => covered(img), { once: true });
+    img.addEventListener('error', () => { settled = true; done(); }, { once: true });
+    img.src = vid.dataset.gif;
+    vid.replaceWith(img);
+  };
+  vid.muted = true;                              // some browsers only autoplay when muted is set as a property
+  if (!vid.paused && vid.readyState > 2) covered(vid);
+  vid.addEventListener('playing', () => covered(vid), { once: true });
+  vid.addEventListener('error', fallBack, { once: true });
+  const p = vid.play(); if (p && p.catch) p.catch(fallBack);
 });
 
 // Cards: pause their videos when off-screen
@@ -1077,8 +1141,10 @@ const pump = () => {
   if (i < 2) firstCards.push(p);
   p.then(pump);
 };
-// give the header a head start, then start the queue (two lanes)
-settle(heroReady, 1200).then(() => { pump(); pump(); });
+// The header gets the bandwidth first. One card lane opens once the header is in (or after 1.2s at most),
+// the second only once the header is in (or after 4s), so the cards never slow the header down.
+settle(heroReady, 1200).then(pump);
+settle(heroReady, 4000).then(pump);
 
 // 3) the intro: holds until the header + first two cards are ready (one glint pass minimum, two at most); push through to skip
 const introDone = new Promise(finish => {
@@ -1086,8 +1152,8 @@ const introDone = new Promise(finish => {
   const skip = !intro || getComputedStyle(intro).display === 'none';
   if (skip) return finish();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // glint timing (matches the CSS): starts once the letters have risen, 2.6s per pass, every letter back to white 2.3s in
-  const WAVE_AT = 1300, PERIOD = 2600, CLEAN = 2300;
+  // glint timing (matches the CSS): starts once the letters have risen, 3.4s per pass, the light and the lift are past the last letter 2.65s in
+  const WAVE_AT = 1300, PERIOD = 3400, CLEAN = 2650;
   const MIN = reduce ? 600 : WAVE_AT + CLEAN;                 // one full pass on a fast connection (~3.6s)
   const MAX = reduce ? 3500 : WAVE_AT + PERIOD + CLEAN;       // at most two passes, then hand off regardless
   const t0 = performance.now();
@@ -1095,6 +1161,15 @@ const introDone = new Promise(finish => {
   const nameEl = intro.querySelector('.intro-name');
   let started = false;
   document.body.classList.add('intro-lock');
+  // the blue copy of the name the light band reveals
+  if (!reduce) {
+    const glint = document.createElement('span');
+    glint.className = 'intro-glint'; glint.setAttribute('aria-hidden', 'true');
+    [...nameEl.childNodes].forEach(n => glint.appendChild(n.cloneNode(true)));
+    glint.querySelectorAll('.iw').forEach(w => { w.className = 'gw'; });
+    nameEl.appendChild(glint);
+    intro.style.setProperty('--nw', nameEl.getBoundingClientRect().width + 'px');
+  }
   requestAnimationFrame(() => intro.classList.add('is-in'));
   if (!reduce) setTimeout(() => intro.classList.add('is-wave'), WAVE_AT);   // after every letter has landed
   let ready = 0; const total = 3;
@@ -1172,7 +1247,7 @@ const introDone = new Promise(finish => {
     const letters = [...intro.querySelectorAll('.iw span')];
     // A forced skip can land mid-rise or mid-glint. Freeze every letter exactly where it is, then let it relax
     // to plain white while the word is already moving, so nothing snaps.
-    const live = letters.map(l => { const c = getComputedStyle(l); return [c.transform, c.color, c.textShadow]; });
+    const live = letters.map(l => { const c = getComputedStyle(l); return [c.transform, c.color, c.webkitTextStrokeColor, c.textShadow]; });
     const busy = live.some(([t, c]) => (t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)') || c !== 'rgb(255, 255, 255)');
     // Each word is lifted out, redrawn at the title's full size and shrunk to look exactly as it did, then it
     // travels, grows and tightens into the title. Drawn big the whole way, so the last frame is identical to the
@@ -1186,7 +1261,7 @@ const introDone = new Promise(finish => {
     const s0 = introPx / heroPx;
     if (busy) letters.forEach((l, i) => {
       l.style.transition = 'none'; l.style.animation = 'none';
-      l.style.transform = live[i][0]; l.style.color = live[i][1]; l.style.textShadow = live[i][2];
+      l.style.transform = live[i][0]; l.style.color = live[i][1]; l.style.webkitTextStrokeColor = live[i][2]; l.style.textShadow = live[i][3];
     });
     intro.classList.remove('is-wave');
     nameEl.style.transform = 'none';
@@ -1208,8 +1283,8 @@ const introDone = new Promise(finish => {
     void intro.offsetWidth;
     if (busy) {
       letters.forEach(l => {
-        l.style.transition = 'transform .45s cubic-bezier(.3,0,.2,1), color .45s ease, text-shadow .45s ease';
-        l.style.transform = 'none'; l.style.color = ''; l.style.textShadow = 'none';
+        l.style.transition = 'transform .45s cubic-bezier(.3,0,.2,1), color .45s ease, -webkit-text-stroke-color .45s ease, text-shadow .45s ease';
+        l.style.transform = 'none'; l.style.color = '#fff'; l.style.webkitTextStrokeColor = '#fff'; l.style.textShadow = '0 0 20px rgba(0,87,255,0)';
       });
       // once every letter has relaxed, drop to plain text (mid-flight, far too small a shift to see)
       setTimeout(() => words.forEach(w => { w.textContent = w.textContent; }), 480);
