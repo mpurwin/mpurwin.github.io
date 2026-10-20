@@ -7,6 +7,13 @@
 <link rel="icon" type="image/png" href="images/Maxwell Purwin webclip.png">
 <link rel="apple-touch-icon" href="/images/Maxwell Purwin webclip.png">
 <meta name="theme-color" content="#050a18">
+<link rel="preload" as="image" href="/images/Main_Header_GIF.gif" fetchpriority="high">
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<script>
+  // JS is on: allow the intro. Seen it already this visit: skip it.
+  document.documentElement.classList.add('js');
+  try { if (sessionStorage.getItem('mp-intro')) document.documentElement.classList.add('intro-skip'); } catch (e) {}
+</script>
 
 <!-- SEO -->
 <meta name="description" content="Maxwell Purwin is a multidisciplinary creative manager crafting visual identity across motion, graphic design, and social content.">
@@ -169,13 +176,13 @@ nav.is-visible {
   font-synthesis: none;
   font-size: clamp(46px, 6.6vw, 96px);
   line-height: 0.92;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;          /* a little open, like the nav; the intro is wider and tightens into this */
   text-transform: uppercase;
   /* Only Simpel Medium is embedded, so thicken it with a stroke in the text colour.
      Unlike a browser-faked bold, this renders identically in Chrome and Safari. */
   -webkit-text-stroke: 0.035em currentColor;
   color: #fff;
-  margin: 0 0 44px -0.03em; /* optical left align with the copy below */
+  margin: 0 -0.05em 44px -0.03em; /* optical left align with the copy below; trailing tracking trimmed */
   will-change: transform, opacity;
 }
 .name-line {
@@ -184,7 +191,10 @@ nav.is-visible {
   padding-bottom: 0.06em;      /* keep descenders/baseline unclipped */
 }
 .name-line + .name-line { margin-top: -0.04em; }
-.name-line:last-child { color: #c9cbd0; } /* solid, so the bold stroke doesn't double up */
+.nw { display: inline-block; white-space: nowrap; }
+/* after the intro hands off, the name is already in place: no rise */
+.hero.name-handoff .name-inner { transition: none; }
+.hero.name-hold .hero-name { visibility: hidden; }
 .name-inner {
   display: block;
   transform: translateY(108%);
@@ -631,11 +641,57 @@ footer {
   .hero-bottom { animation-duration: 0.01s; animation-delay: 0s; }
 }
 
+/* ── Intro: plays while the header and first cards load. Uses only the embedded font, so it shows instantly ── */
+.intro{display:none}
+html.js .intro{position:fixed;inset:0;z-index:300;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+html.js.intro-skip .intro{display:none}
+.intro-name{font-family:var(--display);font-weight:500;font-synthesis:none;-webkit-text-stroke:.035em currentColor;color:#fff;text-transform:uppercase;letter-spacing:.16em;line-height:.92;font-size:clamp(14px,1.5vw,19px);margin:0 -.16em 0 0;white-space:nowrap;transition:opacity .45s ease}
+.iw{display:inline-block;overflow:hidden;padding:.12em .06em .12em 0;vertical-align:bottom;transform-origin:0 0;-webkit-text-stroke:.035em currentColor}
+.iw span{display:inline-block;transform:translateY(115%) rotate(8deg);transition:transform 1s cubic-bezier(.34,1.45,.64,1),color .8s ease;transition-delay:calc(var(--d) * 55ms)}
+.intro.is-in .iw span{transform:none}
+/* while things load, a blue glint sweeps across the name, letter by letter (not tied to progress) */
+.intro.is-wave .iw span{animation:glint 2.6s ease-in-out infinite;animation-delay:calc(var(--d) * 90ms)}
+@keyframes glint{0%,40%,100%{color:#fff;text-shadow:none;transform:none}16%{color:#5b95ff;text-shadow:0 0 20px rgba(0,87,255,.55);transform:translateY(-.08em)}}
+/* hand-off: the curtain fades while each word travels to its place in the hero */
+/* travel + veil timing */
+.intro-veil{position:absolute;inset:0;background:radial-gradient(60% 45% at 50% 55%,rgba(0,87,255,.18) 0%,rgba(11,59,184,.08) 45%,rgba(5,10,24,0) 75%),#050a18;z-index:-1;transition:opacity 1.4s cubic-bezier(.45,0,.2,1)}
+.intro.is-morph .intro-veil{opacity:0}
+.intro.is-morph .iw{transition:transform 1.4s cubic-bezier(.5,0,.1,1),letter-spacing 1.4s cubic-bezier(.5,0,.1,1),color 1.1s ease}
+/* forced skip: same move, a touch quicker */
+.intro.is-morph.is-quick .iw{transition-duration:1.1s,1.1s,.9s}
+.intro.is-morph.is-quick .intro-veil{transition-duration:1.1s}
+/* gummy skip: the name stretches up against resistance as you scroll / swipe, and springs back if you let go */
+html.js .intro{touch-action:none}
+
+.intro.is-morph .iw span{transition:color .5s ease;animation:none}
+body.intro-lock{overflow:hidden}
+/* hero text waits for the intro to lift */
+.hero-bottom{animation-play-state:paused}
+.hero.is-loaded .hero-bottom{animation-play-state:running}
+/* header GIF fades in rather than popping over the canvas */
+.hero-gif{opacity:0;transition:opacity 1.2s ease}
+.hero-gif.is-ready{opacity:1}
+/* cards: a still frame shows first, then crossfades away once the GIF is playing */
+.card-poster{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.card-poster.is-on{opacity:1}
+.card-poster.is-off{opacity:0;transition:opacity 1.4s ease}
+@media (prefers-reduced-motion: reduce){
+  html.js .intro{transition:opacity .5s ease}
+  .intro.is-fade{opacity:0}
+  .iw span{transform:none;transition:none}
+  .intro.is-wave .iw span{animation:none}
+}
+
 /* ── Safari-only fixes ── */
 </style>
 <script>if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent))document.documentElement.classList.add('is-safari');</script>
 </head>
 <body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-veil"></div>
+  <p class="intro-name"><span class="iw iw1"><span style="--d:0">M</span><span style="--d:1">a</span><span style="--d:2">x</span><span style="--d:3">w</span><span style="--d:4">e</span><span style="--d:5">l</span><span style="--d:6">l</span></span> <span class="iw iw2"><span style="--d:8">P</span><span style="--d:9">u</span><span style="--d:10">r</span><span style="--d:11">w</span><span style="--d:12">i</span><span style="--d:13">n</span></span></p>
+</div>
 
 <nav>
   <a href="#" class="nav-logo" style="text-transform:uppercase;letter-spacing:0.08em;">Maxwell Purwin</a>
@@ -649,13 +705,13 @@ footer {
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
-  <img class="hero-gif" id="hero-gif" src="/images/Main_Header_GIF.gif" alt="" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.jpg">
+  <img class="hero-gif" id="hero-gif" src="/images/Main_Header_GIF.gif" alt="" fetchpriority="high" decoding="async" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791933241/Main_Header_GIF_v9d8qe.jpg">
   <div class="hero-scrim"></div>
 
   <div class="hero-content">
     <h1 class="hero-name" id="hero-name" aria-label="Maxwell Purwin">
-      <span class="name-line" aria-hidden="true"><span class="name-inner" style="--i:0">Maxwell</span></span>
-      <span class="name-line" aria-hidden="true"><span class="name-inner" style="--i:1">Purwin</span></span>
+      <span class="name-line" aria-hidden="true"><span class="name-inner" style="--i:0"><span class="nw">Maxwell</span></span></span>
+      <span class="name-line" aria-hidden="true"><span class="name-inner" style="--i:1"><span class="nw nw2">Purwin</span></span></span>
     </h1>
 
     <div class="hero-bottom">
@@ -944,25 +1000,31 @@ function makeVideo(src, poster, className) {
   return v;
 }
 
-// Hero
-(() => {
+// ── Loading choreography: header first, then cards in order; the intro covers the wait ──
+const settle = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
+
+// Header: GIF (top priority) → Cloudinary video → animated canvas behind
+const heroReady = new Promise(done => {
   const gif = document.getElementById('hero-gif');
-  if (!gif) return;
-  const covered = () => { heroCovered = true; syncCanvas(); };
+  if (!gif) return done();
+  const covered = el => { el.classList.add('is-ready'); heroCovered = true; syncCanvas(); done(); };
   const fallBack = () => {
     const v = makeVideo(gif.dataset.video, gif.dataset.poster, 'hero-gif');
     gif.replaceWith(v);
-    v.addEventListener('playing', covered);
+    v.addEventListener('playing', () => covered(v), { once: true });
+    v.addEventListener('error', done, { once: true });
+    v.querySelector('source').addEventListener('error', done, { once: true });
     const p = v.play(); if (p && p.catch) p.catch(() => {});
   };
-  if (gif.complete) { gif.naturalWidth ? covered() : fallBack(); }
+  if (gif.complete && gif.naturalWidth) covered(gif);
+  else if (gif.complete) fallBack();
   else {
-    gif.addEventListener('load', covered, { once: true });
+    gif.addEventListener('load', () => covered(gif), { once: true });
     gif.addEventListener('error', fallBack, { once: true });
   }
-})();
+});
 
-// Cards: load each GIF as it nears the screen; if it fails, swap in the video
+// Cards: pause their videos when off-screen
 const cardVideoObserver = new IntersectionObserver(entries => {
   entries.forEach(({ target: v, isIntersecting }) => {
     if (!v.isConnected) return;
@@ -971,26 +1033,210 @@ const cardVideoObserver = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '200px 0px' });
 
-const cardLoader = new IntersectionObserver(entries => {
-  entries.forEach(({ target: bg, isIntersecting }) => {
-    if (!isIntersecting) return;
-    cardLoader.unobserve(bg);
-    const useVideo = () => {
-      if (!bg.dataset.video) return;
-      const v = makeVideo(bg.dataset.video, bg.dataset.poster, 'card-video');
-      bg.appendChild(v);
-      cardVideoObserver.observe(v);
+const cards = [...document.querySelectorAll('.card-bg[data-video]')].filter(bg => !bg.closest('.is-hidden')); // hidden cards load nothing
+
+// 1) still frames: small JPGs, shown as soon as each arrives
+cards.forEach(bg => {
+  if (!bg.dataset.poster) return;
+  const layer = document.createElement('div');
+  layer.className = 'card-poster';
+  bg.prepend(layer);
+  bg._poster = layer;
+  const img = new Image();
+  img.decoding = 'async'; if ('fetchPriority' in img) img.fetchPriority = 'low';
+  img.onload = () => { if (!bg.classList.contains('has-gif') && !bg.querySelector('video.is-playing')) { layer.style.backgroundImage = `url("${img.src}")`; layer.classList.add('is-on'); } };
+  img.src = bg.dataset.poster;
+});
+
+// 2) GIFs, top of the page first, two at a time; video if a GIF fails
+const loadCard = bg => new Promise(done => {
+  const reveal = () => { if (bg._poster) bg._poster.classList.add('is-off'); done(); };
+  const useVideo = () => {
+    if (!bg.dataset.video) return done();
+    const v = makeVideo(bg.dataset.video, bg.dataset.poster, 'card-video');
+    bg.appendChild(v);
+    cardVideoObserver.observe(v);
+    v.addEventListener('playing', () => { v.classList.add('is-playing'); reveal(); }, { once: true });
+    v.addEventListener('error', done, { once: true });
+    v.querySelector('source').addEventListener('error', done, { once: true });
+    setTimeout(done, 6000);
+  };
+  if (!bg.dataset.gif) return useVideo();
+  const img = new Image();
+  img.decoding = 'async';
+  img.onload = () => { bg.classList.add('has-gif'); reveal(); };
+  img.onerror = useVideo;
+  img.src = bg.dataset.gif;
+});
+const firstCards = [];
+let next = 0;
+const pump = () => {
+  if (next >= cards.length) return;
+  const i = next++;
+  const p = loadCard(cards[i]);
+  if (i < 2) firstCards.push(p);
+  p.then(pump);
+};
+// give the header a head start, then start the queue (two lanes)
+settle(heroReady, 1200).then(() => { pump(); pump(); });
+
+// 3) the intro: holds until the header + first two cards are ready (one glint pass minimum, two at most); push through to skip
+const introDone = new Promise(finish => {
+  const intro = document.getElementById('intro');
+  const skip = !intro || getComputedStyle(intro).display === 'none';
+  if (skip) return finish();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // glint timing (matches the CSS): starts once the letters have risen, 2.6s per pass, every letter back to white 2.3s in
+  const WAVE_AT = 1300, PERIOD = 2600, CLEAN = 2300;
+  const MIN = reduce ? 600 : WAVE_AT + CLEAN;                 // one full pass on a fast connection (~3.6s)
+  const MAX = reduce ? 3500 : WAVE_AT + PERIOD + CLEAN;       // at most two passes, then hand off regardless
+  const t0 = performance.now();
+  const hero = document.querySelector('.hero');
+  const nameEl = intro.querySelector('.intro-name');
+  let started = false;
+  document.body.classList.add('intro-lock');
+  requestAnimationFrame(() => intro.classList.add('is-in'));
+  if (!reduce) setTimeout(() => intro.classList.add('is-wave'), WAVE_AT);   // after every letter has landed
+  let ready = 0; const total = 3;
+  const tick = () => { ready++; };
+  heroReady.then(tick);
+  settle(heroReady, 1200).then(() => setTimeout(() => {
+    // firstCards is filled once the queue starts (same moment)
+    (firstCards[0] || Promise.resolve()).then(tick);
+    (firstCards[1] || Promise.resolve()).then(tick);
+  }, 0));
+
+  // ── Gummy skip ──
+  // Scrolling, swiping up or pressing ↓ / space builds "pull". The name lifts against a rubber-band resistance
+  // (it moves less the harder you push), and springs back the moment you ease off. Push through to skip.
+  const SKIP_AT = 760, MAXY = 64, K = 420;
+  let pull = 0, lastInput = 0, rafPull = 0, touchY = null;
+  const lift = () => (reduce ? 0 : -MAXY * (1 - Math.exp(-pull / K)));
+  const render = () => {
+    nameEl.style.transform = pull > 0.5 ? `translate3d(0,${lift().toFixed(2)}px,0)` : '';
+  };
+  const springBack = () => {
+    rafPull = 0;
+    if (started) return;
+    if (performance.now() - lastInput > 110) pull *= 0.86;      // let go: ease back down
+    if (pull < 0.5) pull = 0;
+    render();
+    if (pull > 0) rafPull = requestAnimationFrame(springBack);
+  };
+  const push = amount => {
+    if (started || amount <= 0) return;
+    pull += amount * (1 - 0.35 * Math.min(1, pull / SKIP_AT));  // stiffer the further it's pulled
+    lastInput = performance.now();
+    if (pull >= SKIP_AT) return handoff(true);
+    render();
+    if (!rafPull) rafPull = requestAnimationFrame(springBack);
+  };
+  const onWheel = e => { e.preventDefault(); push(Math.min(120, Math.abs(e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY))); };
+  const onTouchStart = e => { touchY = e.touches[0].clientY; };
+  const onTouchMove = e => {
+    if (touchY == null) return;
+    e.preventDefault();
+    const y = e.touches[0].clientY; push((touchY - y) * 1.5); touchY = y;
+  };
+  const onTouchEnd = () => { touchY = null; };
+  const onKey = e => {
+    if (['ArrowDown', 'PageDown', ' ', 'Spacebar', 'End', 'Enter'].includes(e.key)) { e.preventDefault(); push(150); }
+  };
+  addEventListener('wheel', onWheel, { passive: false });
+  addEventListener('touchstart', onTouchStart, { passive: true });
+  addEventListener('touchmove', onTouchMove, { passive: false });
+  addEventListener('touchend', onTouchEnd);
+  addEventListener('keydown', onKey);
+  const unlisten = () => {
+    removeEventListener('wheel', onWheel); removeEventListener('touchstart', onTouchStart);
+    removeEventListener('touchmove', onTouchMove); removeEventListener('touchend', onTouchEnd);
+    removeEventListener('keydown', onKey);
+  };
+
+  // ── Hand-off: the intro name travels into the title ──
+  function handoff(forced) {
+    if (started) return;
+    started = true;
+    unlisten();
+    if (rafPull) cancelAnimationFrame(rafPull);
+    try { sessionStorage.setItem('mp-intro', '1'); } catch (e) {}
+    hero.classList.add('name-handoff', 'name-hold', 'is-loaded');   // real name in place, hidden for now
+    const done = () => {
+      hero.classList.remove('name-hold');                           // swap the travelling words for the real name
+      document.body.classList.remove('intro-lock');
+      intro.remove();
+      finish();
     };
-    if (!bg.dataset.gif) return useVideo();
-    const img = new Image();
-    img.onload = () => bg.classList.add('has-gif');
-    img.onerror = useVideo;
-    img.src = bg.dataset.gif;
-  });
-}, { rootMargin: '600px 0px' });
-document.querySelectorAll('.card-bg[data-video]').forEach(bg => {
-  if (bg.closest('.is-hidden')) return; // hidden cards load nothing
-  cardLoader.observe(bg);
+    if (reduce) { intro.classList.add('is-fade'); setTimeout(done, 520); return; }
+    const words = [...intro.querySelectorAll('.iw')];
+    const letters = [...intro.querySelectorAll('.iw span')];
+    // A forced skip can land mid-rise or mid-glint. Freeze every letter exactly where it is, then let it relax
+    // to plain white while the word is already moving, so nothing snaps.
+    const live = letters.map(l => { const c = getComputedStyle(l); return [c.transform, c.color, c.textShadow]; });
+    const busy = live.some(([t, c]) => (t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)') || c !== 'rgb(255, 255, 255)');
+    // Each word is lifted out, redrawn at the title's full size and shrunk to look exactly as it did, then it
+    // travels, grows and tightens into the title. Drawn big the whole way, so the last frame is identical to the
+    // real title (no soft-then-sharp pop at the swap).
+    const heroName = document.getElementById('hero-name');
+    const heroPx = parseFloat(getComputedStyle(heroName).fontSize);
+    const heroLS = getComputedStyle(heroName).letterSpacing;
+    const targets = [...heroName.querySelectorAll('.nw')].map(el => el.getBoundingClientRect());
+    const introPx = parseFloat(getComputedStyle(words[0]).fontSize);
+    const starts = words.map(w => w.getBoundingClientRect());     // includes any pull lift
+    const s0 = introPx / heroPx;
+    if (busy) letters.forEach((l, i) => {
+      l.style.transition = 'none'; l.style.animation = 'none';
+      l.style.transform = live[i][0]; l.style.color = live[i][1]; l.style.textShadow = live[i][2];
+    });
+    intro.classList.remove('is-wave');
+    nameEl.style.transform = 'none';
+    // Move the words out of the (possibly lifted) name line onto a plain layer with the same type styles, so
+    // 'fixed' always means the screen, in every browser.
+    const fly = document.createElement('p');
+    fly.className = 'intro-name';
+    fly.style.cssText = 'position:absolute;inset:0;margin:0;transform:none;pointer-events:none';
+    intro.appendChild(fly);
+    words.forEach(w => fly.appendChild(w));
+    words.forEach((w, i) => {
+      if (!busy) w.textContent = w.textContent;                   // plain text: the font's own kerning, same as the title
+      w.style.cssText = `position:fixed;left:0;top:0;margin:0;font-size:${heroPx}px;letter-spacing:.16em;` +
+                        `transform:translate(${starts[i].left}px,${starts[i].top}px) scale(${s0})`;
+    });
+    void intro.offsetWidth;                   // register the starting state...
+    if (forced) intro.classList.add('is-quick');
+    intro.classList.add('is-morph');          // ...then switch the movement on
+    void intro.offsetWidth;
+    if (busy) {
+      letters.forEach(l => {
+        l.style.transition = 'transform .45s cubic-bezier(.3,0,.2,1), color .45s ease, text-shadow .45s ease';
+        l.style.transform = 'none'; l.style.color = ''; l.style.textShadow = 'none';
+      });
+      // once every letter has relaxed, drop to plain text (mid-flight, far too small a shift to see)
+      setTimeout(() => words.forEach(w => { w.textContent = w.textContent; }), 480);
+    }
+    words.forEach((w, i) => {
+      const to = targets[i];
+      if (!to) return;
+      const pad = parseFloat(getComputedStyle(w).paddingTop);   // mask padding above the letters
+      w.style.letterSpacing = heroLS;
+      w.style.transform = `translate(${to.left}px,${to.top - pad}px) scale(1)`;
+    });
+    setTimeout(done, forced ? 1150 : 1450);
+  }
+
+  const atCleanMoment = t => reduce || ((t - WAVE_AT) % PERIOD) >= CLEAN - 20;   // never cut the glint mid-pass
+  const loop = () => {
+    if (started) return;
+    const t = performance.now() - t0;
+    if (((ready >= total && t >= MIN) || t >= MAX) && atCleanMoment(t)) {
+      // don't take over while someone is mid-push; the spring settles first
+      if (pull > 0) return requestAnimationFrame(loop);
+      setTimeout(() => handoff(false), 120);
+      return;
+    }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
 });
 
 // ── Scroll reveals — staggered per card ──
@@ -1018,9 +1264,9 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     started = true;
     requestAnimationFrame(() => hero.classList.add('is-loaded'));
   };
-  // wait for the font so the lines don't reflow mid-animation
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
-  setTimeout(go, 1200); // safety net
+  // wait for the intro to lift and the font to be ready, so the lines don't reflow mid-animation
+  introDone.then(() => (document.fonts ? settle(document.fonts.ready, 800) : null)).then(go);
+  setTimeout(go, 5000); // safety net
 })();
 
 // ── Scroll handoff: big name drifts up and fades as the nav fades in ──
