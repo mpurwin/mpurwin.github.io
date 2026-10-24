@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="../images/Maxwell%20Purwin%20webclip.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Jost:wght@400;500&family=Instrument+Serif:ital@1&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Simpel';
@@ -37,21 +37,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* HERO — brand texture with a navy overlay for contrast */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:min(92vh,960px);display:flex;flex-direction:column;justify-content:flex-end;
   padding:0 48px 80px;border-bottom:1px solid var(--gray-200);
   position:relative;overflow:hidden;background:#1d3a9e;
 }
-.hero-bg{position:absolute;inset:-12%;background:#1d3a9e url('/images/Brand Texture.jpg') center/cover no-repeat;animation:drift 16s ease-in-out infinite alternate}
-@keyframes drift{0%{transform:translate3d(0,0,0) scale(1.1) rotate(0deg)}50%{transform:translate3d(-6%,3%,0) scale(1) rotate(-1.5deg)}100%{transform:translate3d(5%,-4%,0) scale(1.08) rotate(1deg)}}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(120deg,#08123d 0%,#0f2a86 38%,#1d4fe0 72%,#3d7bff 100%);background-size:220% 220%;animation:shift 22s ease-in-out infinite alternate}
+@keyframes shift{0%{background-position:0% 60%}100%{background-position:100% 40%}}
 /* three lights moving across the texture */
-.hero-glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;overflow:hidden}
-.hero-glow::before,.hero-glow::after,.hero-glow i{content:'';position:absolute;border-radius:50%;filter:blur(50px);will-change:transform}
-.hero-glow::before{width:65vw;height:65vw;left:-15vw;top:-30vw;background:radial-gradient(circle,rgba(120,175,255,.7),rgba(120,175,255,0) 62%);animation:glowA 11s ease-in-out infinite alternate}
-.hero-glow::after{width:55vw;height:55vw;right:-15vw;top:5vh;background:radial-gradient(circle,rgba(160,130,255,.55),rgba(160,130,255,0) 62%);animation:glowB 14s ease-in-out infinite alternate}
-.hero-glow i{width:45vw;height:45vw;left:30vw;top:30vh;background:radial-gradient(circle,rgba(80,200,255,.45),rgba(80,200,255,0) 62%);animation:glowC 9s ease-in-out infinite alternate}
-@keyframes glowA{50%{transform:translate3d(35vw,30vh,0) scale(1.3)}100%{transform:translate3d(70vw,8vh,0) scale(.9)}}
-@keyframes glowB{50%{transform:translate3d(-45vw,30vh,0) scale(.8)}100%{transform:translate3d(-20vw,-10vh,0) scale(1.25)}}
-@keyframes glowC{50%{transform:translate3d(-30vw,-25vh,0) scale(1.35)}100%{transform:translate3d(25vw,-5vh,0) scale(.85)}}
 /* film-grain flicker */
 @keyframes grain{0%{background-position:0 0}25%{background-position:-37px 21px}50%{background-position:53px -14px}75%{background-position:-19px -46px}100%{background-position:28px 39px}}
 .hero-grain{position:absolute;inset:0;pointer-events:none;opacity:.55;mix-blend-mode:overlay;background-size:180px 180px;animation:grain .9s steps(5) infinite;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.4 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -69,14 +61,104 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .headline-mask{display:block;overflow:hidden;padding-bottom:.06em}
 .headline-word{display:block;transform:translateY(105%);animation:rise .9s cubic-bezier(.16,1,.3,1) .15s forwards}
 @keyframes rise{to{transform:none}}
-@media (prefers-reduced-motion: reduce){.hero-bg,.hero-grain,.hero-glow::before,.hero-glow::after,.hero-glow i,.headline-word,.hero-bottom{animation:none;transform:none;opacity:1}.hero-grain{opacity:.55}}
+@media (prefers-reduced-motion: reduce){.hero-bg,.hero-grain,.headline-word,.hero-bottom{animation:none;transform:none;opacity:1}.hero-grain{opacity:.55}}
 .hero-bio{max-width:400px;font-size:15px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.75}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:100px;transition:all .15s;white-space:nowrap;font-family:var(--body)}
 .btn-primary{background:#fff;color:var(--black)}
 .btn-primary:hover{background:#e8e8e8;transform:translateY(-1px)}
 
+
+
+/* ── TYPE PLAYGROUND ── each letter crossfades into a style and back */
+.hero-headline{user-select:none;-webkit-user-select:none}
+.ltr{display:inline-block;position:relative;will-change:transform}
+.ltr.space{width:.24em}
+.ltr .base{display:inline-block;font-style:normal}
+.ltr .base.land{animation:land .45s cubic-bezier(.2,1.5,.4,1)}
+@keyframes land{from{transform:scale(.82) translateY(4%)}to{transform:none}}
+/* the swapped glyph sits on top of the original, which keeps holding its space,
+   so changing fonts can never shift the baseline or the width of the line */
+.ltr .alt{position:absolute;left:50%;top:0;white-space:nowrap;pointer-events:none;font-style:normal;visibility:hidden;transform:translateX(-50%) scale(.8);transition:transform .45s cubic-bezier(.2,1.5,.4,1)}
+.ltr.swap .base{visibility:hidden}
+.ltr.swap .alt{visibility:visible;transform:translateX(-50%) var(--vt,scale(1))}
+.alt.v-serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0;--vt:translateY(-2%) scale(1.1)}
+.alt.v-soft{color:#fff;--vt:rotate(-3deg) translateY(-2%)}
+.alt.v-outline{color:transparent;-webkit-text-stroke:2px #fff;--vt:scale(1.04)}
+.alt.v-mono{font-family:'Space Mono',ui-monospace,monospace;font-weight:700;letter-spacing:-.04em;--vt:translateY(8%) scale(.84)}
+@media (prefers-reduced-motion: reduce){.ltr .alt{transition:none}.ltr .base.land{animation:none}}
+
+/* ── RESUME ── scroll-driven chapters, type wall, licence cards */
+.resume-section{background:#fff}
+.rs-wrap{max-width:1180px;margin:0 auto}
+.rs-h{font-family:'Jost',var(--body);font-weight:400;font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:#333;padding-bottom:12px;border-bottom:1px solid #c4c4c4}
+.rs-block + .rs-block{margin-top:90px}
+
+/* scroll-in */
+.in-up{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.in-up.in{opacity:1;transform:none}
+
+/* ── work: each role opens on its own ── */
+.job{border-bottom:1px solid var(--gray-100)}
+.job-head{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:240px 1fr 14px;gap:24px;align-items:center;padding:28px 0;cursor:pointer}
+.job-head:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.job-when{font-size:13px;color:var(--gray-400)}
+.job-title{font-size:18px;font-weight:500;line-height:1.3;color:var(--black)}
+.job-org{display:block;font-size:14px;font-weight:400;color:var(--gray-600);margin-top:3px}
+.job-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.job.open .job-body{grid-template-rows:1fr}
+.job-inner{overflow:hidden;padding-left:264px}
+.job-inner p.body{font-size:16px;font-weight:300;line-height:1.8;color:#2a2a2a;max-width:64ch;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.job.open .job-inner p.body{opacity:1;transform:none;transition-delay:.12s}
+.job-inner p.body + p.body{margin-top:12px}
+.job-inner p.body:last-child{margin-bottom:32px}
+.tog{position:relative;width:14px;height:14px;color:var(--black)}
+.tog::before,.tog::after{content:'';position:absolute;left:0;top:50%;width:14px;height:1.5px;background:currentColor;transition:transform .45s var(--ease)}
+.tog::after{transform:rotate(90deg)}
+.job.open .tog::after{transform:rotate(0deg)}
+.job-head:hover .tog{color:var(--accent)}
+/* ── education ── */
+.row{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--gray-100);position:relative}
+.row-when{font-size:13px;color:var(--gray-400)}
+.row-title{font-size:17px;font-weight:500;line-height:1.3;color:var(--black)}
+
+.row-sub{display:block;font-family:var(--body);font-size:14px;font-weight:400;color:var(--gray-600);margin-top:6px}
+
+/* ── skills: a wall of type that swaps style on hover ── */
+.skillwall{margin-top:24px;font-family:var(--body);font-weight:500;font-size:17px;line-height:1.85;letter-spacing:-.02em;color:var(--black)}
+.sk{display:inline-block;cursor:default}
+
+/* ── certifications: licence cards that tilt toward the cursor ── */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px;perspective:1000px}
+.lic{position:relative;border-radius:18px;padding:28px 30px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#f5f8ff 0%,#e8eeff 55%,#dfe8ff 100%);border:1px solid #dbe4ff;transform-style:preserve-3d;transition:transform .6s var(--ease),box-shadow .6s var(--ease),opacity .8s var(--ease);will-change:transform;overflow:hidden}
+.lic:hover{box-shadow:0 30px 60px -20px rgba(0,40,140,.25)}
+.lic::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.75),rgba(255,255,255,0) 55%)}
+.lic:hover::after{opacity:1}
+.lic-top{font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#5a6a99}
+.lic h3{font-family:var(--display);font-weight:500;font-size:clamp(24px,2.6vw,34px);line-height:1.05;color:#0d1a4a;margin-top:28px;transform:translateZ(30px)}
+.lic p{font-size:14px;color:#3d4c7a;margin-top:8px;transform:translateZ(20px)}
+.lic-ghost{position:absolute;right:18px;bottom:-14px;font-family:var(--display);font-size:120px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(29,58,158,.14);pointer-events:none}
+
+@media(max-width:900px){
+  .row{grid-template-columns:1fr;gap:6px}
+  .job-head{grid-template-columns:1fr 14px;gap:4px 14px;padding:22px 0}
+  .job-when{grid-column:1/-1}
+  .job-inner{padding-left:0}
+  .job-inner p.body{font-size:15.5px}
+  .row{padding:20px 0}
+  .rs-block + .rs-block{margin-top:72px}
+}
+@media (prefers-reduced-motion: reduce){.in-up,.mark,.sk,.job-body,.job-inner p.body,.tog::after{transition:none}}
+
+
+.skillwall .w{display:inline-block}
+.skillwall .sep{display:inline-block;color:var(--gray-200);margin:0 .28em;font-weight:400}
+/* titles and skills: a translucent blue highlight that draws in on hover */
+.mark,.sk{background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-size:0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .55s var(--ease)}
+.mark{padding:0 2px;margin:0 -2px}
+.job-head:hover .mark,.row:hover .mark,.sk:hover{background-size:100% 100%}
+
 /* RESUME DISPLAY */
-.resume-section{padding:80px 48px 120px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+.resume-section{padding:100px 48px 140px;background:#fff;border-bottom:1px solid var(--gray-200)}
 .resume-frame{max-width:860px;margin:0 auto;box-shadow:0 8px 48px rgba(0,0,0,0.12);border-radius:2px;overflow:hidden}
 .resume-frame img{width:100%;display:block}
 
@@ -94,7 +176,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   nav{padding:0 20px}
   .hero{padding:0 20px 60px}
   .hero-bottom{flex-direction:column;align-items:flex-start}
-  .resume-section{padding:48px 20px 80px}
+  .resume-section{padding:56px 20px 90px}
   footer{flex-direction:column;gap:20px;padding:32px 20px}
 }
 
@@ -117,7 +199,6 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-glow"><i></i></div>
   <div class="hero-grain"></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
@@ -126,14 +207,52 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     </h1>
     <div class="hero-bottom">
       <p class="hero-bio">8+ years directing visual identity across motion, video, graphic design, brand and social content.</p>
-      <a href="/pdfs/Maxwell Purwin Resume 2026.pdf" download="Maxwell_Purwin_Resume.pdf" class="btn btn-primary">↓ Download PDF</a>
+      <a href="/pdfs/Maxwell Purwin Resume 2026.pdf" download="Maxwell Purwin Resume 2026.pdf" class="btn btn-primary">↓ Download PDF</a>
     </div>
   </div>
 </section>
 
 <section class="resume-section reveal">
-  <div class="resume-frame">
-    <img src="/images/Maxwell Purwin Resume 2026.png" alt="Maxwell Purwin Resume" style="width:100%;display:block;"/>
+  <div class="rs-wrap">
+
+    <div class="rs-block">
+      <h2 class="rs-h">Work &amp; Experience</h2>
+      <div class="job in-up" id="creative-manager">
+        <button class="job-head" type="button" aria-expanded="false" aria-controls="creative-manager-body"><span class="job-when">2024 — Now</span><span class="job-title"><span class="mark">Social Creative Manager</span><span class="job-org">Virgin Voyages</span></span><span class="tog" aria-hidden="true"></span></button>
+        <div class="job-body" id="creative-manager-body" role="region"><div class="job-inner"><p class="body">I lead creative direction for all of our organic and paid social, translating brand vision into cohesive campaigns for a 2M+ audience, growing engagement 40% year over year and increasing content output 132% year over year. I partner with the brand and growth teams to turn business goals into visual concepts, and I integrate AI tools and trend analytics into concepting and planning to inform our monthly creative strategy.</p><p class="body">I manage and mentor 3+ designers, videographers, and contractors, setting clear direction and reviewing all creative so it stays true to brand standards and resonates with our target audiences. To keep that work moving, I built a custom creative approval system that consolidated three tools into one. It handles 100+ assets monthly, unifies brainstorming, feedback, and approvals, and cut production turnaround by 20%.</p></div></div>
+      </div>
+      <div class="job in-up" id="content-designer">
+        <button class="job-head" type="button" aria-expanded="false" aria-controls="content-designer-body"><span class="job-when">2021 — 2024</span><span class="job-title"><span class="mark">Social Content Designer</span><span class="job-org">Virgin Voyages</span></span><span class="tog" aria-hidden="true"></span></button>
+        <div class="job-body" id="content-designer-body" role="region"><div class="job-inner"><p class="body">I designed static, motion, and video campaign assets across 10 major digital and social channels for the brand's launch and 4 ship rollouts, helping grow total audience from 350K to over 1.2M.</p><p class="body">Working within brand guidelines, I developed campaign creative and delivered 10+ assets weekly under tight deadlines. I traveled internationally to capture content and support shoot planning for organic and paid use, and I built a company-wide social asset library that improved access and distribution across teams.</p></div></div>
+      </div>
+      <div class="job in-up" id="freelance">
+        <button class="job-head" type="button" aria-expanded="false" aria-controls="freelance-body"><span class="job-when">2016 — 2023</span><span class="job-title"><span class="mark">Freelance Videographer and Designer</span><span class="job-org">Maxwell Purwin Freelance</span></span><span class="tog" aria-hidden="true"></span></button>
+        <div class="job-body" id="freelance-body" role="region"><div class="job-inner"><p class="body">As a freelancer, I designed brand identities, vector graphics, and motion graphics for clients using Illustrator and Photoshop. On the film side, I concepted and storyboarded narrative video content, planning framing, pacing, and delivery, and directed on-location photo and video capture for automotive and medical clients.</p><p class="body">Alongside client work, I grew an independent automotive YouTube channel to 26K+ subscribers, publishing 3x weekly.</p></div></div>
+      </div>
+      <div class="job in-up" id="production-assistant">
+        <button class="job-head" type="button" aria-expanded="false" aria-controls="production-assistant-body"><span class="job-when">2018 — 2020</span><span class="job-title"><span class="mark">Production Assistant</span><span class="job-org">Specialty Field Production</span></span><span class="tog" aria-hidden="true"></span></button>
+        <div class="job-body" id="production-assistant-body" role="region"><div class="job-inner"><p class="body">I assisted on large-scale commercial and livestreamed production sets, collaborating with 15+ crew members and supporting high-profile clients including Ford Performance and Rivian.</p><p class="body">To keep productions running smoothly, I organized cameras, drones, lenses, and grip equipment in studio and on set, and solved critical equipment and technical issues promptly under time-sensitive conditions. I also supported the Digital Imaging Technician with media management, data offloading, and asset organization.</p></div></div>
+      </div>
+    </div>
+
+    <div class="rs-block">
+      <h2 class="rs-h">Education</h2>
+      <div class="row in-up"><span class="row-when">Bachelor of Arts</span><span class="row-title"><span class="mark">University of Michigan</span><span class="row-sub">Film, Television, and Media, Production &amp; Entrepreneurship</span></span></div>
+      <div class="row in-up"><span class="row-when">Summer Sessions</span><span class="row-title"><span class="mark">University of California, Los Angeles</span><span class="row-sub">Digital Cinematography</span></span></div>
+      <div class="row in-up"><span class="row-when">Associate of Arts</span><span class="row-title"><span class="mark">Grand Rapids Community College</span><span class="row-sub">Liberal Arts &amp; Sciences, General Studies</span></span></div>
+    </div>
+
+    <div class="rs-block">
+      <h2 class="rs-h">Skills</h2>
+      <div class="skillwall" id="skillwall"><span class="w"><span class="sk"><span class="sk-base">Creative Strategy</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Creative Direction</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Team Leadership</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Social Strategy</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Project Management</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Collaboration</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Motion Design</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Aerial Cinematography</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Camera Operation</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Premiere Pro</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">After Effects</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Illustrator</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Photoshop</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Figma</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">InDesign</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">Airtable</span></span><span class="sep">/</span></span><span class="w"><span class="sk"><span class="sk-base">AI Workflows &amp; Automation</span></span></span></div>
+    </div>
+
+    <div class="rs-block">
+      <h2 class="rs-h">Certifications</h2>
+      <div class="row in-up"><span class="row-when">Federal Aviation Administration</span><span class="row-title"><span class="mark">Private Pilot License</span><span class="row-sub">Airplane Single Engine Land</span></span></div>
+      <div class="row in-up"><span class="row-when">Federal Aviation Administration</span><span class="row-title"><span class="mark">Remote Pilot License</span><span class="row-sub">Part 107</span></span></div>
+    </div>
+
   </div>
 </section>
 
@@ -142,13 +261,123 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <ul class="footer-links">
     <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
     <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="/pdfs/Maxwell Purwin Resume 2026.pdf" download="Maxwell_Purwin_Resume.pdf">Download PDF</a></li>
+    <li><a href="/pdfs/Maxwell Purwin Resume 2026.pdf" download="Maxwell Purwin Resume 2026.pdf">Download PDF</a></li>
   </ul>
 </footer>
 
 <script>
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target;const siblings=Array.from(el.parentElement.children);const idx=siblings.indexOf(el);setTimeout(()=>el.classList.add('visible'),idx*80);obs.unobserve(el);}});},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   TYPE PLAYGROUND
+   Letters crossfade into a new style when touched, hold,
+   then ease back. One wanders on its own now and then.
+   ════════════════════════════════════════════════════════ */
+(function(){
+  const VARIANTS = ['v-serif','v-outline','v-mono','v-soft'];
+  const HOLD = 1500, IDLE_EVERY = 7000, SETTLE = 450;
+  const hero = document.querySelector('.hero');
+  const word = document.querySelector('.headline-word');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const text = word.textContent;
+
+  word.textContent = '';
+  word.setAttribute('aria-label', text);
+  const letters = [];
+  [...text].forEach(ch => {
+    const o = document.createElement('span');
+    if(ch === ' '){ o.className = 'ltr space'; word.appendChild(o); return; }
+    o.className = 'ltr';
+    o.innerHTML = '<i class="base"></i><i class="alt" aria-hidden="true"></i>';
+    o.firstChild.textContent = ch; o.lastChild.textContent = ch;
+    word.appendChild(o);
+    letters.push({ o, alt:o.lastChild, busy:false, last:'', x:0, y:0, tx:0, ty:0 });
+  });
+
+
+  function play(l, hold){
+    if(l.busy) return;
+    l.busy = true;
+    const pool = VARIANTS.filter(v => v !== l.last);
+    l.last = pool[Math.floor(Math.random() * pool.length)];
+    l.alt.className = 'alt ' + l.last;
+    void l.alt.offsetWidth;
+    l.o.classList.add('swap');
+    setTimeout(() => {
+      l.o.classList.remove('swap');
+      const base = l.o.firstChild;
+      base.classList.remove('land'); void base.offsetWidth; base.classList.add('land');
+      setTimeout(() => { l.busy = false; }, SETTLE);
+    }, hold || HOLD);
+  }
+
+  letters.forEach(l => {
+    l.o.addEventListener('pointerenter', e => { if(e.pointerType === 'mouse') play(l); });
+    l.o.addEventListener('pointerdown', () => play(l));
+  });
+
+  // letters drift gently toward the cursor (eased every frame, so it never snaps)
+  let mx = null, my = null;
+  hero.addEventListener('pointermove', e => { if(e.pointerType === 'mouse'){ mx = e.clientX; my = e.clientY; } });
+  hero.addEventListener('pointerleave', () => { mx = my = null; });
+  function frame(){
+    letters.forEach(l => {
+      if(mx === null){ l.tx = 0; l.ty = 0; }
+      else {
+        const r = l.o.getBoundingClientRect();
+        const cx = r.left + r.width/2 - l.x, cy = r.top + r.height/2 - l.y;
+        const dx = mx - cx, dy = my - cy, d = Math.hypot(dx, dy), reach = 260;
+        const k = d < reach ? (1 - d/reach) * 0.1 : 0;
+        l.tx = dx * k; l.ty = dy * k;
+      }
+      l.x += (l.tx - l.x) * 0.09; l.y += (l.ty - l.y) * 0.09;
+      l.o.style.transform = `translate3d(${l.x.toFixed(2)}px,${l.y.toFixed(2)}px,0)`;
+    });
+    requestAnimationFrame(frame);
+  }
+
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+    // let tilted letters breathe once the word has risen into place
+    setTimeout(() => document.querySelector('.headline-mask').style.overflow = 'visible', reduced ? 0 : 1100);
+    if(reduced) return;
+    requestAnimationFrame(frame);
+    // intro: a slow wave across the word
+    setTimeout(() => letters.forEach((l, n) => setTimeout(() => play(l), n * 85)), 1100);
+    setInterval(() => {
+      const free = letters.filter(l => !l.busy);
+      if(free.length) play(free[Math.floor(Math.random() * free.length)]);
+    }, IDLE_EVERY);
+  });
+})();
+</script>
+
+<script>
+/* RESUME — gentle scroll-ins and the skills swaps */
+(function(){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hit = location.hash && document.getElementById(location.hash.slice(1));
+  if(hit && hit.classList.contains('job')){ hit.classList.add('open'); hit.querySelector('.job-head').setAttribute('aria-expanded', true); setTimeout(() => hit.scrollIntoView({ block:'center' }), 200); }
+
+  // scroll-in
+  const rev = new IntersectionObserver(es => es.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, sibs = Array.from(el.parentElement.querySelectorAll(':scope > .in-up'));
+    setTimeout(() => el.classList.add('in'), Math.max(0, sibs.indexOf(el)) * 110);
+    rev.unobserve(el);
+  }), { threshold: .2 });
+  document.querySelectorAll('.in-up').forEach(el => rev.observe(el));
+
+  document.querySelectorAll('.job').forEach(job => {
+    const head = job.querySelector('.job-head');
+    head.addEventListener('click', () => {
+      const open = job.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+    });
+  });
+})();
 </script>
 </body>
 </html>
