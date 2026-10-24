@@ -65,7 +65,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Nav ── */
+/* ── Nav ──
+   Over the header: just the links, as white text on the video (no bar, no name).
+   On scroll: the white bar drops in from the top, the name fades in and the links turn dark. */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -75,19 +77,23 @@ nav {
   align-items: center;
   padding: 0 48px;
   height: 64px;
+  isolation: isolate;
+}
+/* the bar itself: a separate layer so it can slide down behind the links */
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
   opacity: 0;
-  transform: translateY(-12px);
-  pointer-events: none;
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  transform: translateY(-100%);
+  transition: transform 0.5s var(--ease), opacity 0.35s var(--ease);
 }
-nav.is-visible {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
+nav.is-visible::before { opacity: 1; transform: none; }
 
 .nav-logo {
   font-family: var(--display);
@@ -96,19 +102,32 @@ nav.is-visible {
   color: var(--black);
   text-decoration: none;
   letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.45s var(--ease) 0.1s, transform 0.45s var(--ease) 0.1s;
 }
+nav.is-visible .nav-logo { opacity: 1; transform: none; pointer-events: auto; }
 
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+/* links wait for the intro, then fade in with the rest of the header */
+nav:not(.is-ready) .nav-links { opacity: 0; pointer-events: none; }
+.nav-links { transition: opacity 0.8s var(--ease); }
 .nav-links a {
   font-size: 13px;
   font-weight: 400;
-  color: var(--gray-600);
+  color: rgba(255,255,255,0.88);
   text-decoration: none;
   padding: 6px 14px;
-  border-radius: 100px;
-  transition: background 0.15s, color 0.15s;
+  /* hover: the blue highlight from the old resume page draws in under the word (text only, not the padding) */
+  background: linear-gradient(transparent 56%,rgba(91,149,255,.45) 56%,rgba(91,149,255,.45) 90%,transparent 90%) no-repeat;
+  background-origin: content-box; background-clip: content-box;
+  background-size: 0% 100%;
+  transition: background-size .55s var(--ease), color 0.4s var(--ease);
 }
-.nav-links a:hover { background: var(--gray-100); color: var(--black); }
+.nav-links a:hover, .nav-links a:focus-visible { background-size: 100% 100%; color: #fff; }
+nav.is-visible .nav-links a { color: var(--gray-600); background-image: linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%); }
+nav.is-visible .nav-links a:hover, nav.is-visible .nav-links a:focus-visible { color: var(--black); }
 .nav-links .nav-cta {
   background: var(--black);
   color: var(--white);
@@ -589,13 +608,14 @@ nav.is-visible {
   flex-shrink: 0;
 }
 
-/* ── Footer ── */
+/* ── Footer: name, with "Let's Talk" underneath linking to the contact page ── */
 footer {
   border-top: 1px solid var(--gray-200);
   padding: 40px 48px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
 }
 .footer-name {
   font-family: var(--display);
@@ -604,16 +624,21 @@ footer {
   color: var(--black);
   text-transform: uppercase;
 }
-.footer-links { display: flex; list-style: none; }
-.footer-links a {
-  font-size: 13px;
+.footer-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--gray-600);
   text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 100px;
-  transition: background 0.15s, color 0.15s;
+  /* hover: the same blue highlight as the nav */
+  background: linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;
+  background-size: 0% 100%;
+  transition: background-size .55s var(--ease), color 0.2s var(--ease);
 }
-.footer-links a:hover { background: var(--gray-100); color: var(--black); }
+.footer-contact:hover, .footer-contact:focus-visible { color: var(--black); background-size: 100% 100%; }
 
 @keyframes up {
   from { opacity: 0; transform: translateY(20px); }
@@ -628,16 +653,18 @@ footer {
 
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
+  .nav-logo { font-size: 13px; white-space: nowrap; }
+  .nav-links a { padding: 6px 10px; }
   .hero { padding: 0 20px 60px; }
   .hero-bottom { flex-direction: column; align-items: flex-start; }
   .section-header { padding: 0 20px; }
   .project-grid { grid-template-columns: 1fr; }
   .about { grid-template-columns: 1fr; padding: 60px 20px; }
-  footer { flex-direction: column; gap: 20px; padding: 32px 20px; }
+  footer { padding: 32px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .name-inner, nav { transition: none !important; }
+  .name-inner, nav, nav::before, .nav-logo, .nav-links, .nav-links a { transition: none !important; }
   .hero-bottom { animation-duration: 0.01s; animation-delay: 0s; }
 }
 
@@ -715,7 +742,7 @@ body.intro-lock{overflow:hidden}
 .hero-gif.is-ready{opacity:1}
 /* when the first frame is already showing, the video takes over with a straight cut on that same frame: no crossfade, no ghosting */
 .hero-gif.is-cut{transition:none}
-/* cards: a still frame shows first, then crossfades away once the GIF is playing */
+/* cards: a still frame shows first, then crossfades away once the video (or fallback GIF) is playing */
 .card-poster{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
 .card-poster.is-on{opacity:1}
 .card-poster.is-off{opacity:0;transition:opacity 1.4s ease}
@@ -745,7 +772,6 @@ body.intro-lock{overflow:hidden}
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="/about/">About</a></li>
-    <li><a href="/resume/">Resume</a></li>
 
   </ul>
 </nav>
@@ -782,7 +808,7 @@ body.intro-lock{overflow:hidden}
   <div class="project-grid">
 
     <a href="/virginvoyages/" class="project-card reveal">
-      <div class="card-bg bg-1" data-gif="/images/VV Header Website.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931307/VV_Header_Website_kiizb4.jpg"></div>
+      <div class="card-bg bg-1" data-gif="/images/VV Header Website.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792857967/VV_Header_Website_kiizb4.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792857967/VV_Header_Website_kiizb4.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -794,7 +820,7 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/universitymotors/" class="project-card reveal">
-      <div class="card-bg bg-2" data-gif="/images/University Motors GIF Website 2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/University_Motors_GIF_Website_2_redsjt.jpg"></div>
+      <div class="card-bg bg-2" data-gif="/images/University Motors GIF Website 2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -806,7 +832,7 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/comstockparkbodyshop/" class="project-card reveal">
-      <div class="card-bg bg-3" data-gif="/images/CPBS HEADER_GIF_2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931422/CPBS_HEADER_GIF_2_dp2tlg.jpg"></div>
+      <div class="card-bg bg-3" data-gif="/images/CPBS HEADER_GIF_2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858344/CPBS_HEADER_GIF_2_dp2tlg.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858344/CPBS_HEADER_GIF_2_dp2tlg.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -818,7 +844,7 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/dlm/" class="project-card reveal">
-      <div class="card-bg bg-4" data-gif="/images/DLM HEADER_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/DLM_HEADER_1_uop8be.jpg"></div>
+      <div class="card-bg bg-4" data-gif="/images/DLM HEADER_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858727/DLM_HEADER_1_uop8be.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858727/DLM_HEADER_1_uop8be.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -830,7 +856,7 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/photography/" class="project-card reveal">
-      <div class="card-bg bg-5" data-gif="/images/Photography Header GIF_1_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931424/Photography_Header_GIF_1_1_ykdoae.jpg"></div>
+      <div class="card-bg bg-5" data-gif="/images/Photography Header GIF_1_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792859251/Photography_Header_GIF_1_1_ykdoae.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792859251/Photography_Header_GIF_1_1_ykdoae.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -842,7 +868,7 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/justforfun/" class="project-card reveal">
-      <div class="card-bg bg-6" data-gif="/images/mini animation header.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1791931423/mini_animation_header_wztuwn.jpg"></div>
+      <div class="card-bg bg-6" data-gif="/images/mini animation header.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858987/mini_animation_header_wztuwn.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858987/mini_animation_header_wztuwn.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
@@ -871,11 +897,7 @@ body.intro-lock{overflow:hidden}
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
-  <ul class="footer-links">
-    <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
-    <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="/resume/">Resume</a></li>
-  </ul>
+  <a href="/about/#contact" class="footer-contact">Let&rsquo;s Talk</a>
 </footer>
 
 <script>
@@ -1032,7 +1054,7 @@ draw(); // paint one frame so there's never a blank hero
 syncCanvas();
 window.addEventListener('resize', () => { resize(); });
 
-// ── Media: local GIF first → Cloudinary MP4 backup → CSS gradient ──
+// ── Media: Cloudinary MP4 first → local GIF backup → CSS gradient ──
 function makeVideo(src, poster, className) {
   const v = document.createElement('video');
   v.className = className;
@@ -1112,25 +1134,33 @@ cards.forEach(bg => {
   img.src = bg.dataset.poster;
 });
 
-// 2) GIFs, top of the page first, two at a time; video if a GIF fails
+// 2) Cloudinary videos, top of the page first, two at a time; the local GIF if a video can't play
 const loadCard = bg => new Promise(done => {
-  const reveal = () => { if (bg._poster) bg._poster.classList.add('is-off'); done(); };
-  const useVideo = () => {
-    if (!bg.dataset.video) return done();
-    const v = makeVideo(bg.dataset.video, bg.dataset.poster, 'card-video');
-    bg.appendChild(v);
-    cardVideoObserver.observe(v);
-    v.addEventListener('playing', () => { v.classList.add('is-playing'); reveal(); }, { once: true });
-    v.addEventListener('error', done, { once: true });
-    v.querySelector('source').addEventListener('error', done, { once: true });
-    setTimeout(done, 6000);
+  let finished = false;
+  const finish = () => { if (!finished) { finished = true; done(); } };
+  const reveal = () => { if (bg._poster) bg._poster.classList.add('is-off'); finish(); };
+  let usedGif = false;
+  const useGif = () => {
+    if (usedGif) return; usedGif = true;
+    const v = bg.querySelector('video.card-video');
+    if (v) { cardVideoObserver.unobserve(v); v.remove(); }
+    if (!bg.dataset.gif) return finish();            // gradient behind takes over
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => { bg.classList.add('has-gif'); reveal(); };
+    img.onerror = finish;
+    img.src = bg.dataset.gif;
   };
-  if (!bg.dataset.gif) return useVideo();
-  const img = new Image();
-  img.decoding = 'async';
-  img.onload = () => { bg.classList.add('has-gif'); reveal(); };
-  img.onerror = useVideo;
-  img.src = bg.dataset.gif;
+  if (!bg.dataset.video) return useGif();
+  const v = makeVideo(bg.dataset.video, bg.dataset.poster, 'card-video');
+  bg.appendChild(v);
+  v.addEventListener('playing', () => { v.classList.add('is-playing'); reveal(); }, { once: true });
+  v.addEventListener('error', useGif, { once: true });
+  v.querySelector('source').addEventListener('error', useGif, { once: true });
+  // autoplay refused (e.g. iPhone low-power mode): show the GIF instead
+  const p = v.play(); if (p && p.catch) p.catch(err => { if (err && err.name === 'NotAllowedError') useGif(); });
+  cardVideoObserver.observe(v);
+  setTimeout(finish, 6000);                          // a slow video never holds up the next card
 });
 const firstCards = [];
 let next = 0;
@@ -1344,10 +1374,16 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   setTimeout(go, 5000); // safety net
 })();
 
-// ── Scroll handoff: big name drifts up and fades as the nav fades in ──
+// ── Scroll handoff: big name drifts up and fades as the nav bar drops in ──
 (() => {
   const nav = document.querySelector('nav');
   const name = document.getElementById('hero-name');
+  // show the links once the header is in (after the intro)
+  const heroEl = document.querySelector('.hero');
+  const ready = () => heroEl && heroEl.classList.contains('is-loaded') && nav.classList.add('is-ready');
+  if (heroEl) new MutationObserver(ready).observe(heroEl, { attributes: true, attributeFilter: ['class'] });
+  ready();
+  setTimeout(() => nav.classList.add('is-ready'), 6000); // safety net
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let ticking = false;
   const update = () => {

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>University Motors | Maxwell Purwin</title>
 <link rel="icon" type="image/png" href="../images/Maxwell%20Purwin%20webclip.png">
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preload" as="image" href="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -31,12 +33,16 @@ body{background:var(--white);color:var(--black);font-family:var(--body);font-siz
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:64px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06)}
 .nav-logo{font-family:var(--display);font-size:15px;font-weight:600;color:var(--black);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
-.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-origin:content-box;background-clip:content-box;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s}
+/* hover: the blue highlight draws in under the word */
+.nav-links a:hover,.nav-links a:focus-visible{background-size:100% 100%;color:var(--black)}
 
-/* HERO — full viewport, GIF bg */
+/* HERO — full viewport, video bg */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:#0b1530 url('/images/University Motors GIF Website 2.gif') center/cover no-repeat}
+.hero-bg{position:absolute;inset:0;background:#0b1530 center/cover no-repeat}
+/* header: Cloudinary video first; the local GIF only if the video can't play (see script at the end) */
+.hero-bg.use-gif{background-image:url('/images/University Motors GIF Website 2.gif')}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%)}
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
@@ -105,13 +111,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .pnav-item.next:hover::before{transform:translateX(0)}
 .pnav-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.08;transition:opacity .4s}
 .pnav-item:hover .pnav-bg{opacity:0.18}
-.pnav-bg-vv{background-image:url('/images/VV Header Website.gif')}
-.pnav-bg-cpbs{background-image:url('/images/CPBS HEADER_GIF_2.gif')}
+/* Previous/Next backgrounds: Cloudinary video, loaded as the cards come near; the GIF only if the video can't play */
+.pnav-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pnav-bg-vv.use-gif{background-image:url('/images/VV Header Website.gif')}
+.pnav-bg-cpbs.use-gif{background-image:url('/images/CPBS HEADER_GIF_2.gif')}
 .pnav-dir{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
 .pnav-title{font-family:var(--display);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;color:var(--black);text-transform:uppercase}
 .pnav-type{font-size:12px;color:var(--gray-400)}
 
-footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}
+footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.footer-contact{font-family:var(--display);font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s var(--ease)}
+.footer-contact:hover,.footer-contact:focus-visible{color:var(--black);background-size:100% 100%}
 .footer-name{font-family:var(--display);font-size:14px;font-weight:600;color:var(--black);letter-spacing:.04em;text-transform:uppercase}
 .footer-links{display:flex;list-style:none}
 .footer-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
@@ -128,6 +138,8 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 @media(max-width:768px){
   nav{padding:0 20px}
+  .nav-logo{font-size:13px;white-space:nowrap}
+  .nav-links a{padding:6px 10px}
   .hero{padding:0 20px 52px}
   .hero-foot{flex-direction:column;align-items:flex-start}
   .hero-tags{align-items:flex-start}
@@ -147,7 +159,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   .project-nav{grid-template-columns:1fr;margin-top:72px}
   .pnav-item{padding:40px 20px}
   .pnav-item.next{align-items:flex-start;text-align:left}
-  footer{flex-direction:column;gap:20px;padding:32px 20px}
+  footer{padding:32px 20px}
 }
 @media (prefers-reduced-motion: reduce){
   .reveal,.tick-wrap{opacity:1;transform:none;transition:none}
@@ -161,13 +173,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <ul class="nav-links">
     <li><a href="/#work">Work</a></li>
     <li><a href="/about/">About</a></li>
-    <li><a href="/resume/">Resume</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="hero-bg"><video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.jpg"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.mp4" type="video/mp4"></video></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">YouTube Content Creation</p>
@@ -268,12 +279,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <!-- PROJECT NAV -->
 <div class="project-nav">
-  <a href="/virginvoyages/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-vv"></div>
+  <a href="/virginvoyages/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-vv" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792857967/VV_Header_Website_kiizb4.mp4"></div>
     <span class="pnav-dir">&#8592; Previous</span>
     <span class="pnav-title">Virgin Voyages</span>
     <span class="pnav-type">Social Media &amp; Content Strategy</span>
   </a>
-  <a href="/comstockparkbodyshop/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-cpbs"></div>
+  <a href="/comstockparkbodyshop/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-cpbs" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792858344/CPBS_HEADER_GIF_2_dp2tlg.mp4"></div>
     <span class="pnav-dir">Next &#8594;</span>
     <span class="pnav-title">Comstock Park Body Shop</span>
     <span class="pnav-type">Branding &amp; Video Production</span>
@@ -282,11 +293,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
-  <ul class="footer-links">
-    <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
-    <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="/resume/">Resume</a></li>
-  </ul>
+  <a href="/about/#contact" class="footer-contact">Let&rsquo;s Talk</a>
 </footer>
 
 <script>
@@ -373,6 +380,41 @@ document.querySelectorAll('.stat').forEach(el => statObs.observe(el));
     io.unobserve(e.target);
   }), { rootMargin: '0px 0px -4% 0px' });
   new Set(ticks.map(el => el.closest('.tick-wrap'))).forEach(w => io.observe(w));
+})();
+</script>
+<script>
+// ── Header: Cloudinary video, local GIF only if the video can't play ──
+(() => {
+  const bg = document.getElementById('hero-bg');
+  const v = bg && bg.querySelector('video');
+  if (!v) return;
+  let done = false;
+  const fallback = () => { if (done) return; done = true; v.remove(); bg.classList.add('use-gif'); };
+  v.querySelector('source').addEventListener('error', fallback);
+  v.addEventListener('error', fallback);
+  v.muted = true;
+  const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name !== 'AbortError') fallback(); });
+})();
+</script>
+<script>
+// ── Previous/Next cards: video backgrounds, loaded when the cards are about to scroll into view ──
+(() => {
+  const bgs = [...document.querySelectorAll('.pnav-bg[data-video]')];
+  if (!bgs.length) return;
+  const load = bg => {
+    const v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+    const src = document.createElement('source'); src.src = bg.dataset.video; src.type = 'video/mp4'; v.appendChild(src);
+    let done = false;
+    const fallback = () => { if (done) return; done = true; v.remove(); bg.classList.add('use-gif'); };
+    src.addEventListener('error', fallback); v.addEventListener('error', fallback);
+    bg.appendChild(v);
+    const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name === 'NotAllowedError') fallback(); });
+  };
+  if (!('IntersectionObserver' in window)) return bgs.forEach(load);
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '400px 0px' });
+  bgs.forEach(bg => io.observe(bg));
 })();
 </script>
 </body>

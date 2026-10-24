@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amíra | Maxwell Purwin</title>
+<title>Amíra, a Personal Hospitality Concept | Maxwell Purwin</title>
 <link rel="icon" type="image/png" href="../images/Maxwell%20Purwin%20webclip.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,8 +31,9 @@ body{background:var(--white);color:var(--black);font-family:var(--body);font-siz
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:64px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06)}
 .nav-logo{font-family:var(--display);font-size:15px;font-weight:600;color:var(--black);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
-.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-origin:content-box;background-clip:content-box;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s}
+/* hover: the blue highlight draws in under the word */
+.nav-links a:hover,.nav-links a:focus-visible{background-size:100% 100%;color:var(--black)}
 
 /* HERO — full viewport, GIF bg */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
@@ -40,7 +41,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%)}
 .hero-content{position:relative;z-index:2}
-.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:36px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s var(--ease) .1s forwards}
 .hero-title{font-family:var(--display);font-size:clamp(56px,8vw,120px);font-weight:700;line-height:.9;letter-spacing:-.03em;color:#fff;text-transform:uppercase;margin-bottom:40px;opacity:0;animation:up .7s var(--ease) .2s forwards}
 .hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;opacity:0;animation:up .7s var(--ease) .32s forwards}
 .hero-desc{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:480px;line-height:1.7}
@@ -73,13 +74,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .pnav-item.next:hover::before{transform:translateX(0)}
 .pnav-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.08;transition:opacity .4s}
 .pnav-item:hover .pnav-bg{opacity:0.18}
-.pnav-bg-jff{background-image:url('/images/mini animation header.gif')}
-.pnav-bg-vv{background-image:url('/images/VV Header Website.gif')}
+/* Previous/Next backgrounds: Cloudinary video, loaded as the cards come near; the GIF only if the video can't play */
+.pnav-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pnav-bg-jff.use-gif{background-image:url('/images/mini animation header.gif')}
+.pnav-bg-vv.use-gif{background-image:url('/images/VV Header Website.gif')}
 .pnav-dir{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
 .pnav-title{font-family:var(--display);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;color:var(--black);text-transform:uppercase}
 .pnav-type{font-size:12px;color:var(--gray-400)}
 
-footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}
+footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.footer-contact{font-family:var(--display);font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s var(--ease)}
+.footer-contact:hover,.footer-contact:focus-visible{color:var(--black);background-size:100% 100%}
 .footer-name{font-family:var(--display);font-size:14px;font-weight:600;color:var(--black);letter-spacing:.04em;text-transform:uppercase}
 .footer-links{display:flex;list-style:none}
 .footer-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
@@ -97,6 +102,8 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 @media(max-width:768px){
   nav{padding:0 20px}
+  .nav-logo{font-size:13px;white-space:nowrap}
+  .nav-links a{padding:6px 10px}
   .hero{padding:0 20px 52px}
   .hero-foot{flex-direction:column;align-items:flex-start}
   .hero-tags{align-items:flex-start}
@@ -105,7 +112,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   .project-nav{grid-template-columns:1fr;margin-top:72px}
   .pnav-item{padding:40px 20px}
   .pnav-item.next{align-items:flex-start;text-align:left}
-  footer{flex-direction:column;gap:20px;padding:32px 20px}
+  footer{padding:32px 20px}
 }
 @media (prefers-reduced-motion: reduce){
   .reveal,.tick-wrap{opacity:1;transform:none;transition:none}
@@ -157,7 +164,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 .g-item{flex:0 0 min(72vw,880px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:var(--gray-100);position:relative}
 .g-item img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none;transition:transform 2s cubic-bezier(.16,1,.3,1)}
 .g-item:hover img{transform:scale(1.025)}
-.gallery-foot{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.gallery-foot{display:flex;justify-content:center;align-items:center;margin-top:24px}
 .gallery-hint{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)}
 .gallery-btns{display:flex;gap:8px}
 .gallery-btns button{width:44px;height:44px;border-radius:50%;border:1px solid var(--gray-200);background:#fff;font-size:18px;cursor:pointer;color:var(--black);box-shadow:0 2px 8px rgba(0,0,0,.08);transition:background .15s}
@@ -206,7 +213,6 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <ul class="nav-links">
     <li><a href="/#work">Work</a></li>
     <li><a href="/about/">About</a></li>
-    <li><a href="/resume/">Resume</a></li>
   </ul>
 </nav>
 
@@ -215,7 +221,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <div class="hero-bg" id="amira-hero-bg"><video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.jpg"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.mp4" type="video/mp4"></video></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Personal Hospitality Brand Concept</p>
+    <p class="hero-eyebrow">Personal Hospitality Concept</p>
     <h1 class="hero-title">Am&iacute;ra</h1>
     <div class="hero-foot">
       <p class="hero-desc">My own working concept for what a luxury micro resort in Northern Michigan could look like, created to bring together my love of design, brand building and hospitality.</p>
@@ -285,7 +291,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
     <div class="metric">
       <div>
         <p class="metric-index">Design</p>
-        <p class="metric-n metric-n-text">Concrete<br>&amp; wood</p>
+        <p class="metric-n metric-n-text">Quiet by<br>design</p>
         <p class="metric-l">Concept renderings</p>
       </div>
       <p class="metric-body">Clean, modern forms in concrete and wood, with nothing added for show. Materials chosen to age well and disappear into the land. At night, the residences glow softly from within: warm light against dark water.</p>
@@ -299,7 +305,6 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
       <div class="g-item slot" data-label="Rendering"><img src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto,w_1600,c_limit/v1790290565/04-vision-bluff-pool_qs2oyg.jpg" alt="A residence deck overlooking the lake" draggable="false" loading="lazy" decoding="async"></div>
     </div>
     <div class="gallery-foot">
-      <span class="gallery-hint">Drag to explore</span>
       <div class="gallery-btns"><button type="button" id="g-prev" aria-label="Previous">&#8592;</button><button type="button" id="g-next" aria-label="Next">&#8594;</button></div>
     </div>
   </section>
@@ -311,7 +316,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
         <p class="metric-index">Website</p>
         <p class="metric-n metric-n-text">One story,<br>start to finish</p>
       </div>
-      <p class="metric-body">A single scrolling story that walks through the idea, the seasons, the residences, the stay and the design. Scroll the live site below, or open it on its own.</p>
+      <p class="metric-body">A single scrolling story that walks through the idea, the seasons, the residences, the stay and the design. Scroll through the live site below.</p>
     </div>
     <div class="browser reveal">
       <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">maxpurwin.com/amira</span></div>
@@ -320,21 +325,18 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
         <button class="frame-cover" id="frame-cover" type="button" aria-label="Explore the site"></button>
       </div>
     </div>
-    <div class="site-actions">
-      <a href="/amira/" class="btn btn-dark" target="_blank">Visit Am&iacute;ra &#8599;</a>
-    </div>
   </section>
 
 </main>
 
 <!-- PROJECT NAV -->
 <div class="project-nav">
-  <a href="/justforfun/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-jff"></div>
+  <a href="/justforfun/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-jff" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792858987/mini_animation_header_wztuwn.mp4"></div>
     <span class="pnav-dir">&#8592; Previous</span>
     <span class="pnav-title">Just For Fun</span>
     <span class="pnav-type">Personal Projects</span>
   </a>
-  <a href="/virginvoyages/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-vv"></div>
+  <a href="/virginvoyages/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-vv" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792857967/VV_Header_Website_kiizb4.mp4"></div>
     <span class="pnav-dir">Next &#8594;</span>
     <span class="pnav-title">Virgin Voyages</span>
     <span class="pnav-type">Social Media &amp; Content Strategy</span>
@@ -343,11 +345,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
-  <ul class="footer-links">
-    <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
-    <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="/resume/">Resume</a></li>
-  </ul>
+  <a href="/about/#contact" class="footer-contact">Let&rsquo;s Talk</a>
 </footer>
 
 <script>
@@ -477,6 +475,27 @@ document.querySelectorAll('.slot img').forEach(img => {
   v.querySelector('source').addEventListener('error', fallback);
   v.addEventListener('error', fallback);
   const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name !== 'AbortError') fallback(); });
+})();
+</script>
+<script>
+// ── Previous/Next cards: video backgrounds, loaded when the cards are about to scroll into view ──
+(() => {
+  const bgs = [...document.querySelectorAll('.pnav-bg[data-video]')];
+  if (!bgs.length) return;
+  const load = bg => {
+    const v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+    const src = document.createElement('source'); src.src = bg.dataset.video; src.type = 'video/mp4'; v.appendChild(src);
+    let done = false;
+    const fallback = () => { if (done) return; done = true; v.remove(); bg.classList.add('use-gif'); };
+    src.addEventListener('error', fallback); v.addEventListener('error', fallback);
+    bg.appendChild(v);
+    const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name === 'NotAllowedError') fallback(); });
+  };
+  if (!('IntersectionObserver' in window)) return bgs.forEach(load);
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '400px 0px' });
+  bgs.forEach(bg => io.observe(bg));
 })();
 </script>
 </body>

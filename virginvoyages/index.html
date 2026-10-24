@@ -31,8 +31,9 @@ body{background:var(--white);color:var(--black);font-family:var(--body);font-siz
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:64px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06)}
 .nav-logo{font-family:var(--display);font-size:15px;font-weight:600;color:var(--black);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
-.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+.nav-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-origin:content-box;background-clip:content-box;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s}
+/* hover: the blue highlight draws in under the word */
+.nav-links a:hover,.nav-links a:focus-visible{background-size:100% 100%;color:var(--black)}
 
 /* HERO — full viewport, GIF bg */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
@@ -188,7 +189,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .pnav-title{font-family:var(--display);font-size:clamp(20px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;color:var(--black);text-transform:uppercase}
 .pnav-type{font-size:12px;color:var(--gray-400)}
 
-footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}
+footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.footer-contact{font-family:var(--display);font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;background:linear-gradient(transparent 56%,rgba(0,87,255,.18) 56%,rgba(0,87,255,.18) 90%,transparent 90%) no-repeat;background-size:0% 100%;transition:background-size .55s var(--ease),color .2s var(--ease)}
+.footer-contact:hover,.footer-contact:focus-visible{color:var(--black);background-size:100% 100%}
 .footer-name{font-family:var(--display);font-size:14px;font-weight:600;color:var(--black);letter-spacing:.04em;text-transform:uppercase}
 .footer-links{display:flex;list-style:none}
 .footer-links a{font-size:13px;color:var(--gray-600);text-decoration:none;padding:6px 14px;border-radius:100px;transition:background .15s,color .15s}
@@ -200,6 +203,8 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 @media(max-width:768px){
   nav{padding:0 20px}
+  .nav-logo{font-size:13px;white-space:nowrap}
+  .nav-links a{padding:6px 10px}
   .hero{padding:0 20px 52px}
   .hero-foot{flex-direction:column;align-items:flex-start}
   .hero-tags{align-items:flex-start}
@@ -218,11 +223,13 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   .media-row{grid-template-columns:1fr}
   .project-nav{grid-template-columns:1fr}
   .pnav-item.next{align-items:flex-start;text-align:left}
-  footer{flex-direction:column;gap:20px;padding:32px 20px}
+  footer{padding:32px 20px}
 }
 .pnav-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.08;transition:opacity .4s}.pnav-item:hover .pnav-bg{opacity:0.18}
-.pnav-bg-jff{background-image:url('/images/mini animation header.gif')}
-.pnav-bg-um{background-image:url('/images/University Motors GIF Website 2.gif')}
+/* Previous/Next backgrounds: Cloudinary video, loaded as the cards come near; the GIF only if the video can't play */
+.pnav-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pnav-bg-jff.use-gif{background-image:url('/images/mini animation header.gif')}
+.pnav-bg-um.use-gif{background-image:url('/images/University Motors GIF Website 2.gif')}
 
 .vv-page{border-top:1px solid var(--gray-200)}
 .vv-section{}
@@ -586,13 +593,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
   <ul class="nav-links">
     <li><a href="/#work">Work</a></li>
     <li><a href="/about/">About</a></li>
-    <li><a href="/resume/">Resume</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg" id="vv-hero-bg"><video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1791931307/VV_Header_Website_kiizb4.jpg"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1791931307/VV_Header_Website_kiizb4.mp4" type="video/mp4"></video></div>
+  <div class="hero-bg" id="vv-hero-bg"><video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792857967/VV_Header_Website_kiizb4.jpg"><source src="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1792857967/VV_Header_Website_kiizb4.mp4" type="video/mp4"></video></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Social Media &amp; Content Strategy</p>
@@ -875,12 +881,12 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <!-- PROJECT NAV -->
 <div class="project-nav">
-  <a href="/justforfun/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-jff"></div>
+  <a href="/justforfun/" class="pnav-item prev reveal"><div class="pnav-bg pnav-bg-jff" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792858987/mini_animation_header_wztuwn.mp4"></div>
     <span class="pnav-dir">&#8592; Previous</span>
     <span class="pnav-title">Just For Fun</span>
     <span class="pnav-type">Personal Projects</span>
   </a>
-  <a href="/universitymotors/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-um"></div>
+  <a href="/universitymotors/" class="pnav-item next reveal"><div class="pnav-bg pnav-bg-um" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_960,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.mp4"></div>
     <span class="pnav-dir">Next &#8594;</span>
     <span class="pnav-title">University Motors</span>
     <span class="pnav-type">YouTube Content Creation</span>
@@ -889,11 +895,7 @@ footer{border-top:1px solid var(--gray-200);padding:40px 48px;display:flex;justi
 
 <footer>
   <span class="footer-name">Maxwell Purwin</span>
-  <ul class="footer-links">
-    <li><a href="mailto:mpurwin@umich.edu">Email</a></li>
-    <li><a href="https://www.linkedin.com/in/maxwellpurwin/" target="_blank">LinkedIn</a></li>
-    <li><a href="/resume/">Resume</a></li>
-  </ul>
+  <a href="/about/#contact" class="footer-contact">Let&rsquo;s Talk</a>
 </footer>
 
 <script>
@@ -1511,6 +1513,27 @@ document.querySelectorAll('.hub-send').forEach(btn => btn.addEventListener('clic
     io.unobserve(wrap);
   }), { rootMargin: '0px 0px -4% 0px' });
   new Set(ticks.map(el => el.closest('.tick-wrap'))).forEach(w => io.observe(w));
+})();
+</script>
+<script>
+// ── Previous/Next cards: video backgrounds, loaded when the cards are about to scroll into view ──
+(() => {
+  const bgs = [...document.querySelectorAll('.pnav-bg[data-video]')];
+  if (!bgs.length) return;
+  const load = bg => {
+    const v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+    const src = document.createElement('source'); src.src = bg.dataset.video; src.type = 'video/mp4'; v.appendChild(src);
+    let done = false;
+    const fallback = () => { if (done) return; done = true; v.remove(); bg.classList.add('use-gif'); };
+    src.addEventListener('error', fallback); v.addEventListener('error', fallback);
+    bg.appendChild(v);
+    const p = v.play(); if (p && p.catch) p.catch(e => { if (e.name === 'NotAllowedError') fallback(); });
+  };
+  if (!('IntersectionObserver' in window)) return bgs.forEach(load);
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '400px 0px' });
+  bgs.forEach(bg => io.observe(bg));
 })();
 </script>
 </body>
