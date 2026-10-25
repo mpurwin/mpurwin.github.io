@@ -11,7 +11,7 @@
 <link rel="preload" as="image" href="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792505716/Main_Header_GIF_v9d8qe.jpg">
 <script>
   // JS is on: allow the intro. Seen it already this visit: skip it.
-  document.documentElement.classList.add('js');
+  document.documentElement.classList.add('js', 'intro-v2');
   try { if (sessionStorage.getItem('mp-intro')) document.documentElement.classList.add('intro-skip'); } catch (e) {}
 </script>
 
@@ -683,41 +683,10 @@ html.js.intro-skip .intro{display:none}
    - The lift is timed to the band: each letter peaks exactly as the light reaches it, and neighbours overlap.
    - Letters are moved as ready-drawn layers (will-change), so they glide instead of re-drawing and shimmering. */
 .intro-name{position:relative}
-.intro-glint{position:absolute;inset:0;pointer-events:none;color:#5b95ff;-webkit-text-stroke:.035em #5b95ff;text-shadow:0 0 18px rgba(0,87,255,.5);
-  -webkit-mask-image:linear-gradient(90deg,transparent 41%,#000 48%,#000 52%,transparent 59%);mask-image:linear-gradient(90deg,transparent 41%,#000 48%,#000 52%,transparent 59%);
-  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:92.5% 0;mask-position:92.5% 0;opacity:0}
-.intro-glint .gw{display:inline-block;overflow:hidden;padding:.12em .06em .12em 0;vertical-align:bottom}
-.intro-glint .gw span{display:inline-block}
-.intro.is-wave .intro-glint{opacity:1;animation:sweep 3.4s linear infinite}
-@keyframes sweep{
-  0%{-webkit-mask-position:92.5% 0;mask-position:92.5% 0}
-  77%,100%{-webkit-mask-position:7.5% 0;mask-position:7.5% 0}
-}
-.intro.is-wave .iw span,.intro.is-wave .gw span{will-change:transform;animation:lift 3.4s infinite;animation-delay:calc(144ms + var(--d) * 110ms)}
-@keyframes lift{
-  0%{transform:translate3d(0,0,0);animation-timing-function:cubic-bezier(.37,0,.63,1)}
-  13.2%{transform:translate3d(0,-.1em,0);animation-timing-function:cubic-bezier(.37,0,.63,1)}
-  26.5%,100%{transform:translate3d(0,0,0)}
-}
-.intro.is-morph .intro-glint{opacity:0;animation:none;transition:opacity .2s ease}
 /* the light spills into the room, quietly: a faint blue bloom behind the name that travels with the light band,
    fading in as the band reaches the first letter and out as it leaves the last. It never crosses the empty screen. */
-.intro-spill{position:absolute;left:50%;top:50%;width:min(40vw,520px);height:min(26vh,240px);margin:calc(min(26vh,240px) / -2) 0 0 calc(min(40vw,520px) / -2);
-  background:radial-gradient(closest-side,rgba(50,120,255,.13),rgba(20,80,255,.05) 55%,rgba(0,60,255,0));pointer-events:none;opacity:0;will-change:transform,opacity;
-  transform:translate3d(calc(var(--nw,200px) * -.85),0,0)}
-.intro.is-wave .intro-spill{animation:spill 3.4s linear infinite}
 /* the band's centre crosses the name from 15.9% to 61.1% of each pass, and its soft trailing edge clears the last
    letter at ~73%, so the bloom holds until the light has fully left; it moves with the band the whole time */
-@keyframes spill{
-  0%{opacity:0;transform:translate3d(calc(var(--nw,200px) * -.85),0,0)}
-  15.9%{opacity:0;animation-timing-function:cubic-bezier(.37,0,.63,1)}
-  30%{opacity:1}
-  58%{opacity:1;animation-timing-function:cubic-bezier(.37,0,.63,1)}
-  73%{opacity:0}
-  77%{transform:translate3d(calc(var(--nw,200px) * .85),0,0)}
-  100%{opacity:0;transform:translate3d(calc(var(--nw,200px) * .85),0,0)}
-}
-.intro.is-morph .intro-spill{animation:none;opacity:0;transition:opacity .4s ease}
 /* hand-off: the curtain fades while each word travels to its place in the hero */
 /* travel + veil timing */
 .intro-veil{position:absolute;inset:0;background:radial-gradient(60% 45% at 50% 55%,rgba(0,87,255,.18) 0%,rgba(11,59,184,.08) 45%,rgba(5,10,24,0) 75%),#050a18;z-index:-1;transition:opacity 1.4s cubic-bezier(.45,0,.2,1)}
@@ -750,12 +719,112 @@ body.intro-lock{overflow:hidden}
   html.js .intro{transition:opacity .5s ease}
   .intro.is-fade{opacity:0}
   .iw span{transform:none;transition:none}
-  .intro.is-wave .intro-glint{animation:none;opacity:0}
-  .intro.is-wave .intro-spill{animation:none;opacity:0}
-  .intro.is-wave .iw span,.intro.is-wave .gw span{animation:none}
 }
 
+
+/* ── Intro: your name appears kerned out, fades in, and gently tightens to its normal spacing,
+   holds a beat, then travels into the header. Solid white in your brand font throughout, video behind. ── */
+.intro .intro-veil{background:radial-gradient(60% 45% at 50% 50%,rgba(5,10,24,.38) 0%,rgba(5,10,24,.64) 100%)}
+html.intro-v2 .intro .iw span{transition:none!important;transform:none!important}           /* no letter rise this time */
+html.intro-v2 .intro .intro-name{opacity:0;letter-spacing:.7em;margin-right:-.7em;filter:blur(5px);
+  transition:opacity .8s ease,filter .6s cubic-bezier(.4,0,.6,1),letter-spacing 1.2s cubic-bezier(.45,0,.2,1),margin-right 1.2s cubic-bezier(.45,0,.2,1)}
+html.intro-v2 .intro.is-on .intro-name{opacity:1}
+/* the blur clears while the letters draw together, on the same curve */
+html.intro-v2 .intro.is-tight .intro-name{letter-spacing:.16em;margin-right:-.16em;filter:blur(0)}
+@media (prefers-reduced-motion: reduce){ html.intro-v2 .intro .intro-name{transition:opacity .3s ease;letter-spacing:.16em;margin-right:-.16em;filter:none} }
+
+/* ── Hand-off: the centred intro name fades and lifts away while the header title rises into the corner
+   line by line; the bio, button and nav follow right as the title lands ── */
+html.intro-v2 .intro.is-leave .intro-name{opacity:0;filter:blur(3px);transform:translateY(-60%);
+  transition:opacity .7s ease,filter .7s ease,transform .9s cubic-bezier(.45,0,.2,1)}
+.intro.is-leave .intro-veil{opacity:0;transition:opacity 1s cubic-bezier(.45,0,.2,1)}
+.hero.handoff-v2 .name-inner{transition:transform 1.05s cubic-bezier(.16,1,.3,1);transition-delay:calc(.3s + var(--i) * .14s)}
+.hero.handoff-v2 .hero-bottom{animation-duration:.6s;animation-delay:.95s}
+html.intro-v2:not(.intro-skip) .nav-links{transition:opacity .6s var(--ease) .95s}
+
 /* ── Safari-only fixes ── */
+
+/* ── Floating gallery: the work grid in the same language as the other pages ──
+   centred column, rounded videos with soft shadows, titles below like a gallery label */
+.work { padding: clamp(44px, 4vw, 72px) 0 clamp(52px, 5vw, 88px); }   /* tighter above the label and below the last cards */
+.work .section-header { padding: 0 clamp(48px, 7vw, 200px); margin-bottom: clamp(32px, 2.8vw, 56px); }
+.project-grid {
+  gap: clamp(32px, 2.8vw, 64px) clamp(32px, 2.8vw, 64px);   /* rows a third tighter; spacing grows with the screen */
+  background: none;
+  border: 0;
+  padding: 0 clamp(48px, 7vw, 200px);                       /* scales with the window, like the old full-width cards */
+}
+.project-card { min-height: 0; display: block; overflow: visible; }
+.project-card:hover { transform: none; }
+.card-media {
+  position: relative;
+  aspect-ratio: 1.85 / 1;                    /* cinema widescreen: a touch shorter than before */
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateZ(0);                 /* keeps the rounded corners clean while the video scales */
+  box-shadow: 0 30px 70px -32px rgba(0,0,0,.35);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.project-card:hover .card-media, .project-card:focus-visible .card-media {
+  transform: translateY(-6px);
+  box-shadow: 0 44px 90px -30px rgba(0,0,0,.45);
+}
+/* no text on the video any more, so only a light veil that lifts on hover */
+.card-scrim { background: rgba(0,0,0,.14); }
+@media (hover: hover) { .project-card:hover .card-scrim { opacity: 0; } }
+.project-card:focus-visible .card-scrim { opacity: 0; }
+.project-card-top { top: 20px; right: 20px; left: auto; }
+.card-content { padding: 20px 2px 0; }
+.project-type { color: var(--gray-400); margin-bottom: 6px; }
+.project-title { color: var(--black); font-size: clamp(20px, 1.9vw, 26px); }
+.project-card.is-wide .card-media { aspect-ratio: 21 / 8; }
+@media (max-width: 768px) {
+  .work .section-header { padding: 0 20px; }
+  .project-grid { padding: 0 20px; gap: 40px; }
+  .card-media { border-radius: 12px; }
+  .project-card.is-wide .card-media { aspect-ratio: 1.85 / 1; }
+}
+
+/* ── Reflected glow: a soft, blurred copy of each card's own video glows around it, like light on a surface.
+   The glow sits in a wrapper that stops just below the card and fades out, so it never washes over the title. ── */
+.project-card { position: relative; isolation: isolate; container-type: inline-size; }
+.glow-wrap {
+  --h: calc(100cqw / 1.85);                                  /* height of the video card */
+  position: absolute; z-index: -1; pointer-events: none;
+  left: -120px; right: -120px; top: -120px;                  /* plenty of room for the soft edges to fade out */
+  height: calc(var(--h) + 120px + 16px);                     /* ends 16px below the card */
+  /* fades out above and below the card, so it never washes over the titles of the row above or the card's own title */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 70px, #000 120px, #000 calc(100% - 54px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, transparent 70px, #000 120px, #000 calc(100% - 54px), transparent 100%);
+}
+.project-card.is-wide .glow-wrap { --h: calc(100cqw * 8 / 21); }
+.card-glow {
+  position: absolute; left: 120px; right: 120px; top: 120px;
+  width: calc(100% - 240px); height: var(--h);
+  border-radius: 28px;
+  filter: blur(36px) saturate(1.7);
+  opacity: .8;
+  transform: translateY(8px) scale(1);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.project-card:hover .card-glow, .project-card:focus-visible .card-glow { opacity: 1; transform: translateY(10px) scale(1.05); }
+/* the glow can reach past the page edges on narrow screens: trim it there without adding a sideways scroll */
+.work { overflow-x: clip; }
+/* the glow carries the colour now, so the shadow itself is lighter */
+.card-media { box-shadow: 0 18px 40px -26px rgba(0,0,0,.35); }
+.project-card:hover .card-media, .project-card:focus-visible .card-media { box-shadow: 0 26px 50px -26px rgba(0,0,0,.4); }
+.card-content { padding-top: 24px; }
+
+/* ── Settle in on scroll: cards start a little smaller and tipped back, then settle as they rise ── */
+.project-grid { perspective: 1400px; }
+.project-card { transform-origin: 50% 100%; }
+
+@media (max-width: 768px) {
+  .card-glow { filter: blur(26px) saturate(1.4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-glow { transition: none; }
+}
 </style>
 <script>if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent))document.documentElement.classList.add('is-safari');</script>
 </head>
@@ -763,7 +832,6 @@ body.intro-lock{overflow:hidden}
 
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-veil"></div>
-  <div class="intro-spill"></div>
   <p class="intro-name"><span class="iw iw1"><span style="--d:0">M</span><span style="--d:1">a</span><span style="--d:2">x</span><span style="--d:3">w</span><span style="--d:4">e</span><span style="--d:5">l</span><span style="--d:6">l</span></span> <span class="iw iw2"><span style="--d:8">P</span><span style="--d:9">u</span><span style="--d:10">r</span><span style="--d:11">w</span><span style="--d:12">i</span><span style="--d:13">n</span></span></p>
 </div>
 
@@ -808,10 +876,13 @@ body.intro-lock{overflow:hidden}
   <div class="project-grid">
 
     <a href="/virginvoyages/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-1" data-gif="/images/VV Header Website.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792857967/VV_Header_Website_kiizb4.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792857967/VV_Header_Website_kiizb4.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Social Strategy & Content</p>
@@ -820,10 +891,13 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/universitymotors/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-2" data-gif="/images/University Motors GIF Website 2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792859416/University_Motors_GIF_Website_2_redsjt.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Automotive Video</p>
@@ -832,10 +906,13 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/comstockparkbodyshop/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-3" data-gif="/images/CPBS HEADER_GIF_2.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858344/CPBS_HEADER_GIF_2_dp2tlg.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858344/CPBS_HEADER_GIF_2_dp2tlg.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Branding & Video</p>
@@ -844,10 +921,13 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/dlm/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-4" data-gif="/images/DLM HEADER_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858727/DLM_HEADER_1_uop8be.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858727/DLM_HEADER_1_uop8be.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Commercial Production</p>
@@ -856,10 +936,13 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/photography/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-5" data-gif="/images/Photography Header GIF_1_1.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792859251/Photography_Header_GIF_1_1_ykdoae.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792859251/Photography_Header_GIF_1_1_ykdoae.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Stills & Compositions</p>
@@ -868,10 +951,13 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/justforfun/" class="project-card reveal">
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
       <div class="card-bg bg-6" data-gif="/images/mini animation header.gif" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1280,c_limit/v1792858987/mini_animation_header_wztuwn.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1280,c_limit/v1792858987/mini_animation_header_wztuwn.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
+      </div>
       </div>
       <div class="card-content">
         <p class="project-type">Personal Projects</p>
@@ -880,13 +966,16 @@ body.intro-lock{overflow:hidden}
     </a>
 
     <a href="/amiraconcept/" class="project-card is-wide is-hidden reveal" id="amira-card">
-      <div class="card-bg bg-7" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1790294686/Amira_Hero_Header_Video_2_m8tqze.jpg"></div>
+      <div class="glow-wrap" aria-hidden="true"><canvas class="card-glow" width="48" height="30"></canvas></div>
+      <div class="card-media">
+      <div class="card-bg bg-7" data-video="https://res.cloudinary.com/dfscbinjh/video/upload/q_auto,w_1920,c_limit/v1792866415/Amira_Hero_Header_Video_3.mp4" data-poster="https://res.cloudinary.com/dfscbinjh/video/upload/so_0,q_auto,f_jpg,w_1920,c_limit/v1792866415/Amira_Hero_Header_Video_3.jpg"></div>
       <div class="card-scrim"></div>
       <div class="project-card-top">
         <span class="project-arrow">→</span>
       </div>
+      </div>
       <div class="card-content">
-        <p class="project-type">Personal Brand Concept</p>
+        <p class="project-type">Personal Hospitality Concept</p>
         <h2 class="project-title" style="text-transform:uppercase;letter-spacing:0.02em">Amíra</h2>
       </div>
     </a>
@@ -1176,40 +1265,25 @@ const pump = () => {
 settle(heroReady, 1200).then(pump);
 settle(heroReady, 4000).then(pump);
 
-// 3) the intro: holds until the header + first two cards are ready (one glint pass minimum, two at most); push through to skip
+// 3) the intro: ~1.7s (kerned out, fades in and tightens), then hands off to the header title; push through to skip
 const introDone = new Promise(finish => {
   const intro = document.getElementById('intro');
   const skip = !intro || getComputedStyle(intro).display === 'none';
   if (skip) return finish();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // glint timing (matches the CSS): starts once the letters have risen, 3.4s per pass, the light and the lift are past the last letter 2.65s in
-  const WAVE_AT = 1300, PERIOD = 3400, CLEAN = 2650;
-  const MIN = reduce ? 600 : WAVE_AT + CLEAN;                 // one full pass on a fast connection (~3.6s)
-  const MAX = reduce ? 3500 : WAVE_AT + PERIOD + CLEAN;       // at most two passes, then hand off regardless
+  const ROLL_END = reduce ? 700 : 1700;            // fades in and tightens from the start (settled ~1.25s), holds a beat, then moves into place              // hand off at ~1.7s, no waiting on downloads any more
   const t0 = performance.now();
   const hero = document.querySelector('.hero');
   const nameEl = intro.querySelector('.intro-name');
   let started = false;
   document.body.classList.add('intro-lock');
-  // the blue copy of the name the light band reveals
-  if (!reduce) {
-    const glint = document.createElement('span');
-    glint.className = 'intro-glint'; glint.setAttribute('aria-hidden', 'true');
-    [...nameEl.childNodes].forEach(n => glint.appendChild(n.cloneNode(true)));
-    glint.querySelectorAll('.iw').forEach(w => { w.className = 'gw'; });
-    nameEl.appendChild(glint);
-    intro.style.setProperty('--nw', nameEl.getBoundingClientRect().width + 'px');
-  }
-  requestAnimationFrame(() => intro.classList.add('is-in'));
-  if (!reduce) setTimeout(() => intro.classList.add('is-wave'), WAVE_AT);   // after every letter has landed
-  let ready = 0; const total = 3;
-  const tick = () => { ready++; };
-  heroReady.then(tick);
-  settle(heroReady, 1200).then(() => setTimeout(() => {
-    // firstCards is filled once the queue starts (same moment)
-    (firstCards[0] || Promise.resolve()).then(tick);
-    (firstCards[1] || Promise.resolve()).then(tick);
-  }, 0));
+
+  // ── the intro: kerned out, fades in and tightens ──
+  intro.classList.add('is-in');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    intro.classList.add('is-on');                                         // fades in, kerned out
+    setTimeout(() => intro.classList.add('is-tight'), reduce ? 0 : 40);   // and draws together straight away, sharpening as it goes
+  }));
 
   // ── Gummy skip ──
   // Scrolling, swiping up or pressing ↓ / space builds "pull". The name lifts against a rubber-band resistance
@@ -1265,7 +1339,7 @@ const introDone = new Promise(finish => {
     unlisten();
     if (rafPull) cancelAnimationFrame(rafPull);
     try { sessionStorage.setItem('mp-intro', '1'); } catch (e) {}
-    hero.classList.add('name-handoff', 'name-hold', 'is-loaded');   // real name in place, hidden for now
+    hero.classList.add('handoff-v2', 'is-loaded');                  // the header title starts rising in behind the intro
     const done = () => {
       hero.classList.remove('name-hold');                           // swap the travelling words for the real name
       document.body.classList.remove('intro-lock');
@@ -1273,70 +1347,15 @@ const introDone = new Promise(finish => {
       finish();
     };
     if (reduce) { intro.classList.add('is-fade'); setTimeout(done, 520); return; }
-    const words = [...intro.querySelectorAll('.iw')];
-    const letters = [...intro.querySelectorAll('.iw span')];
-    // A forced skip can land mid-rise or mid-glint. Freeze every letter exactly where it is, then let it relax
-    // to plain white while the word is already moving, so nothing snaps.
-    const live = letters.map(l => { const c = getComputedStyle(l); return [c.transform, c.color, c.webkitTextStrokeColor, c.textShadow]; });
-    const busy = live.some(([t, c]) => (t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)') || c !== 'rgb(255, 255, 255)');
-    // Each word is lifted out, redrawn at the title's full size and shrunk to look exactly as it did, then it
-    // travels, grows and tightens into the title. Drawn big the whole way, so the last frame is identical to the
-    // real title (no soft-then-sharp pop at the swap).
-    const heroName = document.getElementById('hero-name');
-    const heroPx = parseFloat(getComputedStyle(heroName).fontSize);
-    const heroLS = getComputedStyle(heroName).letterSpacing;
-    const targets = [...heroName.querySelectorAll('.nw')].map(el => el.getBoundingClientRect());
-    const introPx = parseFloat(getComputedStyle(words[0]).fontSize);
-    const starts = words.map(w => w.getBoundingClientRect());     // includes any pull lift
-    const s0 = introPx / heroPx;
-    if (busy) letters.forEach((l, i) => {
-      l.style.transition = 'none'; l.style.animation = 'none';
-      l.style.transform = live[i][0]; l.style.color = live[i][1]; l.style.webkitTextStrokeColor = live[i][2]; l.style.textShadow = live[i][3];
-    });
-    intro.classList.remove('is-wave');
-    nameEl.style.transform = 'none';
-    // Move the words out of the (possibly lifted) name line onto a plain layer with the same type styles, so
-    // 'fixed' always means the screen, in every browser.
-    const fly = document.createElement('p');
-    fly.className = 'intro-name';
-    fly.style.cssText = 'position:absolute;inset:0;margin:0;transform:none;pointer-events:none';
-    intro.appendChild(fly);
-    words.forEach(w => fly.appendChild(w));
-    words.forEach((w, i) => {
-      if (!busy) w.textContent = w.textContent;                   // plain text: the font's own kerning, same as the title
-      w.style.cssText = `position:fixed;left:0;top:0;margin:0;font-size:${heroPx}px;letter-spacing:.16em;` +
-                        `transform:translate(${starts[i].left}px,${starts[i].top}px) scale(${s0})`;
-    });
-    void intro.offsetWidth;                   // register the starting state...
-    if (forced) intro.classList.add('is-quick');
-    intro.classList.add('is-morph');          // ...then switch the movement on
-    void intro.offsetWidth;
-    if (busy) {
-      letters.forEach(l => {
-        l.style.transition = 'transform .45s cubic-bezier(.3,0,.2,1), color .45s ease, -webkit-text-stroke-color .45s ease, text-shadow .45s ease';
-        l.style.transform = 'none'; l.style.color = '#fff'; l.style.webkitTextStrokeColor = '#fff'; l.style.textShadow = '0 0 20px rgba(0,87,255,0)';
-      });
-      // once every letter has relaxed, drop to plain text (mid-flight, far too small a shift to see)
-      setTimeout(() => words.forEach(w => { w.textContent = w.textContent; }), 480);
-    }
-    words.forEach((w, i) => {
-      const to = targets[i];
-      if (!to) return;
-      const pad = parseFloat(getComputedStyle(w).paddingTop);   // mask padding above the letters
-      w.style.letterSpacing = heroLS;
-      w.style.transform = `translate(${to.left}px,${to.top - pad}px) scale(1)`;
-    });
-    setTimeout(done, forced ? 1150 : 1450);
+    intro.classList.add('is-leave');           // the centred name softly fades and lifts away
+    setTimeout(done, 1000);
   }
 
-  const atCleanMoment = t => reduce || ((t - WAVE_AT) % PERIOD) >= CLEAN - 20;   // never cut the glint mid-pass
   const loop = () => {
     if (started) return;
-    const t = performance.now() - t0;
-    if (((ready >= total && t >= MIN) || t >= MAX) && atCleanMoment(t)) {
-      // don't take over while someone is mid-push; the spring settles first
-      if (pull > 0) return requestAnimationFrame(loop);
-      setTimeout(() => handoff(false), 120);
+    if (performance.now() - t0 >= ROLL_END) {
+      if (pull > 0) return requestAnimationFrame(loop);   // don't take over while someone is mid-push
+      handoff(true);                                       // the quicker travel
       return;
     }
     requestAnimationFrame(loop);
@@ -1403,6 +1422,69 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   update();
 })();
 
+</script>
+<script>
+// ── Reflected glow: draws each card's video (or still frame / GIF) into a tiny canvas, blurred up by CSS ──
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cards = [...document.querySelectorAll('.project-card')].filter(c => !c.classList.contains('is-hidden'));
+  const items = cards.map(card => {
+    const cv = card.querySelector('.card-glow'), bg = card.querySelector('.card-bg');
+    if (!cv || !bg) return null;
+    const ctx = cv.getContext('2d');
+    const it = { card, cv, ctx, bg, still: null, gif: null, on: false };
+    if (bg.dataset.poster) { const im = new Image(); im.onload = () => { it.still = im; draw(it, true); }; im.src = bg.dataset.poster; }
+    if (bg.dataset.gif) { const g = new Image(); g.onload = () => { it.gif = g; }; g.src = bg.dataset.gif; }
+    return it;
+  }).filter(Boolean);
+  // fallback colour from the card's gradient, so there's always some glow
+  items.forEach(it => {
+    const m = getComputedStyle(it.bg).backgroundImage.match(/#[0-9a-f]{6}|rgb\([^)]+\)/gi);
+    const g = it.ctx.createLinearGradient(0, 0, 48, 30);
+    (m || ['#223', '#112']).slice(0, 3).forEach((c, i, a) => g.addColorStop(i / Math.max(1, a.length - 1), c));
+    it.ctx.fillStyle = g; it.ctx.fillRect(0, 0, 48, 30);
+  });
+  function draw(it, force) {
+    const v = it.bg.querySelector('video');
+    let src = null;
+    if (v && v.readyState >= 2 && !v.paused) src = v;
+    else if (it.bg.classList.contains('has-gif') && it.gif) src = it.gif;
+    else if (force && it.still) src = it.still;
+    if (!src) return;
+    try { it.ctx.drawImage(src, 0, 0, 48, 30); } catch (e) {}
+  }
+  const io = new IntersectionObserver(es => es.forEach(e => { const it = items.find(x => x.card === e.target); if (it) it.on = e.isIntersecting; }), { rootMargin: '200px 0px' });
+  items.forEach(it => io.observe(it.card));
+  if (reduce) return;
+  let last = 0;
+  (function loop(t) {
+    if (t - last > 90) { last = t; items.forEach(it => { if (it.on) draw(it); }); }   // ~11 updates a second is plenty for a blur
+    requestAnimationFrame(loop);
+  })(0);
+})();
+
+// ── Settle in on scroll ──
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cards = [...document.querySelectorAll('.project-card')];
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = innerHeight;
+    cards.forEach(c => {
+      if (c.offsetParent === null) return;
+      const r = c.getBoundingClientRect();
+      const centre = (r.top + r.height * 0.35) / vh;              // 0 = top of screen, 1 = bottom
+      const t = Math.max(0, Math.min(1, (1.05 - centre) / 0.3));  // 0 just entering, 1 settled (settles quickly)
+      const e = 1 - Math.pow(1 - t, 3);
+      c.style.scale = (0.97 + 0.03 * e).toFixed(4);                // a whisper of growth, no tilt
+      c.style.rotate = '';
+    });
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
 </script>
 </body>
 </html>
